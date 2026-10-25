@@ -1,0 +1,90 @@
+xrun(64): 18.03-s001: (c) Copyright 1995-2018 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	18.03-s001: Started on Mar 15, 2026 at 15:37:21 +07
+xrun
+	-f run.f
+		-64
+		-uvmhome /home/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv
+		-incdir ../sv
+		+UVM_VERBOSITY=UVM_LOW
+		+UVM_TESTNAME=set_config_test
+		../sv/yapp_pkg.sv
+		top.sv
+
+   User defined plus("+") options:
+	+UVM_VERBOSITY=UVM_LOW
+
+Loading snapshot worklib.top:sv .................... Done
+SVSEED default: 1
+xmsim: *W,RNDNOXCEL: The legacy SystemVerilog constraint solver is used. Enabling the Xceligen constraint solver with "xrun/xmsim -xceligen on ..." is recommended.
+xmsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+xcelium> source /home/eda/cadence/xcelium/XCELIUM1803/tools/xcelium/files/xmsimrc
+xcelium> source /home/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/files/tcl/uvm_sim.tcl
+xcelium> run
+UVM_INFO /home/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(412) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+CDNS-UVM-1.2 (18.03-s001)
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0: reporter [RNTST] Running test set_config_test...
+UVM_INFO /home/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:
+----------------------------------------------------------------------
+Name                        Type                     Size  Value      
+----------------------------------------------------------------------
+uvm_test_top                set_config_test          -     @1879      
+  tb                        router_tb                -     @1967      
+    yapp                    yapp_env                 -     @2002      
+      tx_agent              yapp_tx_agent            -     @2035      
+        monitor             yapp_tx_monitor          -     @2070      
+          recording_detail  integral                 32    'd1        
+        is_active           uvm_active_passive_enum  1     UVM_PASSIVE
+        recording_detail    integral                 32    'd1        
+      recording_detail      integral                 32    'd1        
+    recording_detail        integral                 32    'd1        
+----------------------------------------------------------------------
+
+UVM_INFO /home/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_catcher.svh(705) @ 0: reporter [UVM/REPORT/CATCHER] 
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+UVM_INFO /home/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_server.svh(847) @ 0: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    4
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[UVM/RELNOTES]     1
+[UVM/REPORT/CATCHER]     1
+[UVMTOP]     1
+
+Simulation complete via $finish(1) at time 0 FS + 231
+/home/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh:543     $finish;
+xcelium> exit
+TOOL:	xrun(64)	18.03-s001: Exiting on Mar 15, 2026 at 15:37:21 +07  (total: 00:00:00)

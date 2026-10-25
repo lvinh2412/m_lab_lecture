@@ -1,0 +1,201 @@
+===============================================================================
+ LAB 4 -- PATCHES
+ Cac doan can sua trong file Lab 3. CHI dua phan thay doi.
+===============================================================================
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [PKT-1..3]   sv/yapp_packet.sv
+///////////////////////////////////////////////////////////////////////////////
+//
+// KHONG sua gi trong class yapp_packet. Chi THEM MOT CLASS MOI vao CUOI FILE,
+// sau dong "endclass : yapp_packet".
+//
+// Tham khao: Section 8 slide 5, 6, 10
+
+// ---- THEM VAO CUOI FILE ----------------------------------------------------
+
+// ---- PKT-1 -----------------------------------------------------------------
+// Khai bao class. Ten: short_yapp_packet
+// Cau hoi: ke thua tu dau?  (Goi y: ban muon giu lai payload_size,
+//          default_delay, default_parity, default_addr -- chung o dau?)
+// ----------------------------------------------------------------------------
+
+class short_yapp_packet extends _______________ ;
+
+
+  // ---- PKT-2 ---------------------------------------------------------------
+  // Hai dong bat buoc cho moi uvm_object:
+  //   (a) macro dang ky factory
+  //   (b) constructor
+  //
+  // Cau hoi (a): dung `uvm_object_utils hay `uvm_object_utils_begin/end?
+  //              Class nay co can khai them field macro nao khong?
+  //              (Goi y: ban da xac nhan dieu nay o cau hoi ve ke thua
+  //               -- log in ra DU 6 field du class con khong khai dong nao)
+  //
+  // Cau hoi (b): doi so name co can gia tri mac dinh khong? Mac dinh la gi?
+  //              (Section 1 slide 26 -- object BAT BUOC co mac dinh)
+  // --------------------------------------------------------------------------
+
+
+
+
+  // ---- PKT-3 ---------------------------------------------------------------
+  // Hai constraint CHONG THEM:
+  //     length < 15
+  //     addr != 'b10          (= khong gui toi channel 2)
+  //
+  // *** CANH BAO TEN ***
+  // Dat ten constraint cho KHAC ten constraint cua cha.
+  // Cha dang co: default_length, payload_size, default_delay,
+  //              default_parity, default_addr
+  // Neu trung ten -> ban GHI DE constraint cua cha, khong phai them vao.
+  // Hau qua: mat "length > 0" => co the sinh ra goi length = 0.
+  //
+  // Dat ten goi y: short_length, not_addr_2
+  // --------------------------------------------------------------------------
+
+
+
+
+endclass : short_yapp_packet
+
+
+// TU KIEM TRA [PKT]:
+//   Sau khi viet xong, tu tra loi: khoang gia tri cuoi cung cua length la gi?
+//   Dap an o cuoi file nay.
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [AGT-1..3]   sv/yapp_tx_agent.sv
+///////////////////////////////////////////////////////////////////////////////
+//
+// Tham khao: Section 8 slide 9 (cu phap create)
+
+  function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+
+    // ---- AGT-1 ---------------------------------------------------------
+    // Doi dong nay sang factory create:
+    //     monitor = new("monitor", this);
+    //
+    // Cu phap:   <kieu>::type_id::create("<ten>", this);
+    // Ten instance GIU NGUYEN "monitor" -- doi ten la hong duong dan
+    // config o Section 7.
+    // --------------------------------------------------------------------
+
+
+    if(is_active == UVM_ACTIVE) begin
+
+      // ---- AGT-2 -------------------------------------------------------
+      //     sequencer = new("sequencer", this);
+      // ------------------------------------------------------------------
+
+
+      // ---- AGT-3 -------------------------------------------------------
+      //     driver = new("driver", this);
+      // ------------------------------------------------------------------
+
+
+    end
+  endfunction : build_phase
+
+// KHONG sua connect_phase. KHONG sua function new. KHONG sua macro block.
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [ENV-1]   sv/yapp_env.sv
+///////////////////////////////////////////////////////////////////////////////
+
+  function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+
+    // ---- ENV-1 -----------------------------------------------------------
+    //     tx_agent = new("tx_agent", this);
+    // -> doi sang factory create. Ten instance giu nguyen "tx_agent".
+    // ----------------------------------------------------------------------
+
+
+  endfunction : build_phase
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [TB-1]   tb/router_tb.sv
+///////////////////////////////////////////////////////////////////////////////
+
+  function void build_phase(uvm_phase phase);
+    `uvm_info("MSG","In the build phase",UVM_HIGH)
+    super.build_phase(phase);
+
+    // ---- TB-1 ------------------------------------------------------------
+    //     yapp = new("yapp", this);
+    // -> doi sang factory create. Ten instance giu nguyen "yapp".
+    // ----------------------------------------------------------------------
+
+
+  endfunction : build_phase
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [MON-1]   QUET TOAN BO -- buoc quan trong nhat cua Lab 4
+///////////////////////////////////////////////////////////////////////////////
+//
+// Section 8 slide 8:  "Make sure ALL data and component class instances use
+//                      create() rather than new()"
+//                     "Some exceptions (e.g., TLM connection objects)"
+//
+// Chay lenh nay trong thu muc lab04_my:
+//
+//     grep -rn "= new(" sv/ tb/
+//
+// Ban se thay NHIEU ket qua. Phan loai tung dong vao 1 trong 3 nhom:
+//
+//   NHOM A -- PHAI doi sang create()
+//       Moi component va data object binh thuong.
+//       Vi du: monitor, driver, sequencer, agent, env, tb
+//
+//   NHOM B -- GIU new()   : TLM port / export
+//       Vi du:  item_collected_port = new("item_collected_port", this);
+//       Day la "TLM connection objects" ma slide 8 noi la ngoai le.
+//
+//   NHOM C -- GIU new()   : cac thu KHONG phai lenh tao instance
+//       - "function new (...)"             <- dinh nghia constructor
+//       - "super.new(name, parent);"       <- goi constructor cha
+//       - "payload = new[length];"         <- cap phat dynamic array
+//                                             (chu y: new[] co dau NGOAC VUONG)
+//
+// *** Chi can SOT MOT dong nhom A la override that bai o dung cho do,
+//     va KHONG CO canh bao nao. ***
+//
+// Viet ra giay: ban tim thay bao nhieu dong nhom A? bao nhieu nhom B?
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// DAP AN TU KIEM TRA [PKT]
+///////////////////////////////////////////////////////////////////////////////
+//
+//   length:  > 0      (default_length, tu CHA)
+//            < 64     (default_length, tu CHA)
+//            < 15     (short_length,   tu CON)
+//            ------------------------------------
+//            =>  1 <= length <= 14
+//
+//   addr:    != 'b11  (default_addr, tu CHA)
+//            != 'b10  (not_addr_2,   tu CON)
+//            ------------------------------------
+//            =>  addr thuoc {0, 1}
+//
+//   Va van con:  payload.size() == length
+//                0 <= packet_delay < 20
+//                parity_type dist {BAD:=1, GOOD:=5}
+//
+// Neu ban dat ten constraint TRUNG voi cha, ket qua se khac -- do la
+// cach kiem tra ban da hieu dung hay chua.
+//
+///////////////////////////////////////////////////////////////////////////////

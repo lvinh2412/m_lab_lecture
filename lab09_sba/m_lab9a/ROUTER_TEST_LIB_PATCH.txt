@@ -1,0 +1,169 @@
+===============================================================================
+router_test_lib.sv  --  LAB 9A  (PATCH)
+===============================================================================
+
+*** TIN TOT: GAN NHU KHONG PHAI SUA GI ***
+
+test_mc cua Lab 8 chay duoc nguyen ven o Lab 9A. Scoreboard la mot
+component THU DONG -- no tu dong nhan goi qua TLM, khong can test
+cau hinh gi cho no.
+
+Day la bang chung cho cau cua slide 9:
+    "Producer does not know how many consumers are connected"
+
+Them scoreboard khong lam doi kich ban test.
+
+
+===============================================================================
+[TEST-1]  Kiem tra base_test da co du ba thu
+===============================================================================
+
+Doc lai base_test. Lab 9A dua vao BA dieu da co san tu Lab 7:
+
+    function void end_of_elaboration_phase(uvm_phase phase);
+      uvm_top.print_topology();          // <- xem scoreboard va 4 imp
+    endfunction
+
+    task run_phase(uvm_phase phase);
+      uvm_objection obj = phase.get_objection();
+      obj.set_drain_time(this, 200ns);   // <- SONG CON cho check_phase
+    endtask
+
+    function void check_phase(uvm_phase phase);
+      check_config_usage();
+    endfunction
+
+*** set_drain_time LA DONG QUAN TRONG NHAT VOI LAB 9A ***
+
+check_phase cua scoreboard [SB-13] kiem tra hang doi rong. Nhung
+check_phase chay SAU run_phase.
+
+Khong co drain time:
+    t=T   goi YAPP cuoi roi driver
+    t=T   mcseq drop objection -> run_phase ket thuc
+    t=T   check_phase chay -> hang doi VAN CON goi cuoi
+          -> "Queue's NOT Empty" -> FAILED
+    nhung goi do VAN DANG DI qua router, chua kip ra channel!
+
+=> Loi GIA. Khong phai DUT sai, ma testbench dung qua som.
+
+*** THI NGHIEM 2 PHUT ***
+Sau khi Lab 9A chay sach, tam comment dong set_drain_time, chay lai.
+Du doan truoc: hang doi nao con goi? Bao nhieu goi? Ba kenh deu con
+hay chi mot?
+
+Day la cach tot nhat de hieu drain time dung de lam gi. Slide 12 cua
+Section 12 da dan do "Check you have a drain time specified in the
+testbench" -- gio ban se thay vi sao.
+
+
+===============================================================================
+[TEST-2]  (TUY CHON) Doi chinh sach so sanh tu test
+===============================================================================
+
+Sau khi viet xong comp_uvm o [SB-9], thay vi sua gia tri mac dinh
+trong scoreboard, thu doi tu TEST:
+
+    uvm_config_int::set(this, "tb.router_sb", "compare_policy", UVM);
+
+Dat trong build_phase cua test_mc, truoc super.build_phase(phase).
+
+*** VI SAO DUNG DUOC ***
+[SB-7] khai:
+    `uvm_component_utils_begin(router_scoreboard)
+      `uvm_field_enum(comp_t, compare_policy, UVM_ALL_ON)
+    `uvm_component_utils_end
+
+uvm_field_enum + super.build_phase() cua scoreboard = field automation
+tu doc config vao. Co che Section 7, giong het channel_id va is_active.
+
+*** THI NGHIEM ***
+Chay hai lan, mot voi EQUALITY mot voi UVM, tren cung mot goi bi hong
+co chu y. So sanh thong bao loi.
+
+    EQUALITY -> bao LOI DAU TIEN roi dung
+    UVM      -> bao MOI loi
+
+Ghi lai hai doan log canh nhau. Day la ly do slide 19 ton tai.
+
+
+===============================================================================
+[TEST-3]  *** THI NGHIEM CHINH: VI SAO CAN LAB 9B ***
+===============================================================================
+
+Lam SAU KHI Lab 9A da chay sach va bao PASSED.
+
+Trong test_mc, COMMENT dong type override:
+
+    //yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());
+
+[Da xac minh] Repo lab09_sba co dong nay BI COMMENT, trong khi
+lab08_mcseq thi dong nay dang ACTIVE. Thay doi co chu y giua hai lab.
+
+*** DU DOAN TRUOC KHI CHAY ***
+
+Nho lai router_simple_mcseq:
+    1. HBUS: MAXPKTSIZE = 20
+    2-5. YAPP: 6 goi
+    6. HBUS: MAXPKTSIZE = 63
+    7-9. YAPP: 6 goi
+
+Khong co short_yapp_packet, length co the toi 63.
+
+  (a) Trong buoc 2-5, goi dai hon 20 byte -> router lam gi?      ____
+  (b) Scoreboard co biet MAXPKTSIZE dang la 20 khong?            ____
+  (c) write_yapp co push goi do vao hang doi khong?              ____
+  (d) Co goi nao ra kenh de so sanh voi no khong?                ____
+  (e) check_phase se bao gi?                                     ____
+
+Chay:
+    xrun -f run.f +UVM_TESTNAME=test_mc -l log9a_nolimit.log
+    grep "Queue's NOT Empty"   log9a_nolimit.log
+    grep "Simulation FAILED"   log9a_nolimit.log
+
+[Suy luan] Toi cho rang scoreboard se bao "Queue's NOT Empty" va
+"Simulation FAILED". Toi CHUA chay thi nghiem nay nen khong khang dinh
+con so cu the hay ca chi tiet router drop goi the nao -- ban tu doc RTL
+hoac tu quan sat waveform de xac nhan.
+
+*** DIEU QUAN TRONG NHAT CUA THI NGHIEM NAY ***
+
+Loi bao o SCOREBOARD, nhung DUT HOAN TOAN DUNG. Router drop goi qua
+dai la hanh vi DUNG DAN theo thiet ke.
+
+Sai o cho: scoreboard KHONG BIET router dang cau hinh the nao.
+
+Cach sua: noi them HBUS vao scoreboard de no theo doi MAXPKTSIZE va
+ROUTER_EN, roi write_yapp kiem tra ba dieu kien truoc khi push:
+    - addr != 3
+    - router_enable_reg == 1
+    - length <= max_pktsize_reg
+
+Do chinh la Lab 9B. Slide 22:
+    "Lab 9B Router Module UVC -- Modify the scoreboard to cater for the
+     router dropping oversized or disabled packets"
+
+*** BAI HOC NGHE NGHIEP ***
+Mot scoreboard bao FAILED khong co nghia DUT sai. Viec dau tien khi
+scoreboard bao loi la hoi: "mo hinh cua toi co dung khong?"
+
+Trong du an that, phan lon loi scoreboard ban gap trong tuan dau la
+loi cua scoreboard, khong phai cua DUT.
+
+
+===============================================================================
+TU KIEM TRA
+===============================================================================
+
+ 1. Lab 9A them mot component lon vao testbench nhung test KHONG doi
+    mot dong. Dieu do noi gi ve kien truc TLM?
+
+ 2. Neu muon chay test_mc MA KHONG co scoreboard (vi du de so sanh
+    thoi gian mo phong), ban sua o dau? Test hay router_tb?
+    Co cach nao tat scoreboard bang config khong?
+    (Goi y: factory override scoreboard bang mot lop con rong?)
+
+ 3. check_config_usage() cua base_test se bao gi neu ban go sai
+    "tb.router_sb" thanh "tb.router_scoreboard" o [TEST-2]?
+
+===============================================================================

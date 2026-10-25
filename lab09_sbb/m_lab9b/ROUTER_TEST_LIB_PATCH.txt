@@ -1,0 +1,173 @@
+===============================================================================
+router_test_lib.sv  --  LAB 9B  (PATCH)
+===============================================================================
+
+Gan nhu khong sua gi. Nhung co MOT dong phai bo, va do la phep thu
+quyet dinh cua ca Lab 9B.
+
+
+===============================================================================
+[TEST-1]  Khong sua gi ca -- xac nhan test_mc van chay
+===============================================================================
+
+test_mc cua Lab 8 chay nguyen ven qua ca Lab 9A lan Lab 9B.
+
+Them scoreboard (9A) khong doi test. Them reference + Module UVC (9B)
+cung khong doi test.
+
+Day la bang chung cho cau cua slide 9:
+    "Producer does not know how many consumers are connected"
+
+Monitor khong biet co bao nhieu nguoi nghe. Test khong biet co bao
+nhieu nguoi kiem tra. Moi thu noi bang TLM o tang router_tb.
+
+*** BA THU base_test DA CO SAN, LAB 9B VAN DUA VAO ***
+
+    end_of_elaboration_phase -> uvm_top.print_topology()
+    run_phase                -> obj.set_drain_time(this, 200ns)
+    check_phase              -> check_config_usage()
+
+set_drain_time van la dong quan trong nhat: scoreboard.check_phase
+kiem hang doi rong, va no chay SAU run_phase.
+
+
+===============================================================================
+[TEST-2]  *** PHEP THU QUYET DINH -- BO TYPE OVERRIDE ***
+===============================================================================
+
+Day la Buoc 6 trong README, va la ly do ton tai cua ca Lab 9B.
+
+Trong test_mc, COMMENT dong:
+
+    //yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());
+
+[Da xac minh] Repo lab09_sba VA lab09_sbd deu co dong nay BI COMMENT,
+trong khi lab08_mcseq thi dong nay dang ACTIVE. Thay doi co chu y.
+
+
+=============================================================================
+*** HAI LAN CHAY, HAI KET QUA KHAC NHAU ***
+=============================================================================
+
+Lam dung thu tu nay:
+
+   Lan 1 -- Lab 9A (neu ban con giu thu muc lab09a_my):
+       cd lab09a_my/tb
+       (comment dong override)
+       xrun -f run.f +UVM_TESTNAME=test_mc -l log9a_nolimit.log
+       grep "Queue's NOT Empty\|Simulation FAILED" log9a_nolimit.log
+
+   Lan 2 -- Lab 9B:
+       cd lab09b_my/tb
+       (comment dong override)
+       xrun -f run.f +UVM_TESTNAME=test_mc -l log9b_nolimit.log
+       grep "Router Scoreboard Empty\|Simulation PASSED" log9b_nolimit.log
+
+*** DU DOAN TRUOC KHI CHAY ***
+
+Nho lai router_simple_mcseq:
+    1. HBUS: MAXPKTSIZE = 20
+    2-5. YAPP: 6 goi      <- co goi dai hon 20 byte
+    6. HBUS: MAXPKTSIZE = 63
+    7-9. YAPP: 6 goi nua  <- gio moi do dai deu qua duoc
+
+Khong co short_yapp_packet, length co the toi 63.
+
+  (a) Lab 9A: hang doi co rong luc check_phase khong?       ____
+  (b) Lab 9B: reference loc bao nhieu goi [OVERSIZED]?      ____
+  (c) Lab 9B: hang doi co rong khong?                       ____
+  (d) reference.packets_forwarded = ?   scoreboard.packets_in = ?
+
+[Suy luan] Toi cho rang Lab 9A se bao "Queue's NOT Empty" + FAILED,
+con Lab 9B se bao "Router Scoreboard Empty!" + PASSED. Toi CHUA chay
+hai thi nghiem nay nen khong khang dinh con so cu the -- so goi bi
+[OVERSIZED] phu thuoc vao seed random.
+
+
+=============================================================================
+*** DIEU QUAN TRONG NHAT CUA PHEP THU ***
+=============================================================================
+
+Trong CA HAI lan chay:
+    - cung mot RTL
+    - cung mot kich ban test
+    - cung mot scoreboard (router_scoreboard.sv khong doi dong nao)
+    - DUT hoan toan DUNG trong ca hai
+
+Chi khac: Lab 9B co mot component BIET router dang cau hinh the nao.
+
+=> Loi cua Lab 9A khong phai loi cua DUT. No la loi cua MO HINH.
+
+*** BAI HOC NGHE NGHIEP ***
+Mot scoreboard bao FAILED KHONG co nghia DUT sai.
+Cau hoi dau tien phai la: "mo hinh cua toi co dung khong?"
+
+Trong du an that, phan lon loi scoreboard ban gap trong tuan dau la
+loi cua scoreboard, khong phai cua DUT. Nguoi moi hay bao cao bug
+ma hoa ra la bug cua chinh testbench.
+
+
+===============================================================================
+[TEST-3]  (TUY CHON) Hai thi nghiem lam HIEN RO bo loc
+===============================================================================
+
+Bo loc cua reference co BA ly do drop, nhung test_mc hien tai chi kich
+hoat duoc MOT ([OVERSIZED]). Hai cai kia khong bao gio chay.
+
+*** THI NGHIEM A -- kich hoat [DISABLED] ***
+
+Viet mot hbus sequence ghi ROUTER_EN = 0, roi gui goi.
+[Chua xac minh] Toi khong biet repo co san sequence nao ghi
+router_enable_reg = 0 hay khong. Tu tim:
+    grep -n "enable_reg" ../../hbus/sv/hbus_master_seqs.sv
+
+Neu khong co, viet mot mcseq moi:
+    `uvm_do_on_with(hbus_seq, p_sequencer.hbus_seqr, {enable_reg == 0;})
+    `uvm_do_on(yapp_012, p_sequencer.yapp_seqr)
+
+Du doan: reference bao [DISABLED] may lan? Hang doi co rong khong?
+Router that co drop goi khong, hay van gui? (Doi chieu voi channel
+monitor -- co goi nao toi khong?)
+
+*** THI NGHIEM B -- kich hoat [BAD ADDRESS] ***
+
+yapp_packet cho phep addr 0..3, nhung mac dinh co constraint chan addr=3.
+Tu kiem:
+    grep -n "addr" ../../yapp/sv/yapp_packet.sv
+
+Neu co constraint chan addr == 3, tat no di bang constraint_mode(0)
+hoac viet mot sequence ep addr == 3:
+    `uvm_do_with(req, {req.addr == 3;})
+
+Du doan: reference bao [BAD ADDRESS]. Scoreboard co nhan goi do khong?
+Channel nao thu duoc no? Router lam gi?
+
+*** VI SAO NEN LAM HAI THI NGHIEM NAY ***
+Mot nhanh code khong bao gio chay la mot nhanh code khong bao gio duoc
+kiem tra. Ban vua viet bon nhanh loc -- moi chay duoc mot.
+
+Day cung la cau chuyen cua Section 15 (Functional Coverage): lam sao
+biet test cua minh da cham toi moi truong hop chua.
+
+
+===============================================================================
+TU KIEM TRA
+===============================================================================
+
+ 1. Lab 9A va Lab 9B dung cung mot test_mc, cung mot RTL, cung mot
+    scoreboard -- nhung mot cai FAILED mot cai PASSED. Giai thich
+    trong mot cau.
+
+ 2. Neu BO dong set_drain_time trong base_test o Lab 9B, check_phase
+    bao gi? Lab 9B co "mien nhiem" voi loi do khong, hay van hong
+    giong Lab 9A?
+
+ 3. test_mc khong dat default_sequence cho tb.hbus, nhung reference
+    VAN nhan duoc hbus_transaction. Chung den tu dau?
+    (Goi y: router_simple_mcseq co bao nhieu lenh `uvm_do_on toi
+     hbus_seqr?)
+
+ 4. Bon nhanh loc, chi mot nhanh duoc kich hoat boi test_mc. Viet ra
+    ba thay doi can thiet de kich hoat ca bon.
+
+===============================================================================

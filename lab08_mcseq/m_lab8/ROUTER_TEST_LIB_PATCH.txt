@@ -1,0 +1,271 @@
+===============================================================================
+router_test_lib.sv  --  LAB 8  (PATCH)
+Section 12 slide 8 buoc 4, slide 14
+===============================================================================
+
+Giu nguyen base_test va simple_test cua Lab 7.
+Them MOT test moi o cuoi file: test_mc.
+
+*** PHAN KHO CUA BUOC NAY KHONG PHAI THEM, MA LA XOA ***
+
+Slide 8 buoc 4 ghi hai gach dau dong:
+    - Set the sequence of the multichannel sequencer to the required choice
+    - Remove any default_sequence setting for the UVC
+        * Control is no longer local
+
+Gach thu hai la cho nguoi ta hay quen nhat. [TEST-5] lam viec do, nhung
+HAY LAM THI NGHIEM O [TEST-4] TRUOC de thay hau qua.
+
+
+===============================================================================
+[TEST-1]  Khung class
+===============================================================================
+
+    class test_mc extends base_test;
+
+      `uvm_component_utils(test_mc)
+
+      function new(string name, uvm_component parent);
+        super.new(name, parent);
+      endfunction : new
+
+      function void build_phase(uvm_phase phase);
+        // ... TEST-2..5 o day ...
+        super.build_phase(phase);
+      endfunction : build_phase
+
+    endclass : test_mc
+
+*** base_test DA CO SAN NHUNG THU NAY -- khong viet lai ***
+
+[Da xac minh] base_test cua Lab 7 da co:
+
+    task run_phase(uvm_phase phase);
+      uvm_objection obj = phase.get_objection();
+      obj.set_drain_time(this, 200ns);
+    endtask : run_phase
+
+    function void end_of_elaboration_phase(uvm_phase phase);
+      uvm_top.print_topology();
+    endfunction
+
+    function void check_phase(uvm_phase phase);
+      check_config_usage();
+    endfunction
+
+=> Slide 12 dan do "Check you have a drain time specified in the testbench"
+   -- ban DA co san 200ns. Khong phai them.
+=> print_topology va check_config_usage cung co san. Hai cai do la cong
+   cu chinh de debug Lab 8.
+
+
+===============================================================================
+[TEST-2]  Type override
+===============================================================================
+
+    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());
+
+Doi moi yapp_packet thanh short_yapp_packet (length < 20).
+
+*** VI SAO CAN O LAB 8 ***
+Buoc dau cua kich ban ghi MAXPKTSIZE = 20. Neu goi dai hon 20 byte,
+router se lam gi? Doc RTL de biet. [Chua xac minh] Toi chua doc phan
+xu ly MAXPKTSIZE trong yapp_router.sv nen khong biet no drop goi,
+bao loi, hay cat ngan.
+
+=> Dung short_yapp_packet cho an toan. Nhung sau khi chay xong, THU BO
+   dong nay di va xem chuyen gi xay ra -- do la mot thi nghiem tot ve
+   chuc nang that cua DUT.
+
+*** KIEM TRA TRUOC KHI CHAY ***
+    grep -n "not_addr_2" ../../yapp/sv/yapp_packet.sv
+
+Neu constraint do dang ACTIVE (khong bi comment) thi no mau thuan voi
+yapp_012_seq (goi thu ba ep addr == 2) -> randomization failure.
+[Da xac minh] Ban golden co not_addr_2 bi comment lai, dung vi ly do nay.
+
+
+===============================================================================
+[TEST-3]  Ba lenh default_sequence CAN GIU
+===============================================================================
+
+Ba dong, cho ba cho KHONG do mcseq dieu khien:
+
+  (a) CLOCK_AND_RESET -- phai chay, khong co clock thi khong gi chay duoc
+
+      uvm_config_wrapper::set(this, "tb.clock_and_reset.agent.sequencer.run_phase",
+                              "default_sequence", clk10_rst5_seq::get_type());
+
+  (b) MCSEQUENCER -- *** DONG MOI CUA LAB 8 ***
+
+      uvm_config_wrapper::set(this, "tb.mcsequencer.run_phase",
+                              "default_sequence", router_simple_mcseq::get_type());
+
+  (c) CHANNEL x3 -- dap ung mai mai
+
+      uvm_config_wrapper::set(this, "tb.chan?.rx_agent.sequencer.run_phase",
+                              "default_sequence", channel_rx_resp_seq::get_type());
+
+
+=============================================================================
+*** DONG (b) -- doc ky duong dan ***
+=============================================================================
+
+    "tb.mcsequencer.run_phase"
+     ^^  ^^^^^^^^^^^ ^^^^^^^^^
+     |   |           |
+     |   |           `-- ten PHASE, khong phai component
+     |   `-- ten handle trong router_tb  [RTB-1]
+     `-- ten tb tao trong base_test
+
+So voi cac duong dan khac, cai nay NGAN hon han:
+
+    tb.yapp.tx_agent.sequencer.run_phase       <- 4 cap
+    tb.chan?.rx_agent.sequencer.run_phase      <- 4 cap
+    tb.mcsequencer.run_phase                   <- 2 cap
+
+Vi sao ngan? Vi mcsequencer la CON TRUC TIEP cua router_tb -- no khong
+nam trong agent nao, khong nam trong env nao. Doi chieu hinh slide 7:
+no nam NGANG HANG voi cac UVC, khong nam trong chung.
+
+Day la cach kiem tra nhanh ban co hieu kien truc khong: neu ban dinh
+viet "tb.yapp.mcsequencer..." thi ban dang hieu sai.
+
+
+=============================================================================
+*** BA CHO NAY CO GI CHUNG ***
+=============================================================================
+
+   clock_and_reset  -> chay MAI MAI (ha tang)
+   chan0/1/2        -> chay MAI MAI (dap ung)
+   mcsequencer      -> la ROOT cua kich ban
+
+Khong cai nao can phoi hop thu tu voi cai nao. Nen moi cai tu khoi dong
+bang default_sequence.
+
+Nguoc lai, yapp va hbus PHAI co thu tu voi nhau -> giao cho mcseq.
+
+
+===============================================================================
+[TEST-4]  *** THI NGHIEM CO CHU Y -- DUNG BO QUA ***
+===============================================================================
+
+O buoc nay, CO TINH THEM lai dong default_sequence cu cua YAPP:
+
+      uvm_config_wrapper::set(this, "tb.yapp.tx_agent.sequencer.run_phase",
+                              "default_sequence", yapp_012_seq::get_type());
+
+Gio YAPP sequencer nhan sequence tu HAI nguon:
+
+      default_sequence  ---------------> yapp_012_seq
+                                              |
+      tb.yapp.tx_agent.sequencer <------------+
+                                              |
+      router_simple_mcseq ---`uvm_do_on`------+
+
+
+*** DU DOAN RA GIAY TRUOC KHI CHAY ***
+
+  (a) Co UVM_ERROR khong?          du doan: ______
+  (b) So goi YAPP gui di?          du doan: ______
+  (c) Thu tu goi xen ke hay noi tiep?       ______
+  (d) So cap raise/drop objection?          ______
+  (e) check_config_usage bao gi?            ______
+
+Chay va dem:
+
+    xrun -f run.f +UVM_TESTNAME=test_mc -l log8_step4.log
+
+    grep -c "Sending Packet"       log8_step4.log
+    grep -c "raise objection"      log8_step4.log
+    grep -c "UVM_ERROR"            log8_step4.log
+    grep "yapp_012_seq"            log8_step4.log | head -20
+
+[Suy luan] Toi cho rang se KHONG co UVM_ERROR, vi gui nhieu sequence
+toi mot sequencer la HOP LE trong UVM -- sequencer co co che arbitration
+de xen ke chung. Toi chua chay thi nghiem nay nen khong khang dinh
+chi tiet thu tu hay so goi chinh xac.
+
+*** DO LA DIEU NGUY HIEM ***
+Loi nay KHONG BAO GI CA. Testbench van chay, van ra ket qua, nhung
+ket qua do khong phai cai ban dinh test. Trong du an that, day la
+loai bug song lau nhat.
+
+
+===============================================================================
+[TEST-5]  XOA dong vua them
+===============================================================================
+
+Xoa (hoac comment) dong default_sequence cua YAPP o [TEST-4].
+
+Chay lai:
+
+    xrun -f run.f +UVM_TESTNAME=test_mc -l log8_final.log
+
+So sanh hai log:
+
+    diff <(grep -c "Sending Packet" log8_step4.log) \
+         <(grep -c "Sending Packet" log8_final.log)
+
+    grep -c "Sending Packet" log8_final.log
+    -> mong doi: 12   (3 + 3 + 6, dem tu PHAN 4 cua README)
+
+Gio ban hieu nam chu cua slide 8:
+
+    "Control is no longer local"
+
+"Local" = UVC tu quyet dinh no chay gi.
+"No longer local" = quyen do da chuyen len mcseq.
+
+De ca hai = hai nguoi cung lai mot vo lang.
+
+
+*** CHU Y: HBUS KHONG CAN XOA GI ***
+Lab 7 (simple_test) chua bao gio dat default_sequence cho hbus. Nen
+khong co gi de xoa. Nhung neu ban co viet them o Lab 7 thi gio phai xoa.
+
+Kiem tra:
+    grep -n "tb.hbus" router_test_lib.sv
+
+
+===============================================================================
+BANG DOI CHIEU: simple_test (Lab 7) -> test_mc (Lab 8)
+===============================================================================
+
+  +------------------------------------+-------------+-------------+
+  | duong dan                          | simple_test | test_mc     |
+  +------------------------------------+-------------+-------------+
+  | tb.yapp.tx_agent.sequencer         | yapp_012_seq| *** XOA *** |
+  | tb.hbus.masters[0].sequencer       | (khong co)  | (khong dat) |
+  | tb.clock_and_reset.agent.sequencer | clk10_rst5  | GIU         |
+  | tb.chan?.rx_agent.sequencer        | chan_rx_resp| GIU         |
+  | tb.mcsequencer                     | --          | *** THEM ***|
+  +------------------------------------+-------------+-------------+
+  | tong so lenh set                   |      3      |      3      |
+  +------------------------------------+-------------+-------------+
+
+Van ba lenh. Nhung MOT trong ba doi cho, va do la ca Lab 8.
+
+
+===============================================================================
+TU KIEM TRA
+===============================================================================
+
+ 1. test_mc dat default_sequence cho ba cho. Ba cho do co gi CHUNG?
+    Hai cho bi xoa (yapp, hbus) co gi chung?
+
+ 2. Duong dan "tb.mcsequencer.run_phase" chi co 2 cap, trong khi
+    "tb.yapp.tx_agent.sequencer.run_phase" co 4. Vi sao?
+
+ 3. Neu go nham thanh "tb.mcseqr.run_phase" (ten cua slide thay vi ten
+    cua repo) -- chuyen gi xay ra? Co loi bien dich khong? Co UVM_ERROR
+    khong? Cai gi bao cho ban biet?
+
+ 4. base_test co san set_drain_time(this, 200ns). Neu BO di, goi nao
+    bi mat? O phia YAPP monitor hay channel monitor? Vi sao?
+    (Goi y: goi cuoi cung roi driver luc nao, va no con phai di bao xa?)
+
+ 5. test_mc KHONG dat gi cho tb.hbus, nhung kich ban VAN co 4 giao dich
+    HBUS. Chung den tu dau?
+
+===============================================================================

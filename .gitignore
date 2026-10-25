@@ -1,0 +1,10 @@
+xcelium.d/
+INCA_libs/
+waves.shm/
+*.shm/
+cov_work/
+.simvision/
+*.history
+*.key
+*.diag
+.bpad/

@@ -1,0 +1,173 @@
+===============================================================================
+router_tb.sv  --  LAB 9A  (PATCH)
+Section 13 slide 13, 15
+===============================================================================
+
+Giu nguyen toan bo Lab 8. Them BA thu.
+
+connect_phase cua router_tb gio lam HAI nhom viec:
+   - noi virtual sequencer  (Lab 8)
+   - noi TLM                (Lab 9A)
+Hai nhom, cung mot ham.
+
+
+===============================================================================
+[RTB-1]  Khai bao handle
+===============================================================================
+
+Them sau "router_mcsequencer mcsequencer;":
+
+    // Router Scoreboard
+    router_scoreboard router_sb;
+
+*** TEN HANDLE "router_sb" SE XUAT HIEN O ***
+   (1) dong khai bao tren
+   (2) chuoi trong create()            [RTB-2]
+   (3) bon dong connect                [RTB-3]
+   (4) duong dan config neu ban doi compare_policy tu test:
+       "tb.router_sb"
+
+Repo dung "router_sb". Chon mot ten roi dung nhat quan.
+
+
+===============================================================================
+[RTB-2]  Tao instance
+===============================================================================
+
+Them vao CUOI build_phase, sau dong tao mcsequencer:
+
+    // router scoreboard
+    router_sb = router_scoreboard::type_id::create("router_sb", this);
+
+*** CHU Y: type_id::create, KHONG PHAI new() ***
+Scoreboard la mot uvm_component binh thuong -> di qua factory
+-> co the override duoc o Lab 9B.
+
+(Nguoc lai, bon doi tuong imp BEN TRONG scoreboard dung new() --
+ xem [SB-8]. Hai thu khac nhau, dung nham la sai ca hai chieu.)
+
+
+===============================================================================
+[RTB-3]  BON dong connect -- noi TLM
+===============================================================================
+
+Them vao connect_phase, SAU hai dong noi virtual sequencer:
+
+    // Connect the TLM ports from the YAPP and Channel UVCs to the scoreboard
+    yapp.tx_agent.monitor.item_collected_port.connect(router_sb.sb_yapp_in);
+    chan0.rx_agent.monitor.item_collected_port.connect(router_sb.sb_chan0);
+    chan1.rx_agent.monitor.item_collected_port.connect(router_sb.sb_chan1);
+    chan2.rx_agent.monitor.item_collected_port.connect(router_sb.sb_chan2);
+
+
+=============================================================================
+*** NAM DIEU PHAI HIEU VE BON DONG NAY ***
+=============================================================================
+
+ (1) CHIEU CUA connect()
+
+        port.connect(imp)      <- DUNG
+        imp.connect(port)      <- SAI
+
+     Luon goi tu phia PHAT (monitor). Nho bang chieu du lieu: du lieu
+     chay tu monitor sang scoreboard, loi goi cung vay.
+
+
+ (2) DUNG HANDLE, KHONG DUNG CHUOI
+
+        yapp.tx_agent.monitor.item_collected_port
+        ^^^^ ^^^^^^^^ ^^^^^^^ ^^^^^^^^^^^^^^^^^^^
+         |      |        |            |
+         |      |        |            +-- ten HANDLE cua port trong monitor
+         |      |        +-- ten HANDLE cua monitor trong agent
+         |      +-- ten HANDLE cua agent trong env
+         +-- ten HANDLE cua env trong router_tb
+
+     Day la truy cap thanh vien SystemVerilog binh thuong.
+
+     *** SO SANH VOI config_db -- hai thu trong giong nhau ***
+
+     +------------------+---------------------------+--------------------+
+     |                  | config_db                 | TLM connect        |
+     +------------------+---------------------------+--------------------+
+     | dung gi          | CHUOI ten instance        | HANDLE (bien)      |
+     | vi du            | "tb.yapp.tx_agent.sequencer" | yapp.tx_agent... |
+     | go sai thi       | IM LANG, khong khop gi    | LOI BIEN DICH      |
+     | co wildcard      | co (* va ?)               | khong              |
+     +------------------+---------------------------+--------------------+
+
+     => TLM connect AN TOAN HON NHIEU. Compiler kiem tra duoc tung ten.
+        Day la mot trong it cho cua UVM ma go sai thi biet ngay.
+
+
+ (3) CA BON MONITOR DUNG CUNG MOT TEN PORT
+
+     yapp.tx_agent.monitor.item_collected_port
+     chan0.rx_agent.monitor.item_collected_port
+     chan1.rx_agent.monitor.item_collected_port
+     chan2.rx_agent.monitor.item_collected_port
+
+     [Da xac minh] Moi monitor trong repo deu dung "item_collected_port".
+     Vi moi monitor chi co MOT analysis port nen khong can ten rieng.
+
+     Phia scoreboard moi can ten rieng (sb_yapp_in, sb_chan0, ...) vi
+     no co NHIEU imp.
+
+     Slide 13 dat ten la "yapp_out" / "yapp_in" -- doi chieu va dung
+     ten cua repo.
+
+
+ (4) MONITOR KHONG SUA MOT DONG NAO
+
+     item_collected_port.write(pkt) da co trong yapp_tx_monitor.sv
+     tu LAB 3. Suot sau lab no ghi vao hu khong.
+
+     Slide 9: "Producer does not know how many consumers are connected"
+     Dap an quiz cau 2: "Any number, INCLUDING ZERO."
+
+     => Lab 9A chi noi dau kia vao. KHONG dong toi yapp/sv/ hay
+        channel/sv/. Do la y nghia that cua "non-intrusive monitoring".
+
+
+ (5) HBUS CHUA NOI -- do la Lab 9B
+
+     Slide 4: "HBUS transactions can also be captured. Scoreboard must
+     account for a disabled router or oversized packets."
+
+     Lab 9A gia dinh moi goi deu qua duoc router. PHAN 6 cua README co
+     thi nghiem cho thay gia dinh do sai o dau.
+
+
+===============================================================================
+TU KIEM TRA
+===============================================================================
+
+ 1. Sau [RTB-2] (chua lam [RTB-3]), chay va xem print_topology().
+    Phai thay:
+        router_sb     router_scoreboard        -    @xxxx
+          sb_yapp_in  uvm_analysis_imp_yapp    -    @xxxx
+          sb_chan0    uvm_analysis_imp_chan0   -    @xxxx
+          sb_chan1    uvm_analysis_imp_chan1   -    @xxxx
+          sb_chan2    uvm_analysis_imp_chan2   -    @xxxx
+
+    Bon dong imp la CON cua router_sb -- vi constructor truyen "this".
+
+    Neu khong thay bon dong imp -> ban quen new() o [SB-8].
+
+ 2. Lam [RTB-2] nhung CHUA [RTB-3], roi chay. Scoreboard co nhan goi
+    nao khong? Co loi khong? Vi sao?
+
+ 3. Co tinh go sai mot ten, vi du:
+        chan1.rx_agent.monitor.item_collected_port.connect(router_sb.sb_chan0);
+                                                                     ^^^^^^^^
+                                                              chan0, khong phai chan1
+    Co loi bien dich khong? Chay se ra hien tuong gi?
+    (Day la loi IM LANG hiem hoi cua TLM -- vi ca hai ten deu ton tai)
+
+ 4. router_tb cua Lab 8 co 32 component. Lab 9A co bao nhieu?
+    Dem ca bon imp.
+
+ 5. connect_phase gio co 6 dong (2 cua Lab 8 + 4 cua Lab 9A).
+    Thu tu giua hai nhom co quan trong khong? Vi sao?
+
+===============================================================================

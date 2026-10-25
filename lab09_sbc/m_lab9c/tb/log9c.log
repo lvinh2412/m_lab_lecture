@@ -1,0 +1,1723 @@
+xrun(64): 18.03-s001: (c) Copyright 1995-2018 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	18.03-s001: Started on Oct 25, 2026 at 21:23:28 +07
+xrun
+	-f run.f
+		-64
+		-uvmhome /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv
+		+UVM_VERBOSITY=UVM_MEDIUM
+		+UVM_TESTNAME=test_mc
+		-timescale 1ns/100ps
+		-incdir ../sv
+		-incdir ../../../yapp/sv
+		-incdir ../../../channel/sv
+		-incdir ../../../hbus/sv
+		-incdir ../../../clock_and_reset/sv
+		../../../yapp/sv/yapp_pkg.sv
+		../../../yapp/sv/yapp_if.sv
+		../../../channel/sv/channel_pkg.sv
+		../../../channel/sv/channel_if.sv
+		../../../hbus/sv/hbus_pkg.sv
+		../../../hbus/sv/hbus_if.sv
+		../../../clock_and_reset/sv/clock_and_reset_pkg.sv
+		../../../clock_and_reset/sv/clock_and_reset_if.sv
+		../sv/router_module_pkg.sv
+		clkgen.sv
+		tb_top.sv
+		hw_top.sv
+		../../../router_rtl/yapp_router.sv
+	+UVM_TESTNAME=test_mc
+	-l log9c.log
+
+   User defined plus("+") options:
+	+UVM_VERBOSITY=UVM_MEDIUM
+
+Recompiling... reason: file './router_tb.sv' is newer than expected.
+	expected: Sun Oct 25 20:47:10 2026
+	actual:   Sun Oct 25 21:23:26 2026
+Compiling UVM packages (uvm_pkg.sv cdns_uvm_pkg.sv) using uvmhome location /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv
+file: ../../../clock_and_reset/sv/clock_and_reset_pkg.sv
+package clock_and_reset_pkg;
+                          |
+xmvlog: *W,TSNSPK (../../../clock_and_reset/sv/clock_and_reset_pkg.sv,3|26): `timescale is not specified for the package.  The default timescale of 1ns/1ns will be assumed for this package.
+file: tb_top.sv
+	module worklib.tb_top:sv
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		$unit_0x455e886d
+		uvm_pkg
+		cdns_uvmapi
+		cdns_assert2uvm_pkg
+		cdns_uvm_pkg
+		hbus_pkg
+		yapp_pkg
+		clock_and_reset_pkg
+		channel_pkg
+		router_module_pkg
+		tb_top
+		hw_top
+xmelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.uvm_pkg:sv <0x3df7404d>
+			streams:  23, words: 27347
+		worklib.uvm_pkg:sv <0x45577558>
+			streams:  23, words: 28233
+		worklib.uvm_pkg:sv <0x4e4b8a74>
+			streams:  23, words: 26233
+		worklib.tb_top:sv <0x0218b602>
+			streams:  27, words: 30233
+		worklib.uvm_pkg:sv <0x4384fc95>
+			streams:  24, words: 37577
+		worklib.uvm_pkg:sv <0x57f33cf3>
+			streams:  32, words: 40407
+		worklib.uvm_pkg:sv <0x25651f50>
+			streams:  28, words: 85761
+		worklib.uvm_pkg:sv <0x03f0e7d7>
+			streams:  22, words: 21747
+		worklib.tb_top:sv <0x6d2e6ecf>
+			streams:   1, words:  4876
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                       Instances  Unique
+		Modules:                       9       7
+		Interfaces:                    6       4
+		Verilog packages:              9       9
+		Resolved nets:                 0       1
+		Registers:                 21550   13202
+		Scalar wires:                 63       -
+		Vectored wires:               34       -
+		Named events:                  5      13
+		Always blocks:                20      16
+		Initial blocks:              523     229
+		Parallel blocks:              40      41
+		Cont. assignments:            19      42
+		Pseudo assignments:           26      26
+		Assertions:                    5       5
+		Covergroup Instances:          0       2
+		Compilation units:             1       1
+		SV Class declarations:       295     411
+		SV Class specializations:    644     644
+		Simulation timescale:      100ps
+	Writing initial simulation snapshot: worklib.tb_top:sv
+Loading snapshot worklib.tb_top:sv .................... Done
+SVSEED default: 1
+xmsim: *W,RNDNOXCEL: The legacy SystemVerilog constraint solver is used. Enabling the Xceligen constraint solver with "xrun/xmsim -xceligen on ..." is recommended.
+xmsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+xcelium> source /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/xcelium/files/xmsimrc
+xcelium> source /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/files/tcl/uvm_sim.tcl
+xcelium> run
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(412) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+CDNS-UVM-1.2 (18.03-s001)
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_WARNING @ 0: reporter [MULTTST] Multiple (2) +UVM_TESTNAME arguments provided on the command line.  'test_mc' will be used.  Provided list: test_mc, test_mc.
+UVM_INFO @ 0: reporter [RNTST] Running test test_mc...
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(59) @ 0: uvm_test_top.tb.chan0.rx_agent.monitor [NOCOV] Coverage not enabled for: uvm_test_top.tb.chan0.rx_agent.monitor
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(59) @ 0: uvm_test_top.tb.chan1.rx_agent.monitor [NOCOV] Coverage not enabled for: uvm_test_top.tb.chan1.rx_agent.monitor
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(59) @ 0: uvm_test_top.tb.chan2.rx_agent.monitor [NOCOV] Coverage not enabled for: uvm_test_top.tb.chan2.rx_agent.monitor
+UVM_WARNING /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_component.svh(3132) @ 0: uvm_test_top.tb.hbus.monitor [UVM/CFG/GET/DPR] get/set_config_* API has been deprecated. Use uvm_config_db instead.
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:
+--------------------------------------------------------------------------
+Name                           Type                       Size  Value     
+--------------------------------------------------------------------------
+uvm_test_top                   test_mc                    -     @1323     
+  tb                           router_tb                  -     @2276     
+    chan0                      channel_env                -     @2389     
+      rx_agent                 channel_rx_agent           -     @3491     
+        driver                 channel_rx_driver          -     @4280     
+          rsp_port             uvm_analysis_port          -     @4379     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @4329     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h0       
+          recording_detail     integral                   32    'd1       
+        monitor                channel_rx_monitor         -     @3534     
+          item_collected_port  uvm_analysis_port          -     @3594     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h0       
+          checks_enable        integral                   1     'h1       
+          coverage_enable      integral                   1     'h1       
+          recording_detail     integral                   32    'd1       
+        sequencer              channel_rx_sequencer       -     @3625     
+          rsp_export           uvm_analysis_export        -     @3684     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @4246     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        is_active              uvm_active_passive_enum    1     UVM_ACTIVE
+        recording_detail       integral                   32    'd1       
+      channel_id               integral                   32    'h0       
+      checks_enable            integral                   1     'h1       
+      coverage_enable          integral                   1     'h1       
+      recording_detail         integral                   32    'd1       
+    chan1                      channel_env                -     @2426     
+      rx_agent                 channel_rx_agent           -     @4445     
+        driver                 channel_rx_driver          -     @5205     
+          rsp_port             uvm_analysis_port          -     @5300     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @5251     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h1       
+          recording_detail     integral                   32    'd1       
+        monitor                channel_rx_monitor         -     @4480     
+          item_collected_port  uvm_analysis_port          -     @4532     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h1       
+          checks_enable        integral                   1     'h1       
+          coverage_enable      integral                   1     'h1       
+          recording_detail     integral                   32    'd1       
+        sequencer              channel_rx_sequencer       -     @4565     
+          rsp_export           uvm_analysis_export        -     @4620     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @5172     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        is_active              uvm_active_passive_enum    1     UVM_ACTIVE
+        recording_detail       integral                   32    'd1       
+      channel_id               integral                   32    'h1       
+      checks_enable            integral                   1     'h1       
+      coverage_enable          integral                   1     'h1       
+      recording_detail         integral                   32    'd1       
+    chan2                      channel_env                -     @2457     
+      rx_agent                 channel_rx_agent           -     @5352     
+        driver                 channel_rx_driver          -     @6112     
+          rsp_port             uvm_analysis_port          -     @6207     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @6158     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h2       
+          recording_detail     integral                   32    'd1       
+        monitor                channel_rx_monitor         -     @5387     
+          item_collected_port  uvm_analysis_port          -     @5439     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h2       
+          checks_enable        integral                   1     'h1       
+          coverage_enable      integral                   1     'h1       
+          recording_detail     integral                   32    'd1       
+        sequencer              channel_rx_sequencer       -     @5472     
+          rsp_export           uvm_analysis_export        -     @5527     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @6079     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        is_active              uvm_active_passive_enum    1     UVM_ACTIVE
+        recording_detail       integral                   32    'd1       
+      channel_id               integral                   32    'h2       
+      checks_enable            integral                   1     'h1       
+      coverage_enable          integral                   1     'h1       
+      recording_detail         integral                   32    'd1       
+    clock_and_reset            clock_and_reset_env        -     @2309     
+      agent                    clock_and_reset_agent      -     @6260     
+        driver                 clock_and_reset_driver     -     @6290     
+          rsp_port             uvm_analysis_port          -     @6395     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @6343     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+        sequencer              clock_and_reset_sequencer  -     @6429     
+          rsp_export           uvm_analysis_export        -     @6487     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @7047     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        recording_detail       integral                   32    'd1       
+      recording_detail         integral                   32    'd1       
+    hbus                       hbus_env                   -     @2506     
+      masters[0]               hbus_master_agent          -     @7198     
+        driver                 hbus_master_driver         -     @7890     
+          rsp_port             uvm_analysis_port          -     @7989     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @7939     
+            recording_detail   integral                   32    'd1       
+          random_delay         integral                   1     'h0       
+          master_id            integral                   32    'h0       
+          recording_detail     integral                   32    'd1       
+        sequencer              hbus_master_sequencer      -     @7197     
+          rsp_export           uvm_analysis_export        -     @7296     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @7856     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        monitor                hbus_monitor               -     @7113     
+        is_active              uvm_active_passive_enum    1     UVM_ACTIVE
+        master_id              integral                   32    'h0       
+        recording_detail       integral                   32    'd1       
+      monitor                  hbus_monitor               -     @7113     
+        item_collected_port    uvm_analysis_port          -     @7163     
+          recording_detail     integral                   32    'd1       
+        checks_enable          integral                   1     'h1       
+        coverage_enable        integral                   1     'h1       
+        recording_detail       integral                   32    'd1       
+      num_masters              integral                   32    'h1       
+      num_slaves               integral                   32    'h0       
+      checks_enable            integral                   1     'h1       
+      coverage_enable          integral                   1     'h1       
+      recording_detail         integral                   32    'd1       
+    mcsequencer                router_mcsequencer         -     @2541     
+      rsp_export               uvm_analysis_export        -     @2602     
+        recording_detail       integral                   32    'd1       
+      seq_item_export          uvm_seq_item_pull_imp      -     @3164     
+        recording_detail       integral                   32    'd1       
+      recording_detail         integral                   32    'd1       
+      arbitration_queue        array                      0     -         
+      lock_queue               array                      0     -         
+      num_last_reqs            integral                   32    'd1       
+      num_last_rsps            integral                   32    'd1       
+    router_mod                 router_env                 -     @3198     
+      hbus_in                  uvm_analysis_export        -     @3247     
+        recording_detail       integral                   32    'd1       
+      reference                router_reference           -     @8290     
+        hbus_in                uvm_analysis_imp_hbus      -     @8340     
+          recording_detail     integral                   32    'd1       
+        sb_add_out             uvm_analysis_port          -     @8440     
+          recording_detail     integral                   32    'd1       
+        yapp_in                uvm_analysis_imp_yapp      -     @8390     
+          recording_detail     integral                   32    'd1       
+        recording_detail       integral                   32    'd1       
+      sb_chan0                 uvm_analysis_export        -     @3351     
+        recording_detail       integral                   32    'd1       
+      sb_chan1                 uvm_analysis_export        -     @3403     
+        recording_detail       integral                   32    'd1       
+      sb_chan2                 uvm_analysis_export        -     @3453     
+        recording_detail       integral                   32    'd1       
+      scoreboard               router_scoreboard          -     @8056     
+        sb_chan0               uvm_analysis_imp_chan0     -     @8159     
+          recording_detail     integral                   32    'd1       
+        sb_chan1               uvm_analysis_imp_chan1     -     @8209     
+          recording_detail     integral                   32    'd1       
+        sb_chan2               uvm_analysis_imp_chan2     -     @8259     
+          recording_detail     integral                   32    'd1       
+        sb_yapp_in             uvm_analysis_imp_yapp      -     @8109     
+          recording_detail     integral                   32    'd1       
+        compare_policy         comp_t                     1     UVM       
+        recording_detail       integral                   32    'd1       
+      yapp_in                  uvm_analysis_export        -     @3299     
+        recording_detail       integral                   32    'd1       
+      recording_detail         integral                   32    'd1       
+    yapp                       yapp_env                   -     @2341     
+      tx_agent                 yapp_tx_agent              -     @8488     
+        driver                 yapp_tx_driver             -     @9256     
+          rsp_port             uvm_analysis_port          -     @9355     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @9305     
+            recording_detail   integral                   32    'd1       
+          num_sent             integral                   32    'h0       
+          recording_detail     integral                   32    'd1       
+        monitor                yapp_tx_monitor            -     @8521     
+          item_collected_port  uvm_analysis_port          -     @8572     
+            recording_detail   integral                   32    'd1       
+          num_pkt_col          integral                   32    'h0       
+          recording_detail     integral                   32    'd1       
+        sequencer              yapp_tx_sequencer          -     @8603     
+          rsp_export           uvm_analysis_export        -     @8662     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @9222     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        is_active              uvm_active_passive_enum    1     UVM_ACTIVE
+        recording_detail       integral                   32    'd1       
+      recording_detail         integral                   32    'd1       
+    recording_detail           integral                   32    'd1       
+--------------------------------------------------------------------------
+
+SDI/Verilog Transaction Recording Facility Version 18.03-s001
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(100) @ 0: uvm_test_top.tb.chan2.rx_agent.monitor [channel_rx_monitor] Inside the run() phase
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(100) @ 0: uvm_test_top.tb.chan1.rx_agent.monitor [channel_rx_monitor] Inside the run() phase
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(100) @ 0: uvm_test_top.tb.chan0.rx_agent.monitor [channel_rx_monitor] Inside the run() phase
+UVM_INFO router_mcseqs_lib.sv(34) @ 0: uvm_test_top.tb.mcsequencer@@router_simple_mcseq [router_simple_mcseq] raise objection
+UVM_INFO router_mcseqs_lib.sv(53) @ 0: uvm_test_top.tb.mcsequencer@@router_simple_mcseq [router_simple_mcseq] Executing router_simple_mcseq
+UVM_INFO ../../../clock_and_reset/sv/clock_and_reset_seq.sv(48) @ 0: uvm_test_top.tb.clock_and_reset.agent.sequencer@@clk10_rst5_seq [clk10_rst5_seq] Starting test_sequence sequence body
+UVM_INFO ../../../channel/sv/channel_rx_seqs.sv(24) @ 0: uvm_test_top.tb.chan2.rx_agent.sequencer@@channel_rx_resp_seq [channel_rx_resp_seq] Executing channel_rx_resp_seq (forever)
+UVM_INFO ../../../channel/sv/channel_rx_seqs.sv(24) @ 0: uvm_test_top.tb.chan1.rx_agent.sequencer@@channel_rx_resp_seq [channel_rx_resp_seq] Executing channel_rx_resp_seq (forever)
+UVM_INFO ../../../channel/sv/channel_rx_seqs.sv(24) @ 0: uvm_test_top.tb.chan0.rx_agent.sequencer@@channel_rx_resp_seq [channel_rx_resp_seq] Executing channel_rx_resp_seq (forever)
+UVM_INFO ../../../hbus/sv/hbus_master_seqs.sv(187) @ 0: uvm_test_top.tb.hbus.masters[0].sequencer@@router_simple_mcseq.hbus_small_pkt [hbus_small_packet_seq] Executing sequence
+UVM_INFO ../../../clock_and_reset/sv/clock_and_reset_seq.sv(20) @ 0: uvm_test_top.tb.clock_and_reset.agent.sequencer@@clk10_rst5_seq.cr [clock_and_reset_sequence] starting body clock_and_reset_wait_seq
+UVM_INFO ../../../hbus/sv/hbus_master_seqs.sv(124) @ 0: uvm_test_top.tb.hbus.masters[0].sequencer@@router_simple_mcseq.hbus_small_pkt.hbus_seq [hbus_set_yapp_regs_seq] Executing sequence
+UVM_INFO ../../../hbus/sv/hbus_if.sv(32) @ 50: reporter [HBUS_IF] Master Observed Reset
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(82) @ 50: uvm_test_top.tb.hbus.monitor [hbus_monitor] Reset Active
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(84) @ 550: uvm_test_top.tb.hbus.monitor [hbus_monitor] Reset Deasserted
+UVM_INFO ../../../hbus/sv/hbus_master_driver.sv(48) @ 550: uvm_test_top.tb.hbus.masters[0].driver [hbus_master_driver] Reset Dropped
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(104) @ 550: uvm_test_top.tb.chan2.rx_agent.monitor [channel_rx_monitor] Detected Reset Done
+UVM_INFO ../../../channel/sv/channel_rx_driver.sv(63) @ 550: uvm_test_top.tb.chan2.rx_agent.driver [channel_rx_driver] Reset Dropped
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(104) @ 550: uvm_test_top.tb.chan1.rx_agent.monitor [channel_rx_monitor] Detected Reset Done
+UVM_INFO ../../../channel/sv/channel_rx_driver.sv(63) @ 550: uvm_test_top.tb.chan1.rx_agent.driver [channel_rx_driver] Reset Dropped
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(104) @ 550: uvm_test_top.tb.chan0.rx_agent.monitor [channel_rx_monitor] Detected Reset Done
+UVM_INFO ../../../channel/sv/channel_rx_driver.sv(63) @ 550: uvm_test_top.tb.chan0.rx_agent.driver [channel_rx_driver] Reset Dropped
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(42) @ 550: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Detected Reset Done
+UVM_INFO ../../../yapp/sv/yapp_tx_driver.sv(48) @ 550: uvm_test_top.tb.yapp.tx_agent.driver [yapp_tx_driver] Reset dropped
+UVM_INFO ../../../hbus/sv/hbus_if.sv(65) @ 600: reporter [HBUS_IF] Master writes 14 to 1000
+UVM_INFO ../../../hbus/sv/hbus_master_driver.sv(58) @ 600: uvm_test_top.tb.hbus.masters[0].driver [hbus_master_driver] Driving transaction :
+----------------------------------------------------------------------------------------------------------------------------------
+Name                           Type                  Size  Value                                                                  
+----------------------------------------------------------------------------------------------------------------------------------
+transaction                    hbus_transaction      -     @9821                                                                  
+  haddr                        integral              16    'h1000                                                                 
+  hdata                        integral              8     'h14                                                                   
+  hwr_rd                       hbus_read_write_enum  1     HBUS_WRITE                                                             
+  wait_between_cycle           integral              32    'h3                                                                    
+  begin_time                   time                  64    600                                                                    
+  depth                        int                   32    'd4                                                                    
+  parent sequence (name)       string                8     hbus_seq                                                               
+  parent sequence (full name)  string                71    uvm_test_top.tb.mcsequencer.router_simple_mcseq.hbus_small_pkt.hbus_seq
+  sequencer                    string                41    uvm_test_top.tb.hbus.masters[0].sequencer                              
+----------------------------------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_if.sv(139) @ 650: reporter [HBUS_IF] Monitor Write Transaction
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(92) @ 650: uvm_test_top.tb.hbus.monitor [hbus_monitor] Collecting Transaction
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(100) @ 750: uvm_test_top.tb.hbus.monitor [hbus_monitor] transaction collected :
+------------------------------------------------------------
+Name                  Type                  Size  Value     
+------------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008    
+  haddr               integral              16    'h1000    
+  hdata               integral              8     'h14      
+  hwr_rd              hbus_read_write_enum  1     HBUS_WRITE
+  wait_between_cycle  integral              32    'h0       
+  begin_time          time                  64    650       
+  end_time            time                  64    750       
+------------------------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(43) @ 750: uvm_test_top.tb.router_mod.reference [router_reference] Received HBUS Transaction: 
+------------------------------------------------------------
+Name                  Type                  Size  Value     
+------------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008    
+  haddr               integral              16    'h1000    
+  hdata               integral              8     'h14      
+  hwr_rd              hbus_read_write_enum  1     HBUS_WRITE
+  wait_between_cycle  integral              32    'h0       
+  begin_time          time                  64    650       
+  end_time            time                  64    750       
+------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_if.sv(65) @ 800: reporter [HBUS_IF] Master writes 01 to 1001
+UVM_INFO ../../../hbus/sv/hbus_master_driver.sv(58) @ 800: uvm_test_top.tb.hbus.masters[0].driver [hbus_master_driver] Driving transaction :
+----------------------------------------------------------------------------------------------------------------------------------
+Name                           Type                  Size  Value                                                                  
+----------------------------------------------------------------------------------------------------------------------------------
+transaction                    hbus_transaction      -     @9775                                                                  
+  haddr                        integral              16    'h1001                                                                 
+  hdata                        integral              8     'h1                                                                    
+  hwr_rd                       hbus_read_write_enum  1     HBUS_WRITE                                                             
+  wait_between_cycle           integral              32    'h2                                                                    
+  begin_time                   time                  64    800                                                                    
+  depth                        int                   32    'd4                                                                    
+  parent sequence (name)       string                8     hbus_seq                                                               
+  parent sequence (full name)  string                71    uvm_test_top.tb.mcsequencer.router_simple_mcseq.hbus_small_pkt.hbus_seq
+  sequencer                    string                41    uvm_test_top.tb.hbus.masters[0].sequencer                              
+----------------------------------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_if.sv(139) @ 850: reporter [HBUS_IF] Monitor Write Transaction
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(92) @ 850: uvm_test_top.tb.hbus.monitor [hbus_monitor] Collecting Transaction
+UVM_INFO ../../../hbus/sv/hbus_master_seqs.sv(227) @ 900: uvm_test_top.tb.hbus.masters[0].sequencer@@router_simple_mcseq.hbus_rd_maxpkt [hbus_read_max_pkt_seq] Executing sequence
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(100) @ 950: uvm_test_top.tb.hbus.monitor [hbus_monitor] transaction collected :
+------------------------------------------------------------
+Name                  Type                  Size  Value     
+------------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008    
+  haddr               integral              16    'h1001    
+  hdata               integral              8     'h1       
+  hwr_rd              hbus_read_write_enum  1     HBUS_WRITE
+  wait_between_cycle  integral              32    'h0       
+  begin_time          time                  64    850       
+  end_time            time                  64    950       
+------------------------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(43) @ 950: uvm_test_top.tb.router_mod.reference [router_reference] Received HBUS Transaction: 
+------------------------------------------------------------
+Name                  Type                  Size  Value     
+------------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008    
+  haddr               integral              16    'h1001    
+  hdata               integral              8     'h1       
+  hwr_rd              hbus_read_write_enum  1     HBUS_WRITE
+  wait_between_cycle  integral              32    'h0       
+  begin_time          time                  64    850       
+  end_time            time                  64    950       
+------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_master_driver.sv(58) @ 1000: uvm_test_top.tb.hbus.masters[0].driver [hbus_master_driver] Driving transaction :
+-------------------------------------------------------------------------------------------------------------------------
+Name                           Type                  Size  Value                                                         
+-------------------------------------------------------------------------------------------------------------------------
+transaction                    hbus_transaction      -     @9581                                                         
+  haddr                        integral              16    'h1000                                                        
+  hdata                        integral              8     'h22                                                          
+  hwr_rd                       hbus_read_write_enum  1     HBUS_READ                                                     
+  wait_between_cycle           integral              32    'h1                                                           
+  begin_time                   time                  64    1000                                                          
+  depth                        int                   32    'd3                                                           
+  parent sequence (name)       string                14    hbus_rd_maxpkt                                                
+  parent sequence (full name)  string                62    uvm_test_top.tb.mcsequencer.router_simple_mcseq.hbus_rd_maxpkt
+  sequencer                    string                41    uvm_test_top.tb.hbus.masters[0].sequencer                     
+-------------------------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_if.sv(146) @ 1050: reporter [HBUS_IF] Monitor Read Transaction
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(92) @ 1050: uvm_test_top.tb.hbus.monitor [hbus_monitor] Collecting Transaction
+UVM_INFO ../../../hbus/sv/hbus_if.sv(80) @ 1200: reporter [HBUS_IF] Master reads 14 from 1000
+UVM_INFO ../../../hbus/sv/hbus_master_seqs.sv(253) @ 1200: uvm_test_top.tb.hbus.masters[0].sequencer@@router_simple_mcseq.hbus_rd_enable [hbus_read_enable_seq] Executing sequence
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(100) @ 1250: uvm_test_top.tb.hbus.monitor [hbus_monitor] transaction collected :
+-----------------------------------------------------------
+Name                  Type                  Size  Value    
+-----------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008   
+  haddr               integral              16    'h1000   
+  hdata               integral              8     'h14     
+  hwr_rd              hbus_read_write_enum  1     HBUS_READ
+  wait_between_cycle  integral              32    'h0      
+  begin_time          time                  64    1050     
+  end_time            time                  64    1250     
+-----------------------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(43) @ 1250: uvm_test_top.tb.router_mod.reference [router_reference] Received HBUS Transaction: 
+-----------------------------------------------------------
+Name                  Type                  Size  Value    
+-----------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008   
+  haddr               integral              16    'h1000   
+  hdata               integral              8     'h14     
+  hwr_rd              hbus_read_write_enum  1     HBUS_READ
+  wait_between_cycle  integral              32    'h0      
+  begin_time          time                  64    1050     
+  end_time            time                  64    1250     
+-----------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_master_driver.sv(58) @ 1300: uvm_test_top.tb.hbus.masters[0].driver [hbus_master_driver] Driving transaction :
+-------------------------------------------------------------------------------------------------------------------------
+Name                           Type                  Size  Value                                                         
+-------------------------------------------------------------------------------------------------------------------------
+transaction                    hbus_transaction      -     @9579                                                         
+  haddr                        integral              16    'h1001                                                        
+  hdata                        integral              8     'h55                                                          
+  hwr_rd                       hbus_read_write_enum  1     HBUS_READ                                                     
+  wait_between_cycle           integral              32    'h1                                                           
+  begin_time                   time                  64    1300                                                          
+  depth                        int                   32    'd3                                                           
+  parent sequence (name)       string                14    hbus_rd_enable                                                
+  parent sequence (full name)  string                62    uvm_test_top.tb.mcsequencer.router_simple_mcseq.hbus_rd_enable
+  sequencer                    string                41    uvm_test_top.tb.hbus.masters[0].sequencer                     
+-------------------------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_if.sv(146) @ 1350: reporter [HBUS_IF] Monitor Read Transaction
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(92) @ 1350: uvm_test_top.tb.hbus.monitor [hbus_monitor] Collecting Transaction
+UVM_INFO ../../../hbus/sv/hbus_if.sv(80) @ 1500: reporter [HBUS_IF] Master reads 01 from 1001
+UVM_INFO ../../../yapp/sv/yapp_tx_seqs.sv(96) @ 1500: uvm_test_top.tb.yapp.tx_agent.sequencer@@router_simple_mcseq.yapp_012 [yapp_012_seq] Executing YAPP_012_SEQ
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(100) @ 1550: uvm_test_top.tb.hbus.monitor [hbus_monitor] transaction collected :
+-----------------------------------------------------------
+Name                  Type                  Size  Value    
+-----------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008   
+  haddr               integral              16    'h1001   
+  hdata               integral              8     'h1      
+  hwr_rd              hbus_read_write_enum  1     HBUS_READ
+  wait_between_cycle  integral              32    'h0      
+  begin_time          time                  64    1350     
+  end_time            time                  64    1550     
+-----------------------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(43) @ 1550: uvm_test_top.tb.router_mod.reference [router_reference] Received HBUS Transaction: 
+-----------------------------------------------------------
+Name                  Type                  Size  Value    
+-----------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008   
+  haddr               integral              16    'h1001   
+  hdata               integral              8     'h1      
+  hwr_rd              hbus_read_write_enum  1     HBUS_READ
+  wait_between_cycle  integral              32    'h0      
+  begin_time          time                  64    1350     
+  end_time            time                  64    1550     
+-----------------------------------------------------------
+
+ROUTER DROPS PACKET - LENGTH is 28, MAX is 20
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 5650: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @9693      
+  length        integral      6     'h1c       
+  addr          integral      2     'h0        
+  payload       da(integral)  28    -          
+    [0]         integral      8     'h79       
+    [1]         integral      8     'hd3       
+    [2]         integral      8     'ha6       
+    [3]         integral      8     'he8       
+    [4]         integral      8     'h66       
+    ...         ...           ...   ...        
+    [23]        integral      8     'h81       
+    [24]        integral      8     'hbe       
+    [25]        integral      8     'hcf       
+    [26]        integral      8     'he7       
+    [27]        integral      8     'h61       
+  parity        integral      8     'h59       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    2750       
+  end_time      time          64    5650       
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 5650: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @9693      
+  length        integral      6     'h1c       
+  addr          integral      2     'h0        
+  payload       da(integral)  28    -          
+    [0]         integral      8     'h79       
+    [1]         integral      8     'hd3       
+    [2]         integral      8     'ha6       
+    [3]         integral      8     'he8       
+    [4]         integral      8     'h66       
+    ...         ...           ...   ...        
+    [23]        integral      8     'h81       
+    [24]        integral      8     'hbe       
+    [25]        integral      8     'hcf       
+    [26]        integral      8     'he7       
+    [27]        integral      8     'h61       
+  parity        integral      8     'h59       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    2750       
+  end_time      time          64    5650       
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(74) @ 5650: uvm_test_top.tb.router_mod.reference [router_reference] YAPP Packet Dropped [OVERSIZED] - pkt size 1c max size 14
+ROUTER DROPS PACKET - LENGTH is 30, MAX is 20
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 9350: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10308     
+  length        integral      6     'h1e       
+  addr          integral      2     'h1        
+  payload       da(integral)  30    -          
+    [0]         integral      8     'h4c       
+    [1]         integral      8     'hb        
+    [2]         integral      8     'h5f       
+    [3]         integral      8     'h29       
+    [4]         integral      8     'h2        
+    ...         ...           ...   ...        
+    [25]        integral      8     'h9a       
+    [26]        integral      8     'h2b       
+    [27]        integral      8     'h95       
+    [28]        integral      8     'h18       
+    [29]        integral      8     'h74       
+  parity        integral      8     'h49       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    6250       
+  end_time      time          64    9350       
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 9350: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10308     
+  length        integral      6     'h1e       
+  addr          integral      2     'h1        
+  payload       da(integral)  30    -          
+    [0]         integral      8     'h4c       
+    [1]         integral      8     'hb        
+    [2]         integral      8     'h5f       
+    [3]         integral      8     'h29       
+    [4]         integral      8     'h2        
+    ...         ...           ...   ...        
+    [25]        integral      8     'h9a       
+    [26]        integral      8     'h2b       
+    [27]        integral      8     'h95       
+    [28]        integral      8     'h18       
+    [29]        integral      8     'h74       
+  parity        integral      8     'h49       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    6250       
+  end_time      time          64    9350       
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(74) @ 9350: uvm_test_top.tb.router_mod.reference [router_reference] YAPP Packet Dropped [OVERSIZED] - pkt size 1e max size 14
+ROUTER DROPS PACKET - LENGTH is 41, MAX is 20
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 14550: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------
+Name            Type          Size  Value     
+----------------------------------------------
+pkt             yapp_packet   -     @9685     
+  length        integral      6     'h29      
+  addr          integral      2     'h2       
+  payload       da(integral)  41    -         
+    [0]         integral      8     'h61      
+    [1]         integral      8     'h3e      
+    [2]         integral      8     'h77      
+    [3]         integral      8     'h6b      
+    [4]         integral      8     'h4e      
+    ...         ...           ...   ...       
+    [36]        integral      8     'h53      
+    [37]        integral      8     'hfc      
+    [38]        integral      8     'hee      
+    [39]        integral      8     'h87      
+    [40]        integral      8     'h6a      
+  parity        integral      8     'h73      
+  parity_type   parity_t      1     BAD_PARITY
+  packet_delay  integral      32    'd0       
+  begin_time    time          64    10350     
+  end_time      time          64    14550     
+----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 14550: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+----------------------------------------------
+Name            Type          Size  Value     
+----------------------------------------------
+pkt             yapp_packet   -     @9685     
+  length        integral      6     'h29      
+  addr          integral      2     'h2       
+  payload       da(integral)  41    -         
+    [0]         integral      8     'h61      
+    [1]         integral      8     'h3e      
+    [2]         integral      8     'h77      
+    [3]         integral      8     'h6b      
+    [4]         integral      8     'h4e      
+    ...         ...           ...   ...       
+    [36]        integral      8     'h53      
+    [37]        integral      8     'hfc      
+    [38]        integral      8     'hee      
+    [39]        integral      8     'h87      
+    [40]        integral      8     'h6a      
+  parity        integral      8     'h73      
+  parity_type   parity_t      1     BAD_PARITY
+  packet_delay  integral      32    'd0       
+  begin_time    time          64    10350     
+  end_time      time          64    14550     
+----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(74) @ 14550: uvm_test_top.tb.router_mod.reference [router_reference] YAPP Packet Dropped [OVERSIZED] - pkt size 29 max size 14
+UVM_INFO ../../../yapp/sv/yapp_tx_seqs.sv(96) @ 14600: uvm_test_top.tb.yapp.tx_agent.sequencer@@router_simple_mcseq.yapp_012 [yapp_012_seq] Executing YAPP_012_SEQ
+ROUTER DROPS PACKET - LENGTH is 30, MAX is 20
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 18850: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10329     
+  length        integral      6     'h1e       
+  addr          integral      2     'h0        
+  payload       da(integral)  30    -          
+    [0]         integral      8     'hba       
+    [1]         integral      8     'h6c       
+    [2]         integral      8     'hf0       
+    [3]         integral      8     'had       
+    [4]         integral      8     'h49       
+    ...         ...           ...   ...        
+    [25]        integral      8     'h48       
+    [26]        integral      8     'hef       
+    [27]        integral      8     'hdf       
+    [28]        integral      8     'hb3       
+    [29]        integral      8     'hb2       
+  parity        integral      8     'hc6       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    15750      
+  end_time      time          64    18850      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 18850: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10329     
+  length        integral      6     'h1e       
+  addr          integral      2     'h0        
+  payload       da(integral)  30    -          
+    [0]         integral      8     'hba       
+    [1]         integral      8     'h6c       
+    [2]         integral      8     'hf0       
+    [3]         integral      8     'had       
+    [4]         integral      8     'h49       
+    ...         ...           ...   ...        
+    [25]        integral      8     'h48       
+    [26]        integral      8     'hef       
+    [27]        integral      8     'hdf       
+    [28]        integral      8     'hb3       
+    [29]        integral      8     'hb2       
+  parity        integral      8     'hc6       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    15750      
+  end_time      time          64    18850      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(74) @ 18850: uvm_test_top.tb.router_mod.reference [router_reference] YAPP Packet Dropped [OVERSIZED] - pkt size 1e max size 14
+ROUTER DROPS PACKET - LENGTH is 60, MAX is 20
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 26050: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @9683      
+  length        integral      6     'h3c       
+  addr          integral      2     'h1        
+  payload       da(integral)  60    -          
+    [0]         integral      8     'h54       
+    [1]         integral      8     'h93       
+    [2]         integral      8     'hc9       
+    [3]         integral      8     'hf1       
+    [4]         integral      8     'hf5       
+    ...         ...           ...   ...        
+    [55]        integral      8     'h96       
+    [56]        integral      8     'h86       
+    [57]        integral      8     'h45       
+    [58]        integral      8     'h67       
+    [59]        integral      8     'h54       
+  parity        integral      8     'h80       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    19950      
+  end_time      time          64    26050      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 26050: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @9683      
+  length        integral      6     'h3c       
+  addr          integral      2     'h1        
+  payload       da(integral)  60    -          
+    [0]         integral      8     'h54       
+    [1]         integral      8     'h93       
+    [2]         integral      8     'hc9       
+    [3]         integral      8     'hf1       
+    [4]         integral      8     'hf5       
+    ...         ...           ...   ...        
+    [55]        integral      8     'h96       
+    [56]        integral      8     'h86       
+    [57]        integral      8     'h45       
+    [58]        integral      8     'h67       
+    [59]        integral      8     'h54       
+  parity        integral      8     'h80       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    19950      
+  end_time      time          64    26050      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(74) @ 26050: uvm_test_top.tb.router_mod.reference [router_reference] YAPP Packet Dropped [OVERSIZED] - pkt size 3c max size 14
+ROUTER DROPS PACKET - LENGTH is 34, MAX is 20
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 30250: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10339     
+  length        integral      6     'h22       
+  addr          integral      2     'h2        
+  payload       da(integral)  34    -          
+    [0]         integral      8     'h31       
+    [1]         integral      8     'hb5       
+    [2]         integral      8     'h2        
+    [3]         integral      8     'h35       
+    [4]         integral      8     'h50       
+    ...         ...           ...   ...        
+    [29]        integral      8     'h4a       
+    [30]        integral      8     'h7e       
+    [31]        integral      8     'h9a       
+    [32]        integral      8     'h71       
+    [33]        integral      8     'he1       
+  parity        integral      8     'hd5       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    26750      
+  end_time      time          64    30250      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 30250: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10339     
+  length        integral      6     'h22       
+  addr          integral      2     'h2        
+  payload       da(integral)  34    -          
+    [0]         integral      8     'h31       
+    [1]         integral      8     'hb5       
+    [2]         integral      8     'h2        
+    [3]         integral      8     'h35       
+    [4]         integral      8     'h50       
+    ...         ...           ...   ...        
+    [29]        integral      8     'h4a       
+    [30]        integral      8     'h7e       
+    [31]        integral      8     'h9a       
+    [32]        integral      8     'h71       
+    [33]        integral      8     'he1       
+  parity        integral      8     'hd5       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    26750      
+  end_time      time          64    30250      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(74) @ 30250: uvm_test_top.tb.router_mod.reference [router_reference] YAPP Packet Dropped [OVERSIZED] - pkt size 22 max size 14
+UVM_INFO ../../../hbus/sv/hbus_master_seqs.sv(206) @ 30300: uvm_test_top.tb.hbus.masters[0].sequencer@@router_simple_mcseq.hbus_large_pkt [hbus_set_default_regs_seq] Executing sequence
+UVM_INFO ../../../hbus/sv/hbus_master_seqs.sv(124) @ 30300: uvm_test_top.tb.hbus.masters[0].sequencer@@router_simple_mcseq.hbus_large_pkt.hbus_seq [hbus_set_yapp_regs_seq] Executing sequence
+UVM_INFO ../../../hbus/sv/hbus_if.sv(65) @ 30400: reporter [HBUS_IF] Master writes 3f to 1000
+UVM_INFO ../../../hbus/sv/hbus_master_driver.sv(58) @ 30400: uvm_test_top.tb.hbus.masters[0].driver [hbus_master_driver] Driving transaction :
+----------------------------------------------------------------------------------------------------------------------------------
+Name                           Type                  Size  Value                                                                  
+----------------------------------------------------------------------------------------------------------------------------------
+transaction                    hbus_transaction      -     @10388                                                                 
+  haddr                        integral              16    'h1000                                                                 
+  hdata                        integral              8     'h3f                                                                   
+  hwr_rd                       hbus_read_write_enum  1     HBUS_WRITE                                                             
+  wait_between_cycle           integral              32    'h3                                                                    
+  begin_time                   time                  64    30400                                                                  
+  depth                        int                   32    'd4                                                                    
+  parent sequence (name)       string                8     hbus_seq                                                               
+  parent sequence (full name)  string                71    uvm_test_top.tb.mcsequencer.router_simple_mcseq.hbus_large_pkt.hbus_seq
+  sequencer                    string                41    uvm_test_top.tb.hbus.masters[0].sequencer                              
+----------------------------------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_if.sv(139) @ 30450: reporter [HBUS_IF] Monitor Write Transaction
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(92) @ 30450: uvm_test_top.tb.hbus.monitor [hbus_monitor] Collecting Transaction
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(100) @ 30550: uvm_test_top.tb.hbus.monitor [hbus_monitor] transaction collected :
+------------------------------------------------------------
+Name                  Type                  Size  Value     
+------------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008    
+  haddr               integral              16    'h1000    
+  hdata               integral              8     'h3f      
+  hwr_rd              hbus_read_write_enum  1     HBUS_WRITE
+  wait_between_cycle  integral              32    'h0       
+  begin_time          time                  64    30450     
+  end_time            time                  64    30550     
+------------------------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(43) @ 30550: uvm_test_top.tb.router_mod.reference [router_reference] Received HBUS Transaction: 
+------------------------------------------------------------
+Name                  Type                  Size  Value     
+------------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008    
+  haddr               integral              16    'h1000    
+  hdata               integral              8     'h3f      
+  hwr_rd              hbus_read_write_enum  1     HBUS_WRITE
+  wait_between_cycle  integral              32    'h0       
+  begin_time          time                  64    30450     
+  end_time            time                  64    30550     
+------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_if.sv(65) @ 30600: reporter [HBUS_IF] Master writes 01 to 1001
+UVM_INFO ../../../hbus/sv/hbus_master_driver.sv(58) @ 30600: uvm_test_top.tb.hbus.masters[0].driver [hbus_master_driver] Driving transaction :
+----------------------------------------------------------------------------------------------------------------------------------
+Name                           Type                  Size  Value                                                                  
+----------------------------------------------------------------------------------------------------------------------------------
+transaction                    hbus_transaction      -     @10460                                                                 
+  haddr                        integral              16    'h1001                                                                 
+  hdata                        integral              8     'h1                                                                    
+  hwr_rd                       hbus_read_write_enum  1     HBUS_WRITE                                                             
+  wait_between_cycle           integral              32    'h1                                                                    
+  begin_time                   time                  64    30600                                                                  
+  depth                        int                   32    'd4                                                                    
+  parent sequence (name)       string                8     hbus_seq                                                               
+  parent sequence (full name)  string                71    uvm_test_top.tb.mcsequencer.router_simple_mcseq.hbus_large_pkt.hbus_seq
+  sequencer                    string                41    uvm_test_top.tb.hbus.masters[0].sequencer                              
+----------------------------------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_if.sv(139) @ 30650: reporter [HBUS_IF] Monitor Write Transaction
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(92) @ 30650: uvm_test_top.tb.hbus.monitor [hbus_monitor] Collecting Transaction
+UVM_INFO ../../../hbus/sv/hbus_master_seqs.sv(227) @ 30700: uvm_test_top.tb.hbus.masters[0].sequencer@@router_simple_mcseq.hbus_rd_maxpkt [hbus_read_max_pkt_seq] Executing sequence
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(100) @ 30750: uvm_test_top.tb.hbus.monitor [hbus_monitor] transaction collected :
+------------------------------------------------------------
+Name                  Type                  Size  Value     
+------------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008    
+  haddr               integral              16    'h1001    
+  hdata               integral              8     'h1       
+  hwr_rd              hbus_read_write_enum  1     HBUS_WRITE
+  wait_between_cycle  integral              32    'h0       
+  begin_time          time                  64    30650     
+  end_time            time                  64    30750     
+------------------------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(43) @ 30750: uvm_test_top.tb.router_mod.reference [router_reference] Received HBUS Transaction: 
+------------------------------------------------------------
+Name                  Type                  Size  Value     
+------------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008    
+  haddr               integral              16    'h1001    
+  hdata               integral              8     'h1       
+  hwr_rd              hbus_read_write_enum  1     HBUS_WRITE
+  wait_between_cycle  integral              32    'h0       
+  begin_time          time                  64    30650     
+  end_time            time                  64    30750     
+------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_master_driver.sv(58) @ 30800: uvm_test_top.tb.hbus.masters[0].driver [hbus_master_driver] Driving transaction :
+-------------------------------------------------------------------------------------------------------------------------
+Name                           Type                  Size  Value                                                         
+-------------------------------------------------------------------------------------------------------------------------
+transaction                    hbus_transaction      -     @10493                                                        
+  haddr                        integral              16    'h1000                                                        
+  hdata                        integral              8     'h4c                                                          
+  hwr_rd                       hbus_read_write_enum  1     HBUS_READ                                                     
+  wait_between_cycle           integral              32    'h2                                                           
+  begin_time                   time                  64    30800                                                         
+  depth                        int                   32    'd3                                                           
+  parent sequence (name)       string                14    hbus_rd_maxpkt                                                
+  parent sequence (full name)  string                62    uvm_test_top.tb.mcsequencer.router_simple_mcseq.hbus_rd_maxpkt
+  sequencer                    string                41    uvm_test_top.tb.hbus.masters[0].sequencer                     
+-------------------------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../../../hbus/sv/hbus_if.sv(146) @ 30850: reporter [HBUS_IF] Monitor Read Transaction
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(92) @ 30850: uvm_test_top.tb.hbus.monitor [hbus_monitor] Collecting Transaction
+UVM_INFO ../../../hbus/sv/hbus_if.sv(80) @ 31000: reporter [HBUS_IF] Master reads 3f from 1000
+UVM_INFO ../../../yapp/sv/yapp_tx_seqs.sv(237) @ 31000: uvm_test_top.tb.yapp.tx_agent.sequencer@@router_simple_mcseq.six_yapp [six_yapp_seq] Executing SIX_YAPP_SEQ
+UVM_INFO ../../../yapp/sv/yapp_tx_seqs.sv(208) @ 31000: uvm_test_top.tb.yapp.tx_agent.sequencer@@router_simple_mcseq.six_yapp.yss [yapp_rnd_seq] Executing YAPP_RND_SEQ 6 times...
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(100) @ 31050: uvm_test_top.tb.hbus.monitor [hbus_monitor] transaction collected :
+-----------------------------------------------------------
+Name                  Type                  Size  Value    
+-----------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008   
+  haddr               integral              16    'h1000   
+  hdata               integral              8     'h3f     
+  hwr_rd              hbus_read_write_enum  1     HBUS_READ
+  wait_between_cycle  integral              32    'h0      
+  begin_time          time                  64    30850    
+  end_time            time                  64    31050    
+-----------------------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(43) @ 31050: uvm_test_top.tb.router_mod.reference [router_reference] Received HBUS Transaction: 
+-----------------------------------------------------------
+Name                  Type                  Size  Value    
+-----------------------------------------------------------
+tr_collect            hbus_transaction      -     @10008   
+  haddr               integral              16    'h1000   
+  hdata               integral              8     'h3f     
+  hwr_rd              hbus_read_write_enum  1     HBUS_READ
+  wait_between_cycle  integral              32    'h0      
+  begin_time          time                  64    30850    
+  end_time            time                  64    31050    
+-----------------------------------------------------------
+
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 37050: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10356     
+  length        integral      6     'h35       
+  addr          integral      2     'h2        
+  payload       da(integral)  53    -          
+    [0]         integral      8     'ha0       
+    [1]         integral      8     'he0       
+    [2]         integral      8     'h16       
+    [3]         integral      8     'hc4       
+    [4]         integral      8     'he        
+    ...         ...           ...   ...        
+    [48]        integral      8     'hba       
+    [49]        integral      8     'h76       
+    [50]        integral      8     'h2e       
+    [51]        integral      8     'h5f       
+    [52]        integral      8     'h41       
+  parity        integral      8     'h60       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    31650      
+  end_time      time          64    37050      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 37050: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10356     
+  length        integral      6     'h35       
+  addr          integral      2     'h2        
+  payload       da(integral)  53    -          
+    [0]         integral      8     'ha0       
+    [1]         integral      8     'he0       
+    [2]         integral      8     'h16       
+    [3]         integral      8     'hc4       
+    [4]         integral      8     'he        
+    ...         ...           ...   ...        
+    [48]        integral      8     'hba       
+    [49]        integral      8     'h76       
+    [50]        integral      8     'h2e       
+    [51]        integral      8     'h5f       
+    [52]        integral      8     'h41       
+  parity        integral      8     'h60       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    31650      
+  end_time      time          64    37050      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(69) @ 37050: uvm_test_top.tb.router_mod.reference [router_reference] Sent YAPP Packet to Scoreboard
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(135) @ 37450: uvm_test_top.tb.chan2.rx_agent.monitor [channel_rx_monitor] Channel_2 Packet collected :
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @9743      
+  length          integral        6     'h35       
+  addr            integral        2     'h2        
+  payload         da(integral)    53    -          
+    [0]           integral        8     'ha0       
+    [1]           integral        8     'he0       
+    [2]           integral        8     'h16       
+    [3]           integral        8     'hc4       
+    [4]           integral        8     'he        
+    ...           ...             ...   ...        
+    [48]          integral        8     'hba       
+    [49]          integral        8     'h76       
+    [50]          integral        8     'h2e       
+    [51]          integral        8     'h5f       
+    [52]          integral        8     'h41       
+  parity          integral        8     'h60       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    31950      
+  end_time        time            64    37450      
+---------------------------------------------------
+
+UVM_INFO ../sv/router_scoreboard.sv(197) @ 37450: uvm_test_top.tb.router_mod.scoreboard [router_scoreboard] Scoreboard Compare Match: Channel_2 Packet
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @9743      
+  length          integral        6     'h35       
+  addr            integral        2     'h2        
+  payload         da(integral)    53    -          
+    [0]           integral        8     'ha0       
+    [1]           integral        8     'he0       
+    [2]           integral        8     'h16       
+    [3]           integral        8     'hc4       
+    [4]           integral        8     'he        
+    ...           ...             ...   ...        
+    [48]          integral        8     'hba       
+    [49]          integral        8     'h76       
+    [50]          integral        8     'h2e       
+    [51]          integral        8     'h5f       
+    [52]          integral        8     'h41       
+  parity          integral        8     'h60       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    31950      
+  end_time        time            64    37450      
+---------------------------------------------------
+
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 41150: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10594     
+  length        integral      6     'h14       
+  addr          integral      2     'h1        
+  payload       da(integral)  20    -          
+    [0]         integral      8     'h73       
+    [1]         integral      8     'h19       
+    [2]         integral      8     'hcf       
+    [3]         integral      8     'h5        
+    [4]         integral      8     'ha9       
+    ...         ...           ...   ...        
+    [15]        integral      8     'h75       
+    [16]        integral      8     'hb5       
+    [17]        integral      8     'h46       
+    [18]        integral      8     'h67       
+    [19]        integral      8     'h5a       
+  parity        integral      8     'he0       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    39050      
+  end_time      time          64    41150      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 41150: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10594     
+  length        integral      6     'h14       
+  addr          integral      2     'h1        
+  payload       da(integral)  20    -          
+    [0]         integral      8     'h73       
+    [1]         integral      8     'h19       
+    [2]         integral      8     'hcf       
+    [3]         integral      8     'h5        
+    [4]         integral      8     'ha9       
+    ...         ...           ...   ...        
+    [15]        integral      8     'h75       
+    [16]        integral      8     'hb5       
+    [17]        integral      8     'h46       
+    [18]        integral      8     'h67       
+    [19]        integral      8     'h5a       
+  parity        integral      8     'he0       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    39050      
+  end_time      time          64    41150      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(69) @ 41150: uvm_test_top.tb.router_mod.reference [router_reference] Sent YAPP Packet to Scoreboard
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(135) @ 41550: uvm_test_top.tb.chan1.rx_agent.monitor [channel_rx_monitor] Channel_1 Packet collected :
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @9715      
+  length          integral        6     'h14       
+  addr            integral        2     'h1        
+  payload         da(integral)    20    -          
+    [0]           integral        8     'h73       
+    [1]           integral        8     'h19       
+    [2]           integral        8     'hcf       
+    [3]           integral        8     'h5        
+    [4]           integral        8     'ha9       
+    ...           ...             ...   ...        
+    [15]          integral        8     'h75       
+    [16]          integral        8     'hb5       
+    [17]          integral        8     'h46       
+    [18]          integral        8     'h67       
+    [19]          integral        8     'h5a       
+  parity          integral        8     'he0       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    39350      
+  end_time        time            64    41550      
+---------------------------------------------------
+
+UVM_INFO ../sv/router_scoreboard.sv(166) @ 41550: uvm_test_top.tb.router_mod.scoreboard [router_scoreboard] Scoreboard Compare Match: Channel_1 Packet
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @9715      
+  length          integral        6     'h14       
+  addr            integral        2     'h1        
+  payload         da(integral)    20    -          
+    [0]           integral        8     'h73       
+    [1]           integral        8     'h19       
+    [2]           integral        8     'hcf       
+    [3]           integral        8     'h5        
+    [4]           integral        8     'ha9       
+    ...           ...             ...   ...        
+    [15]          integral        8     'h75       
+    [16]          integral        8     'hb5       
+    [17]          integral        8     'h46       
+    [18]          integral        8     'h67       
+    [19]          integral        8     'h5a       
+  parity          integral        8     'he0       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    39350      
+  end_time        time            64    41550      
+---------------------------------------------------
+
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 46550: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10559     
+  length        integral      6     'h30       
+  addr          integral      2     'h1        
+  payload       da(integral)  48    -          
+    [0]         integral      8     'h88       
+    [1]         integral      8     'h4c       
+    [2]         integral      8     'he7       
+    [3]         integral      8     'h47       
+    [4]         integral      8     'hf5       
+    ...         ...           ...   ...        
+    [43]        integral      8     'h12       
+    [44]        integral      8     'he1       
+    [45]        integral      8     'ha3       
+    [46]        integral      8     'ha6       
+    [47]        integral      8     'hf0       
+  parity        integral      8     'h17       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    41650      
+  end_time      time          64    46550      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 46550: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10559     
+  length        integral      6     'h30       
+  addr          integral      2     'h1        
+  payload       da(integral)  48    -          
+    [0]         integral      8     'h88       
+    [1]         integral      8     'h4c       
+    [2]         integral      8     'he7       
+    [3]         integral      8     'h47       
+    [4]         integral      8     'hf5       
+    ...         ...           ...   ...        
+    [43]        integral      8     'h12       
+    [44]        integral      8     'he1       
+    [45]        integral      8     'ha3       
+    [46]        integral      8     'ha6       
+    [47]        integral      8     'hf0       
+  parity        integral      8     'h17       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    41650      
+  end_time      time          64    46550      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(69) @ 46550: uvm_test_top.tb.router_mod.reference [router_reference] Sent YAPP Packet to Scoreboard
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(135) @ 47250: uvm_test_top.tb.chan1.rx_agent.monitor [channel_rx_monitor] Channel_1 Packet collected :
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @10731     
+  length          integral        6     'h30       
+  addr            integral        2     'h1        
+  payload         da(integral)    48    -          
+    [0]           integral        8     'h88       
+    [1]           integral        8     'h4c       
+    [2]           integral        8     'he7       
+    [3]           integral        8     'h47       
+    [4]           integral        8     'hf5       
+    ...           ...             ...   ...        
+    [43]          integral        8     'h12       
+    [44]          integral        8     'he1       
+    [45]          integral        8     'ha3       
+    [46]          integral        8     'ha6       
+    [47]          integral        8     'hf0       
+  parity          integral        8     'h17       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    42250      
+  end_time        time            64    47250      
+---------------------------------------------------
+
+UVM_INFO ../sv/router_scoreboard.sv(166) @ 47250: uvm_test_top.tb.router_mod.scoreboard [router_scoreboard] Scoreboard Compare Match: Channel_1 Packet
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @10731     
+  length          integral        6     'h30       
+  addr            integral        2     'h1        
+  payload         da(integral)    48    -          
+    [0]           integral        8     'h88       
+    [1]           integral        8     'h4c       
+    [2]           integral        8     'he7       
+    [3]           integral        8     'h47       
+    [4]           integral        8     'hf5       
+    ...           ...             ...   ...        
+    [43]          integral        8     'h12       
+    [44]          integral        8     'he1       
+    [45]          integral        8     'ha3       
+    [46]          integral        8     'ha6       
+    [47]          integral        8     'hf0       
+  parity          integral        8     'h17       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    42250      
+  end_time        time            64    47250      
+---------------------------------------------------
+
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 47850: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @9716      
+  length        integral      6     'h2        
+  addr          integral      2     'h0        
+  payload       da(integral)  2     -          
+    [0]         integral      8     'he1       
+    [1]         integral      8     'h79       
+  parity        integral      8     'h90       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    47550      
+  end_time      time          64    47850      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 47850: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @9716      
+  length        integral      6     'h2        
+  addr          integral      2     'h0        
+  payload       da(integral)  2     -          
+    [0]         integral      8     'he1       
+    [1]         integral      8     'h79       
+  parity        integral      8     'h90       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    47550      
+  end_time      time          64    47850      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(69) @ 47850: uvm_test_top.tb.router_mod.reference [router_reference] Sent YAPP Packet to Scoreboard
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(135) @ 48650: uvm_test_top.tb.chan0.rx_agent.monitor [channel_rx_monitor] Channel_0 Packet collected :
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @9703      
+  length          integral        6     'h2        
+  addr            integral        2     'h0        
+  payload         da(integral)    2     -          
+    [0]           integral        8     'he1       
+    [1]           integral        8     'h79       
+  parity          integral        8     'h90       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    48250      
+  end_time        time            64    48650      
+---------------------------------------------------
+
+UVM_INFO ../sv/router_scoreboard.sv(135) @ 48650: uvm_test_top.tb.router_mod.scoreboard [router_scoreboard] Scoreboard Compare Match: Channel_0 Packet
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @9703      
+  length          integral        6     'h2        
+  addr            integral        2     'h0        
+  payload         da(integral)    2     -          
+    [0]           integral        8     'he1       
+    [1]           integral        8     'h79       
+  parity          integral        8     'h90       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    48250      
+  end_time        time            64    48650      
+---------------------------------------------------
+
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 52150: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10557     
+  length        integral      6     'h21       
+  addr          integral      2     'h2        
+  payload       da(integral)  33    -          
+    [0]         integral      8     'h7b       
+    [1]         integral      8     'ha1       
+    [2]         integral      8     'h39       
+    [3]         integral      8     'hcd       
+    [4]         integral      8     'h9c       
+    ...         ...           ...   ...        
+    [28]        integral      8     'ha4       
+    [29]        integral      8     'h9c       
+    [30]        integral      8     'h21       
+    [31]        integral      8     'hd4       
+    [32]        integral      8     'h52       
+  parity        integral      8     'hef       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    48750      
+  end_time      time          64    52150      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 52150: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10557     
+  length        integral      6     'h21       
+  addr          integral      2     'h2        
+  payload       da(integral)  33    -          
+    [0]         integral      8     'h7b       
+    [1]         integral      8     'ha1       
+    [2]         integral      8     'h39       
+    [3]         integral      8     'hcd       
+    [4]         integral      8     'h9c       
+    ...         ...           ...   ...        
+    [28]        integral      8     'ha4       
+    [29]        integral      8     'h9c       
+    [30]        integral      8     'h21       
+    [31]        integral      8     'hd4       
+    [32]        integral      8     'h52       
+  parity        integral      8     'hef       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    48750      
+  end_time      time          64    52150      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(69) @ 52150: uvm_test_top.tb.router_mod.reference [router_reference] Sent YAPP Packet to Scoreboard
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(135) @ 52750: uvm_test_top.tb.chan2.rx_agent.monitor [channel_rx_monitor] Channel_2 Packet collected :
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @10698     
+  length          integral        6     'h21       
+  addr            integral        2     'h2        
+  payload         da(integral)    33    -          
+    [0]           integral        8     'h7b       
+    [1]           integral        8     'ha1       
+    [2]           integral        8     'h39       
+    [3]           integral        8     'hcd       
+    [4]           integral        8     'h9c       
+    ...           ...             ...   ...        
+    [28]          integral        8     'ha4       
+    [29]          integral        8     'h9c       
+    [30]          integral        8     'h21       
+    [31]          integral        8     'hd4       
+    [32]          integral        8     'h52       
+  parity          integral        8     'hef       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    49250      
+  end_time        time            64    52750      
+---------------------------------------------------
+
+UVM_INFO ../sv/router_scoreboard.sv(197) @ 52750: uvm_test_top.tb.router_mod.scoreboard [router_scoreboard] Scoreboard Compare Match: Channel_2 Packet
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @10698     
+  length          integral        6     'h21       
+  addr            integral        2     'h2        
+  payload         da(integral)    33    -          
+    [0]           integral        8     'h7b       
+    [1]           integral        8     'ha1       
+    [2]           integral        8     'h39       
+    [3]           integral        8     'hcd       
+    [4]           integral        8     'h9c       
+    ...           ...             ...   ...        
+    [28]          integral        8     'ha4       
+    [29]          integral        8     'h9c       
+    [30]          integral        8     'h21       
+    [31]          integral        8     'hd4       
+    [32]          integral        8     'h52       
+  parity          integral        8     'hef       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    49250      
+  end_time        time            64    52750      
+---------------------------------------------------
+
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(57) @ 60650: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10590     
+  length        integral      6     'h3f       
+  addr          integral      2     'h2        
+  payload       da(integral)  63    -          
+    [0]         integral      8     'h58       
+    [1]         integral      8     'hc3       
+    [2]         integral      8     'h72       
+    [3]         integral      8     'h11       
+    [4]         integral      8     'hf7       
+    ...         ...           ...   ...        
+    [58]        integral      8     'h10       
+    [59]        integral      8     'h7d       
+    [60]        integral      8     'h7b       
+    [61]        integral      8     'hda       
+    [62]        integral      8     'hfa       
+  parity        integral      8     'h63       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    54250      
+  end_time      time          64    60650      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(56) @ 60650: uvm_test_top.tb.router_mod.reference [router_reference] Received Input YAPP Packet: 
+-----------------------------------------------
+Name            Type          Size  Value      
+-----------------------------------------------
+pkt             yapp_packet   -     @10590     
+  length        integral      6     'h3f       
+  addr          integral      2     'h2        
+  payload       da(integral)  63    -          
+    [0]         integral      8     'h58       
+    [1]         integral      8     'hc3       
+    [2]         integral      8     'h72       
+    [3]         integral      8     'h11       
+    [4]         integral      8     'hf7       
+    ...         ...           ...   ...        
+    [58]        integral      8     'h10       
+    [59]        integral      8     'h7d       
+    [60]        integral      8     'h7b       
+    [61]        integral      8     'hda       
+    [62]        integral      8     'hfa       
+  parity        integral      8     'h63       
+  parity_type   parity_t      1     GOOD_PARITY
+  packet_delay  integral      32    'd0        
+  begin_time    time          64    54250      
+  end_time      time          64    60650      
+-----------------------------------------------
+
+UVM_INFO ../sv/router_reference.sv(69) @ 60650: uvm_test_top.tb.router_mod.reference [router_reference] Sent YAPP Packet to Scoreboard
+UVM_INFO router_mcseqs_lib.sv(48) @ 60700: uvm_test_top.tb.mcsequencer@@router_simple_mcseq [router_simple_mcseq] drop objection
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(135) @ 61250: uvm_test_top.tb.chan2.rx_agent.monitor [channel_rx_monitor] Channel_2 Packet collected :
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @10761     
+  length          integral        6     'h3f       
+  addr            integral        2     'h2        
+  payload         da(integral)    63    -          
+    [0]           integral        8     'h58       
+    [1]           integral        8     'hc3       
+    [2]           integral        8     'h72       
+    [3]           integral        8     'h11       
+    [4]           integral        8     'hf7       
+    ...           ...             ...   ...        
+    [58]          integral        8     'h10       
+    [59]          integral        8     'h7d       
+    [60]          integral        8     'h7b       
+    [61]          integral        8     'hda       
+    [62]          integral        8     'hfa       
+  parity          integral        8     'h63       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    54750      
+  end_time        time            64    61250      
+---------------------------------------------------
+
+UVM_INFO ../sv/router_scoreboard.sv(197) @ 61250: uvm_test_top.tb.router_mod.scoreboard [router_scoreboard] Scoreboard Compare Match: Channel_2 Packet
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @10761     
+  length          integral        6     'h3f       
+  addr            integral        2     'h2        
+  payload         da(integral)    63    -          
+    [0]           integral        8     'h58       
+    [1]           integral        8     'hc3       
+    [2]           integral        8     'h72       
+    [3]           integral        8     'h11       
+    [4]           integral        8     'hf7       
+    ...           ...             ...   ...        
+    [58]          integral        8     'h10       
+    [59]          integral        8     'h7d       
+    [60]          integral        8     'h7b       
+    [61]          integral        8     'hda       
+    [62]          integral        8     'hfa       
+  parity          integral        8     'h63       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    54750      
+  end_time        time            64    61250      
+---------------------------------------------------
+
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_objection.svh(1271) @ 80700: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO ../sv/router_scoreboard.sv(209) @ 80700: uvm_test_top.tb.router_mod.scoreboard [router_scoreboard] Checking Router Scoreboard
+UVM_INFO ../sv/router_scoreboard.sv(213) @ 80700: uvm_test_top.tb.router_mod.scoreboard [router_scoreboard] Check:
+
+   Router Scoreboard Empty!
+
+UVM_INFO ../../../channel/sv/channel_rx_driver.sv(85) @ 80700: uvm_test_top.tb.chan0.rx_agent.driver [channel_rx_driver] Report: Channel_0 RX Driver Sent 1 Responses
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(148) @ 80700: uvm_test_top.tb.chan0.rx_agent.monitor [channel_rx_monitor] Report: Channel_0 Monitor Collected 1 Packets
+UVM_INFO ../../../channel/sv/channel_rx_driver.sv(85) @ 80700: uvm_test_top.tb.chan1.rx_agent.driver [channel_rx_driver] Report: Channel_1 RX Driver Sent 2 Responses
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(148) @ 80700: uvm_test_top.tb.chan1.rx_agent.monitor [channel_rx_monitor] Report: Channel_1 Monitor Collected 2 Packets
+UVM_INFO ../../../channel/sv/channel_rx_driver.sv(85) @ 80700: uvm_test_top.tb.chan2.rx_agent.driver [channel_rx_driver] Report: Channel_2 RX Driver Sent 3 Responses
+UVM_INFO ../../../channel/sv/channel_rx_monitor.sv(148) @ 80700: uvm_test_top.tb.chan2.rx_agent.monitor [channel_rx_monitor] Report: Channel_2 Monitor Collected 3 Packets
+UVM_INFO ../../../hbus/sv/hbus_monitor.sv(123) @ 80700: uvm_test_top.tb.hbus.monitor [hbus_monitor] Report: HBUS Monitor Collected 4 WRITE and 3 READ Transactions
+UVM_INFO ../sv/router_reference.sv(85) @ 80700: uvm_test_top.tb.router_mod.reference [router_reference] Report:
+   Router Reference: Packet Statistics 
+     Packets Dropped:   6
+     Packets Forwarded: 6
+     Oversized Packets: 6
+
+UVM_INFO ../sv/router_scoreboard.sv(218) @ 80700: uvm_test_top.tb.router_mod.scoreboard [router_scoreboard] Report:
+
+   Scoreboard: Packet Statistics 
+     Packets In:   6     Packets Dropped: 0
+     Channel 0 Total: 1  Pass: 1  Miscompare: 0  Dropped: 0
+     Channel 1 Total: 2  Pass: 2  Miscompare: 0  Dropped: 0
+     Channel 2 Total: 3  Pass: 3  Miscompare: 0  Dropped: 0
+
+
+UVM_INFO ../sv/router_scoreboard.sv(222) @ 80700: uvm_test_top.tb.router_mod.scoreboard [router_scoreboard] Status:
+
+Simulation PASSED
+
+UVM_INFO ../../../yapp/sv/yapp_tx_driver.sv(82) @ 80700: uvm_test_top.tb.yapp.tx_agent.driver [yapp_tx_driver] Report: YAPP TX driver sent 12 packets
+UVM_INFO ../../../yapp/sv/yapp_tx_monitor.sv(65) @ 80700: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Report: YAPP Monitor Collected 12 Packets
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_catcher.svh(705) @ 80700: reporter [UVM/REPORT/CATCHER] 
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_server.svh(847) @ 80700: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :  146
+UVM_WARNING :    2
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[HBUS_IF]    15
+[MULTTST]     1
+[NOCOV]     3
+[RNTST]     1
+[TEST_DONE]     1
+[UVM/CFG/GET/DPR]     1
+[UVM/RELNOTES]     1
+[UVM/REPORT/CATCHER]     1
+[UVMTOP]     1
+[channel_rx_driver]     6
+[channel_rx_monitor]    15
+[channel_rx_resp_seq]     3
+[clk10_rst5_seq]     1
+[clock_and_reset_sequence]     1
+[hbus_master_driver]     8
+[hbus_monitor]    17
+[hbus_read_enable_seq]     1
+[hbus_read_max_pkt_seq]     2
+[hbus_set_default_regs_seq]     1
+[hbus_set_yapp_regs_seq]     2
+[hbus_small_packet_seq]     1
+[router_reference]    32
+[router_scoreboard]    10
+[router_simple_mcseq]     3
+[six_yapp_seq]     1
+[yapp_012_seq]     2
+[yapp_rnd_seq]     1
+[yapp_tx_driver]     2
+[yapp_tx_monitor]    14
+
+Simulation complete via $finish(1) at time 8070 NS + 60
+/home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh:543     $finish;
+xcelium> exit
+TOOL:	xrun(64)	18.03-s001: Exiting on Oct 25, 2026 at 21:23:33 +07  (total: 00:00:05)

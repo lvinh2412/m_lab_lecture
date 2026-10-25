@@ -1,0 +1,167 @@
+===============================================================================
+router_tb.sv  --  LAB 8  (PATCH)
+Section 12 slide 8 buoc 3, slide 13
+===============================================================================
+
+Giu nguyen toan bo noi dung Lab 7. Them BA thu.
+
+Day la lan dau router_tb.sv co connect_phase. Trong skeleton Lab 7 toi
+viet cau hoi "vi sao chua can connect_phase?" -- gio la luc can.
+
+
+===============================================================================
+[RTB-1]  Khai bao handle
+===============================================================================
+
+Them vao cuoi danh sach handle, sau "hbus_env hbus;":
+
+    // Virtual Sequencer
+    router_mcsequencer mcsequencer;
+
+*** TEN NAY PHAI KHOP BA CHO ***
+
+    (1) dong khai bao tren
+    (2) chuoi trong create()                      [RTB-2]
+    (3) duong dan trong test_mc                   [TEST-3]
+        "tb.mcsequencer.run_phase"
+
+Slide 13 dat ten la "mcseqr". Repo dat ten la "mcsequencer".
+Chon mot ten roi dung nhat quan ca ba cho.
+
+Lech mot cho -> config khong khop component nao -> mcseq KHONG CHAY
+-> mo phong ket thuc gan nhu ngay lap tuc, 0 goi, KHONG LOI NAO.
+(Bay 5 trong README)
+
+
+===============================================================================
+[RTB-2]  Tao instance trong build_phase
+===============================================================================
+
+Them vao CUOI build_phase, sau dong tao hbus:
+
+    // virtual sequencer
+    mcsequencer = router_mcsequencer::type_id::create("mcsequencer", this);
+
+*** VI TRI TRONG build_phase CO QUAN TRONG KHONG? ***
+
+[Suy luan] Khong. mcsequencer khong doc config nao va khong phu thuoc
+UVC nao luc build. Repo dat no cuoi cung, co le chi la thu tu doc cho
+de theo doi.
+
+Ban co the thu dat no len dau build_phase va xem co hong khong -- mot
+thi nghiem 1 phut, va ket qua cho ban biet them mot dieu ve build_phase.
+
+*** CHU Y: day la create() DUY NHAT cua Lab 8 ***
+Hai con tro hbus_seqr va yapp_seqr KHONG duoc create. Xem [MCS-2].
+
+
+===============================================================================
+[RTB-3]  connect_phase  *** HAM MOI HOAN TOAN ***
+===============================================================================
+
+Them mot ham moi, SAU build_phase:
+
+    // UVM connect_phase
+    function void connect_phase(uvm_phase phase);
+      // Virtual Sequencer Connections
+      mcsequencer.hbus_seqr = hbus.masters[0].sequencer;
+      mcsequencer.yapp_seqr = yapp.tx_agent.sequencer;
+    endfunction : connect_phase
+
+
+=============================================================================
+*** VI SAO PHAI O connect_phase, KHONG PHAI build_phase ***
+=============================================================================
+
+   build_phase    chay TOP-DOWN:
+     router_tb.build_phase          <- ban dang o day
+        |
+        v
+     yapp.build_phase
+        |
+        v
+     tx_agent.build_phase           <- sequencer duoc TAO o day
+        |
+        v
+     sequencer.build_phase
+
+   connect_phase  chay BOTTOM-UP:
+     sequencer.connect_phase
+        ^
+        |
+     tx_agent.connect_phase
+        ^
+        |
+     yapp.connect_phase
+        ^
+        |
+     router_tb.connect_phase        <- ban gan o day, sequencer DA CO THAT
+
+
+Dat hai dong gan trong build_phase cua router_tb:
+   -> yapp.tx_agent chua ton tai  -> null pointer NGAY LUC DO
+   -> va neu dat truoc dong create("yapp") thi ca yapp cung chua co
+
+
+=============================================================================
+*** TAI SAO masters[0] CO NGOAC VUONG ***
+=============================================================================
+
+   mcsequencer.hbus_seqr = hbus.masters[0].sequencer;   <- CO ngoac
+   mcsequencer.yapp_seqr = yapp.tx_agent.sequencer;     <- KHONG
+
+[Da xac minh] hbus_env.sv:
+
+    hbus_master_agent masters[];        // mang DONG
+    ...
+    masters = new[num_masters];
+    foreach(masters [i]) begin
+      $sformat(inst_name, "masters[%0d]", i);
+      masters[i] = hbus_master_agent::type_id::create(inst_name, this);
+    end
+
+HBUS la UVC duy nhat co SO AGENT thay doi duoc (num_masters/num_slaves).
+Voi num_masters = 1 thi chi co masters[0].
+
+Va chu y: TEN INSTANCE cung la chuoi "masters[0]" -- co ngoac vuong
+TRONG TEN. Nen duong dan config cung phai viet co ngoac:
+    "tb.hbus.masters[0].sequencer.run_phase"
+
+
+=============================================================================
+*** VI SAO CHI NOI HAI, KHONG NOI BON ***
+=============================================================================
+
+Channel UVC va Clock/Reset UVC khong duoc noi vao mcsequencer.
+
+Vi sao? Doi chieu voi HINH SLIDE 6: thanh tim "Multichannel Sequence
+Generator" chi co HAI mui ten dut net -- mot toi YAPP, mot toi HBUS.
+Khong co mui ten nao toi Clock/Reset hay ba Channel UVC.
+
+Ly do: chi hai UVC do can PHOI HOP VOI NHAU theo thu tu (ghi thanh ghi
+truoc, gui goi sau). Ba Channel chi viec dap ung mai mai; Clock/Reset
+chi viec chay clock mai mai -- khong ai can dieu phoi chung.
+
+=> Chung GIU default_sequence rieng. Hai UVC kia thi XOA. [TEST-5]
+
+
+===============================================================================
+TU KIEM TRA
+===============================================================================
+
+ 1. Sau [RTB-2], chay simple_test va xem print_topology().
+    Phai thay them dung MOT dong:
+        mcsequencer    router_mcsequencer    -    @xxxx
+    Neu thay them dong nao kieu "yapp_seqr" nam duoi no -> ban dinh
+    bay 1 (create con tro trong build).
+
+ 2. Lam [RTB-2] nhung CHUA lam [RTB-3], roi chay. Co loi khong?
+    Vi sao co / vi sao khong?
+    (Goi y: hai con tro null, nhung da co ai dung chung chua?)
+
+ 3. router_tb cua Lab 7 co bao nhieu component con? Lab 8 co bao nhieu?
+
+ 4. Neu doi ten handle tu "mcsequencer" thanh "mcseqr", ban phai sua
+    them o NHUNG DAU? Liet ke truoc khi lam.
+
+===============================================================================

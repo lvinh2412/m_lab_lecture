@@ -1,0 +1,509 @@
+xrun(64): 18.03-s001: (c) Copyright 1995-2018 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	18.03-s001: Started on Oct 21, 2026 at 21:16:06 +07
+xrun
+	-f run.f
+		-uvmhome /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv
+		+UVM_VERBOSITY=UVM_LOW
+		+UVM_TESTNAME=simple_test
+		-timescale 1ns/100ps
+		-incdir ../../../yapp/sv
+		-incdir ../../../channel/sv
+		-incdir ../../../hbus/sv
+		-incdir ../../../clock_and_reset/sv
+		../../../yapp/sv/yapp_pkg.sv
+		../../../yapp/sv/yapp_if.sv
+		../../../channel/sv/channel_pkg.sv
+		../../../channel/sv/channel_if.sv
+		../../../hbus/sv/hbus_pkg.sv
+		../../../hbus/sv/hbus_if.sv
+		../../../clock_and_reset/sv/clock_and_reset_pkg.sv
+		../../../clock_and_reset/sv/clock_and_reset_if.sv
+		clkgen.sv
+		tb_top.sv
+		hw_top.sv
+		../../../router_rtl/yapp_router.sv
+
+   User defined plus("+") options:
+	+UVM_VERBOSITY=UVM_LOW
+
+Recompiling... reason: file './router_mcseqs_lib.sv' is newer than expected.
+	expected: Wed Oct 21 21:12:41 2026
+	actual:   Wed Oct 21 21:16:02 2026
+Compiling UVM packages (uvm_pkg.sv cdns_uvm_pkg.sv) using uvmhome location /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv
+file: ../../../clock_and_reset/sv/clock_and_reset_pkg.sv
+package clock_and_reset_pkg;
+                          |
+xmvlog: *W,TSNSPK (../../../clock_and_reset/sv/clock_and_reset_pkg.sv,3|26): `timescale is not specified for the package.  The default timescale of 1ns/1ns will be assumed for this package.
+file: tb_top.sv
+	module worklib.tb_top:sv
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		$unit_0x1defa5cc
+		uvm_pkg
+		cdns_uvmapi
+		cdns_assert2uvm_pkg
+		cdns_uvm_pkg
+		hbus_pkg
+		yapp_pkg
+		clock_and_reset_pkg
+		channel_pkg
+		tb_top
+		hw_top
+xmelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.uvm_pkg:sv <0x262bc5cf>
+			streams:  25, words: 46020
+		worklib.uvm_pkg:sv <0x0d2ec778>
+			streams:  23, words: 27347
+		worklib.uvm_pkg:sv <0x054acbb4>
+			streams:  23, words: 28233
+		worklib.uvm_pkg:sv <0x7293ac08>
+			streams:  23, words: 27045
+		worklib.tb_top:sv <0x5f92039f>
+			streams:  27, words: 30233
+		worklib.uvm_pkg:sv <0x6281d538>
+			streams:  24, words: 32961
+		worklib.uvm_pkg:sv <0x725546ab>
+			streams:  28, words: 89239
+		worklib.uvm_pkg:sv <0x5904654f>
+			streams:  22, words: 21747
+		worklib.uvm_pkg:sv <0x4ed54b44>
+			streams:  25, words: 35860
+		worklib.tb_top:sv <0x1dbe2df7>
+			streams:   1, words:  4876
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                       Instances  Unique
+		Modules:                       9       7
+		Interfaces:                    6       4
+		Verilog packages:              8       8
+		Resolved nets:                 0       1
+		Registers:                 21320   13038
+		Scalar wires:                 63       -
+		Vectored wires:               34       -
+		Named events:                  5      13
+		Always blocks:                20      16
+		Initial blocks:              514     226
+		Parallel blocks:              40      41
+		Cont. assignments:            19      42
+		Pseudo assignments:           26      26
+		Assertions:                    5       5
+		Covergroup Instances:          0       2
+		Compilation units:             1       1
+		SV Class declarations:       286     402
+		SV Class specializations:    630     630
+		Simulation timescale:      100ps
+	Writing initial simulation snapshot: worklib.tb_top:sv
+Loading snapshot worklib.tb_top:sv .................... Done
+SVSEED default: 1
+xmsim: *W,RNDNOXCEL: The legacy SystemVerilog constraint solver is used. Enabling the Xceligen constraint solver with "xrun/xmsim -xceligen on ..." is recommended.
+xmsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+xcelium> source /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/xcelium/files/xmsimrc
+xcelium> source /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/files/tcl/uvm_sim.tcl
+xcelium> run
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(412) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+CDNS-UVM-1.2 (18.03-s001)
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0: reporter [RNTST] Running test simple_test...
+UVM_WARNING /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_component.svh(3132) @ 0: uvm_test_top.tb.hbus.monitor [UVM/CFG/GET/DPR] get/set_config_* API has been deprecated. Use uvm_config_db instead.
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:
+--------------------------------------------------------------------------
+Name                           Type                       Size  Value     
+--------------------------------------------------------------------------
+uvm_test_top                   simple_test                -     @2153     
+  tb                           router_tb                  -     @2258     
+    chan0                      channel_env                -     @2371     
+      rx_agent                 channel_rx_agent           -     @3186     
+        driver                 channel_rx_driver          -     @3975     
+          rsp_port             uvm_analysis_port          -     @4074     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @4024     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h0       
+          recording_detail     integral                   32    'd1       
+        monitor                channel_rx_monitor         -     @3229     
+          item_collected_port  uvm_analysis_port          -     @3287     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h0       
+          checks_enable        integral                   1     'h1       
+          coverage_enable      integral                   1     'h1       
+          recording_detail     integral                   32    'd1       
+        sequencer              channel_rx_sequencer       -     @3321     
+          rsp_export           uvm_analysis_export        -     @3379     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @3941     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        is_active              uvm_active_passive_enum    1     UVM_ACTIVE
+        recording_detail       integral                   32    'd1       
+      channel_id               integral                   32    'h0       
+      checks_enable            integral                   1     'h1       
+      coverage_enable          integral                   1     'h1       
+      recording_detail         integral                   32    'd1       
+    chan1                      channel_env                -     @2408     
+      rx_agent                 channel_rx_agent           -     @4140     
+        driver                 channel_rx_driver          -     @4900     
+          rsp_port             uvm_analysis_port          -     @4995     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @4946     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h1       
+          recording_detail     integral                   32    'd1       
+        monitor                channel_rx_monitor         -     @4175     
+          item_collected_port  uvm_analysis_port          -     @4227     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h1       
+          checks_enable        integral                   1     'h1       
+          coverage_enable      integral                   1     'h1       
+          recording_detail     integral                   32    'd1       
+        sequencer              channel_rx_sequencer       -     @4260     
+          rsp_export           uvm_analysis_export        -     @4315     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @4867     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        is_active              uvm_active_passive_enum    1     UVM_ACTIVE
+        recording_detail       integral                   32    'd1       
+      channel_id               integral                   32    'h1       
+      checks_enable            integral                   1     'h1       
+      coverage_enable          integral                   1     'h1       
+      recording_detail         integral                   32    'd1       
+    chan2                      channel_env                -     @2439     
+      rx_agent                 channel_rx_agent           -     @5047     
+        driver                 channel_rx_driver          -     @5807     
+          rsp_port             uvm_analysis_port          -     @5902     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @5853     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h2       
+          recording_detail     integral                   32    'd1       
+        monitor                channel_rx_monitor         -     @5082     
+          item_collected_port  uvm_analysis_port          -     @5134     
+            recording_detail   integral                   32    'd1       
+          channel_id           integral                   32    'h2       
+          checks_enable        integral                   1     'h1       
+          coverage_enable      integral                   1     'h1       
+          recording_detail     integral                   32    'd1       
+        sequencer              channel_rx_sequencer       -     @5167     
+          rsp_export           uvm_analysis_export        -     @5222     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @5774     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        is_active              uvm_active_passive_enum    1     UVM_ACTIVE
+        recording_detail       integral                   32    'd1       
+      channel_id               integral                   32    'h2       
+      checks_enable            integral                   1     'h1       
+      coverage_enable          integral                   1     'h1       
+      recording_detail         integral                   32    'd1       
+    clock_and_reset            clock_and_reset_env        -     @2291     
+      agent                    clock_and_reset_agent      -     @5955     
+        driver                 clock_and_reset_driver     -     @5985     
+          rsp_port             uvm_analysis_port          -     @6090     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @6038     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+        sequencer              clock_and_reset_sequencer  -     @6124     
+          rsp_export           uvm_analysis_export        -     @6182     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @6742     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        recording_detail       integral                   32    'd1       
+      recording_detail         integral                   32    'd1       
+    hbus                       hbus_env                   -     @2488     
+      masters[0]               hbus_master_agent          -     @6895     
+        driver                 hbus_master_driver         -     @7587     
+          rsp_port             uvm_analysis_port          -     @7686     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @7636     
+            recording_detail   integral                   32    'd1       
+          random_delay         integral                   1     'h0       
+          master_id            integral                   32    'h0       
+          recording_detail     integral                   32    'd1       
+        sequencer              hbus_master_sequencer      -     @6893     
+          rsp_export           uvm_analysis_export        -     @6993     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @7553     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        monitor                hbus_monitor               -     @6808     
+        is_active              uvm_active_passive_enum    1     UVM_ACTIVE
+        master_id              integral                   32    'h0       
+        recording_detail       integral                   32    'd1       
+      monitor                  hbus_monitor               -     @6808     
+        item_collected_port    uvm_analysis_port          -     @6858     
+          recording_detail     integral                   32    'd1       
+        checks_enable          integral                   1     'h1       
+        coverage_enable        integral                   1     'h1       
+        recording_detail       integral                   32    'd1       
+      num_masters              integral                   32    'h1       
+      num_slaves               integral                   32    'h0       
+      checks_enable            integral                   1     'h1       
+      coverage_enable          integral                   1     'h1       
+      recording_detail         integral                   32    'd1       
+    mcsequencer                router_mcsequencer         -     @2523     
+      rsp_export               uvm_analysis_export        -     @2584     
+        recording_detail       integral                   32    'd1       
+      seq_item_export          uvm_seq_item_pull_imp      -     @3146     
+        recording_detail       integral                   32    'd1       
+      recording_detail         integral                   32    'd1       
+      arbitration_queue        array                      0     -         
+      lock_queue               array                      0     -         
+      num_last_reqs            integral                   32    'd1       
+      num_last_rsps            integral                   32    'd1       
+    yapp                       yapp_env                   -     @2323     
+      tx_agent                 yapp_tx_agent              -     @7753     
+        driver                 yapp_tx_driver             -     @8523     
+          rsp_port             uvm_analysis_port          -     @8622     
+            recording_detail   integral                   32    'd1       
+          seq_item_port        uvm_seq_item_pull_port     -     @8572     
+            recording_detail   integral                   32    'd1       
+          num_sent             integral                   32    'h0       
+          recording_detail     integral                   32    'd1       
+        monitor                yapp_tx_monitor            -     @7786     
+          item_collected_port  uvm_analysis_port          -     @7837     
+            recording_detail   integral                   32    'd1       
+          num_pkt_col          integral                   32    'h0       
+          recording_detail     integral                   32    'd1       
+        sequencer              yapp_tx_sequencer          -     @7871     
+          rsp_export           uvm_analysis_export        -     @7929     
+            recording_detail   integral                   32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp      -     @8489     
+            recording_detail   integral                   32    'd1       
+          recording_detail     integral                   32    'd1       
+          arbitration_queue    array                      0     -         
+          lock_queue           array                      0     -         
+          num_last_reqs        integral                   32    'd1       
+          num_last_rsps        integral                   32    'd1       
+        is_active              uvm_active_passive_enum    1     UVM_ACTIVE
+        recording_detail       integral                   32    'd1       
+      recording_detail         integral                   32    'd1       
+    recording_detail           integral                   32    'd1       
+--------------------------------------------------------------------------
+
+SDI/Verilog Transaction Recording Facility Version 18.03-s001
+UVM_INFO ../../yapp/sv/yapp_tx_seqs.sv(96) @ 0: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_012_seq [yapp_012_seq] Executing YAPP_012_SEQ
+UVM_INFO ../../channel/sv/channel_rx_seqs.sv(24) @ 0: uvm_test_top.tb.chan2.rx_agent.sequencer@@channel_rx_resp_seq [channel_rx_resp_seq] Executing channel_rx_resp_seq (forever)
+UVM_INFO ../../channel/sv/channel_rx_seqs.sv(24) @ 0: uvm_test_top.tb.chan1.rx_agent.sequencer@@channel_rx_resp_seq [channel_rx_resp_seq] Executing channel_rx_resp_seq (forever)
+UVM_INFO ../../channel/sv/channel_rx_seqs.sv(24) @ 0: uvm_test_top.tb.chan0.rx_agent.sequencer@@channel_rx_resp_seq [channel_rx_resp_seq] Executing channel_rx_resp_seq (forever)
+UVM_INFO ../../clock_and_reset/sv/clock_and_reset_seq.sv(20) @ 0: uvm_test_top.tb.clock_and_reset.agent.sequencer@@clk10_rst5_seq.cr [clock_and_reset_sequence] starting body clock_and_reset_wait_seq
+UVM_INFO ../../yapp/sv/yapp_tx_monitor.sv(57) @ 1750: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @8942      
+  length        integral           6     'h5        
+  addr          integral           2     'h0        
+  payload       da(integral)       5     -          
+    [0]         integral           8     'h29       
+    [1]         integral           8     'hce       
+    [2]         integral           8     'h92       
+    [3]         integral           8     'hef       
+    [4]         integral           8     'hc9       
+  parity        integral           8     'h47       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    1150       
+  end_time      time               64    1750       
+----------------------------------------------------
+
+UVM_INFO ../../channel/sv/channel_rx_monitor.sv(135) @ 2550: uvm_test_top.tb.chan0.rx_agent.monitor [channel_rx_monitor] Channel_0 Packet collected :
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @8954      
+  length          integral        6     'h5        
+  addr            integral        2     'h0        
+  payload         da(integral)    5     -          
+    [0]           integral        8     'h29       
+    [1]           integral        8     'hce       
+    [2]           integral        8     'h92       
+    [3]           integral        8     'hef       
+    [4]           integral        8     'hc9       
+  parity          integral        8     'h47       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    1850       
+  end_time        time            64    2550       
+---------------------------------------------------
+
+UVM_INFO ../../yapp/sv/yapp_tx_monitor.sv(57) @ 4150: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @9020      
+  length        integral           6     'h5        
+  addr          integral           2     'h1        
+  payload       da(integral)       5     -          
+    [0]         integral           8     'h6        
+    [1]         integral           8     'ha1       
+    [2]         integral           8     'hcb       
+    [3]         integral           8     'ha7       
+    [4]         integral           8     'ha        
+  parity        integral           8     'hd4       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    3550       
+  end_time      time               64    4150       
+----------------------------------------------------
+
+UVM_INFO ../../channel/sv/channel_rx_monitor.sv(135) @ 4550: uvm_test_top.tb.chan1.rx_agent.monitor [channel_rx_monitor] Channel_1 Packet collected :
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @8966      
+  length          integral        6     'h5        
+  addr            integral        2     'h1        
+  payload         da(integral)    5     -          
+    [0]           integral        8     'h6        
+    [1]           integral        8     'ha1       
+    [2]           integral        8     'hcb       
+    [3]           integral        8     'ha7       
+    [4]           integral        8     'ha        
+  parity          integral        8     'hd4       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    3850       
+  end_time        time            64    4550       
+---------------------------------------------------
+
+UVM_INFO ../../yapp/sv/yapp_tx_monitor.sv(57) @ 6150: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @8758      
+  length        integral           6     'h8        
+  addr          integral           2     'h2        
+  payload       da(integral)       8     -          
+    [0]         integral           8     'h5e       
+    [1]         integral           8     'hb7       
+    [2]         integral           8     'hfe       
+    [3]         integral           8     'hc0       
+    [4]         integral           8     'h4c       
+    [5]         integral           8     'h39       
+    [6]         integral           8     'h79       
+    [7]         integral           8     'hdb       
+  parity        integral           8     'h22       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    5250       
+  end_time      time               64    6150       
+----------------------------------------------------
+
+UVM_INFO ../../channel/sv/channel_rx_monitor.sv(135) @ 6550: uvm_test_top.tb.chan2.rx_agent.monitor [channel_rx_monitor] Channel_2 Packet collected :
+---------------------------------------------------
+Name              Type            Size  Value      
+---------------------------------------------------
+packet_collected  channel_packet  -     @9000      
+  length          integral        6     'h8        
+  addr            integral        2     'h2        
+  payload         da(integral)    8     -          
+    [0]           integral        8     'h5e       
+    [1]           integral        8     'hb7       
+    [2]           integral        8     'hfe       
+    [3]           integral        8     'hc0       
+    [4]           integral        8     'h4c       
+    [5]           integral        8     'h39       
+    [6]           integral        8     'h79       
+    [7]           integral        8     'hdb       
+  parity          integral        8     'h22       
+  parity_type     parity_e        1     GOOD_PARITY
+  packet_delay    integral        32    'd0        
+  begin_time      time            64    5550       
+  end_time        time            64    6550       
+---------------------------------------------------
+
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_objection.svh(1271) @ 8200: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO ../../channel/sv/channel_rx_driver.sv(85) @ 8200: uvm_test_top.tb.chan0.rx_agent.driver [channel_rx_driver] Report: Channel_0 RX Driver Sent 1 Responses
+UVM_INFO ../../channel/sv/channel_rx_monitor.sv(148) @ 8200: uvm_test_top.tb.chan0.rx_agent.monitor [channel_rx_monitor] Report: Channel_0 Monitor Collected 1 Packets
+UVM_INFO ../../channel/sv/channel_rx_driver.sv(85) @ 8200: uvm_test_top.tb.chan1.rx_agent.driver [channel_rx_driver] Report: Channel_1 RX Driver Sent 1 Responses
+UVM_INFO ../../channel/sv/channel_rx_monitor.sv(148) @ 8200: uvm_test_top.tb.chan1.rx_agent.monitor [channel_rx_monitor] Report: Channel_1 Monitor Collected 1 Packets
+UVM_INFO ../../channel/sv/channel_rx_driver.sv(85) @ 8200: uvm_test_top.tb.chan2.rx_agent.driver [channel_rx_driver] Report: Channel_2 RX Driver Sent 1 Responses
+UVM_INFO ../../channel/sv/channel_rx_monitor.sv(148) @ 8200: uvm_test_top.tb.chan2.rx_agent.monitor [channel_rx_monitor] Report: Channel_2 Monitor Collected 1 Packets
+UVM_INFO ../../hbus/sv/hbus_monitor.sv(123) @ 8200: uvm_test_top.tb.hbus.monitor [hbus_monitor] Report: HBUS Monitor Collected 0 WRITE and 0 READ Transactions
+UVM_INFO ../../yapp/sv/yapp_tx_driver.sv(82) @ 8200: uvm_test_top.tb.yapp.tx_agent.driver [yapp_tx_driver] Report: YAPP TX driver sent 3 packets
+UVM_INFO ../../yapp/sv/yapp_tx_monitor.sv(65) @ 8200: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Report: YAPP Monitor Collected 3 Packets
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_catcher.svh(705) @ 8200: reporter [UVM/REPORT/CATCHER] 
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_server.svh(847) @ 8200: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :   25
+UVM_WARNING :    1
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[TEST_DONE]     1
+[UVM/CFG/GET/DPR]     1
+[UVM/RELNOTES]     1
+[UVM/REPORT/CATCHER]     1
+[UVMTOP]     1
+[channel_rx_driver]     3
+[channel_rx_monitor]     6
+[channel_rx_resp_seq]     3
+[clock_and_reset_sequence]     1
+[hbus_monitor]     1
+[yapp_012_seq]     1
+[yapp_tx_driver]     1
+[yapp_tx_monitor]     4
+
+Simulation complete via $finish(1) at time 820 NS + 60
+/home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh:543     $finish;
+xcelium> exit
+TOOL:	xrun(64)	18.03-s001: Exiting on Oct 21, 2026 at 21:16:09 +07  (total: 00:00:03)

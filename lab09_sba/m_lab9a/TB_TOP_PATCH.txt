@@ -1,0 +1,111 @@
+===============================================================================
+tb_top.sv  --  LAB 9A  (PATCH)
+===============================================================================
+
+Them dung MOT dong. Nhung vi tri cua no thi quan trong.
+
+
+===============================================================================
+[TB-1]  Them mot dong `include
+===============================================================================
+
+Phan import GIU NGUYEN (bon dong import UVC, khong doi).
+
+Phan `include doi tu:
+
+    `include "router_mcsequencer.sv"
+    `include "router_mcseqs_lib.sv"
+    `include "router_tb.sv"
+    `include "router_test_lib.sv"
+
+thanh:
+
+    `include "router_mcsequencer.sv"
+    `include "router_mcseqs_lib.sv"
+    `include "router_scoreboard.sv"      // <-- THEM DONG NAY
+    `include "router_tb.sv"
+    `include "router_test_lib.sv"
+
+[Da xac minh] lab09_sba/tb/tb_top.sv dat dong nay dung o vi tri do.
+
+
+=============================================================================
+*** VI TRI BAT BUOC: TRUOC router_tb.sv ***
+=============================================================================
+
+Chuoi phu thuoc:
+
+   router_scoreboard.sv
+          ^
+          | router_tb.sv co dong:
+          |     router_scoreboard router_sb;
+          |     ^^^^^^^^^^^^^^^^^
+   router_tb.sv
+          ^
+          | router_test_lib.sv co dong:
+          |     router_tb tb;
+   router_test_lib.sv
+
+Dat router_scoreboard.sv SAU router_tb.sv -> loi:
+    "router_scoreboard is not declared"
+
+Luat cu tu Lab 6: `include la DAN CHU. Sau khi dan, moi file thanh MOT
+file tuyen tinh, va class phai khai bao TRUOC khi duoc nhac den.
+
+
+=============================================================================
+*** NHUNG FILE NAY O THU MUC KHAC ***
+=============================================================================
+
+   tb_top.sv           nam o  lab09a_my/tb/
+   router_scoreboard.sv nam o lab09a_my/sv/      <- KHAC THU MUC
+
+Tien xu ly tim file `include o dau? Trong cac thu muc liet ke boi
+-incdir. Nen [RUN-1] PHAI them:
+
+    -incdir ../sv
+
+Quen -> loi "cannot find include file router_scoreboard.sv".
+
+*** DAY LA LAN DAU KE TU LAB 6 ban can -incdir cho thu muc CUA CHINH LAB ***
+
+   Lab 6:  -incdir ../sv            <- UVC rieng cua lab
+   Lab 7:  -incdir ../../yapp/sv    <- UVC dung chung, khong co ../sv
+   Lab 8:  (khong doi)
+   Lab 9A: -incdir ../sv  QUAY LAI  <- module UVC code
+
+
+=============================================================================
+*** VI SAO KHONG THEM router_scoreboard.sv VAO run.f ***
+=============================================================================
+
+Vi no chua CLASS TRAN (khong boc trong package hay module).
+
+Quy tac tu Lab 6:
+   File chua class tran thi KHONG duoc liet ke trong run.f. No phai di
+   vao qua `include cua mot module hoac package.
+
+Giong het router_tb.sv, router_mcsequencer.sv, router_test_lib.sv --
+ca bon deu la class tran, ca bon deu vao qua tb_top.sv.
+
+Thu them "../sv/router_scoreboard.sv" vao run.f xem loi gi. (30 giay,
+va ban se khong bao gio quen quy tac nay.)
+
+
+===============================================================================
+TU KIEM TRA
+===============================================================================
+
+ 1. Sau khi sua, dem so dong `include trong tb_top.sv: phai la 6
+    (5 file cua ban + uvm_macros.svh).
+
+ 2. Chay va grep log bien dich:
+        grep -cE "^file:" log9a.log
+    Phai ra dung 12 -- Y HET Lab 7 va Lab 8. File scoreboard KHONG
+    xuat hien, vi no khong phai don vi bien dich rieng.
+
+ 3. Dao thu tu: dat `include "router_scoreboard.sv" XUONG cuoi, sau
+    router_test_lib.sv. Chay. Loi bao ten file nao -- file bi dao,
+    hay tb_top.sv? Tu doan truoc roi thu.
+
+===============================================================================

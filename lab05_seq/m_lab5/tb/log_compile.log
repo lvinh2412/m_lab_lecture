@@ -1,0 +1,19 @@
+xrun(64): 18.03-s001: (c) Copyright 1995-2018 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	18.03-s001: Started on Oct 15, 2026 at 19:16:48 +07
+xrun
+	-f run.f
+		-64
+		-uvmhome /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv
+		-incdir ../sv
+		+UVM_VERBOSITY=UVM_LOW
+		+UVM_TESTNAME=short_packet_test
+		+SVSEED=random
+		../sv/yapp_pkg.sv
+		top.sv
+	-elaborate
+	-l log_compile.log
+
+   User defined plus("+") options:
+	+UVM_VERBOSITY=UVM_LOW
+
+TOOL:	xrun(64)	18.03-s001: Exiting on Oct 15, 2026 at 19:16:48 +07  (total: 00:00:00)

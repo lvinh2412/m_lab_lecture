@@ -1,0 +1,250 @@
+===============================================================================
+router_test_lib.sv  --  LAB 7  (PATCH)
+===============================================================================
+
+Giu nguyen toan bo base_test va cac test cu cua Lab 4/5/6.
+Chi THEM mot test moi o CUOI file: simple_test.
+
+simple_test la test dau tien chay CA BON UVC cung luc.
+
+
+===============================================================================
+[TEST-1]  Khung class
+===============================================================================
+
+   class simple_test extends base_test;
+     `uvm_component_utils(simple_test)
+
+     function new(string name, uvm_component parent);
+       super.new(name, parent);
+     endfunction : new
+
+     function void build_phase(uvm_phase phase);
+       // ... TEST-2, TEST-3, TEST-4 o day ...
+       super.build_phase(phase);        // <- CUOI CUNG
+     endfunction : build_phase
+
+   endclass : simple_test
+
+*** LUAT CU TU LAB 4, VAN DUNG ***
+super.build_phase(phase) dat CUOI, sau moi lenh set va set_type_override.
+Dat dau -> router_tb duoc build truoc khi config vao kho -> con doc khong
+thay gi.
+
+
+===============================================================================
+[TEST-2]  Type override
+===============================================================================
+
+   set_type_override_by_type(yapp_packet::get_type(),
+                             short_yapp_packet::get_type());
+
+Giong Lab 4. Doi moi yapp_packet thanh short_yapp_packet (length < 20).
+
+*** CANH BAO -- BAY BAN DA GAP O LAB 5 ***
+
+Neu short_yapp_packet cua ban VAN con:
+     constraint not_addr_2 { addr != 'b10; }
+
+va TEST-3 dat default_sequence = yapp_012_seq (goi thu ba ep addr == 2)
+-> MAU THUAN -> randomization failure.
+
+[Da xac minh] File golden yapp/sv/yapp_packet.sv co not_addr_2 bi COMMENT
+OUT. Day chinh la ly do.
+
+Kiem tra truoc khi chay:
+     grep -n "not_addr_2" ../../yapp/sv/yapp_packet.sv
+
+Neu con active -> comment lai, hoac doi default_sequence o TEST-3.
+
+
+===============================================================================
+[TEST-3]  BA lenh default_sequence
+===============================================================================
+
+Khung:
+   uvm_config_wrapper::set(this, "<duong_dan_sequencer>.run_phase",
+                                 "default_sequence", <seq_type>::get_type());
+
+Ba dong can viet:
+
+   (a) YAPP:
+         duong dan : "tb.yapp.tx_agent.sequencer.run_phase"
+         sequence  : yapp_012_seq::get_type()
+
+   (b) CLOCK_AND_RESET:
+         duong dan : "tb.clock_and_reset.agent.sequencer.run_phase"
+         sequence  : clk10_rst5_seq::get_type()
+
+   (c) CHANNEL (ca ba kenh, MOT dong):
+         duong dan : "tb.chan?.rx_agent.sequencer.run_phase"
+         sequence  : channel_rx_resp_seq::get_type()
+
+
+=============================================================================
+*** DAU "?" -- WILDCARD MOT KY TU ***
+=============================================================================
+
+   "tb.chan?.rx_agent.sequencer.run_phase"
+          ^
+   khop:  tb.chan0.rx_agent.sequencer.run_phase
+          tb.chan1.rx_agent.sequencer.run_phase
+          tb.chan2.rx_agent.sequencer.run_phase
+
+   KHONG khop: tb.chan10.... (vi "?" dung MOT ky tu)
+
+Dung "*" cung duoc o day. Vi sao repo chon "?"?
+[Suy luan] "?" chat che hon -- no noi ro "mot ky tu, la so kenh".
+"*" se khop ca "tb.chan_extra.rx_agent..." neu mai co. Toi khong co bang
+chung repo chon vi ly do nay, chi la suy luan ve phong cach viet.
+
+*** DOI CHIEU VOI TB_TOP -- SU KHAC BIET QUAN TRONG ***
+
+   tb_top  : BA lenh set rieng cho ba channel  (gia tri KHAC nhau: ch0/ch1/ch2)
+   test    : MOT lenh set cho ba channel       (gia tri GIONG nhau: cung seq)
+
+Wildcard gon duoc duong dan khi GIA TRI giong nhau. Khong gon duoc khi
+gia tri khac nhau. Hai cho nay trong cung mot lab -- so sanh ky.
+
+
+=============================================================================
+*** TU KIEM TRA TEN SEQUENCE VA TEN COMPONENT ***
+=============================================================================
+
+Ba ten sequence tren day toi chep tu lab07_integ/tb/router_test_lib.sv.
+[Da xac minh] clk10_rst5_seq ton tai trong
+clock_and_reset/sv/clock_and_reset_seq.sv.
+
+[Chua xac minh] Toi CHUA mo channel/sv/ de xac nhan channel_rx_resp_seq.
+Ban tu kiem:
+     grep -rn "class.*extends uvm_sequence" ../../channel/sv/
+     grep -rn "class.*extends uvm_sequence" ../../clock_and_reset/sv/
+
+Ba duong dan component (".agent.sequencer", ".rx_agent.sequencer") cung
+vay -- toi chep tu repo, chua tu xac minh trong channel_env.sv va
+clock_and_reset_env.sv.
+
+*** CACH XAC MINH CHAC CHAN NHAT: chay mot lan voi print_topology() ***
+Them vao base_test:
+     function void end_of_elaboration_phase(uvm_phase phase);
+       uvm_top.print_topology();
+     endfunction
+Chay. Doc cay ra. Chep duong dan TU DO, dung go tu tri nho.
+
+
+===============================================================================
+[TEST-4]  HBUS -- khong co default_sequence
+===============================================================================
+
+*** KHONG VIET GI CHO HBUS. ***
+
+[Da xac minh] lab07_integ/tb/router_test_lib.sv chi co BA lenh
+uvm_config_wrapper::set. Khong co dong nao cho hbus.
+
+Cau hoi: vay HBUS UVC duoc tich hop de lam gi, neu khong gui giao dich nao?
+
+[Suy luan] Toi cho rang Lab 7 chi kiem tra viec KET NOI hbus (bien dich
+duoc, vif lay duoc, agent dung len duoc, khong bao loi), chua kiem tra
+chuc nang. Giao dich HBUS that se xuat hien o Section 16 (Register
+Modeling) khi co register model.
+
+Toi khong co bang chung truc tiep cho suy luan nay -- Section 11 slide 19
+chi ghi "Connect, configure and test HBUS, Channel and Clock/Reset UVC".
+Chu "test" o day co the chi nghia la "chay thu xem co dung khong".
+
+Ban co the kiem chung: chay simple_test, xem trong log co hoat dong HBUS
+nao khong. Neu khong co -> suy luan tren dung.
+
+
+===============================================================================
+PHAN TICH: BA SEQUENCE NAY KET THUC THE NAO
+===============================================================================
+
+*** DAY LA PHAN QUAN TRONG NHAT CUA TEST-3. Doc ky. ***
+
+Ba sequence chay SONG SONG tren ba sequencer khac nhau, trong cung
+run_phase. Chung ket thuc rat khac nhau:
+
+   +---------------------+------------------+---------------------------+
+   | sequence            | ket thuc khi nao | co raise objection khong? |
+   +---------------------+------------------+---------------------------+
+   | yapp_012_seq        | gui xong 3 goi   | CO                        |
+   | clk10_rst5_seq      | sau #300ns       | [Suy luan] xem duoi       |
+   | channel_rx_resp_seq | KHONG BAO GIO    | KHONG DUOC PHEP           |
+   +---------------------+------------------+---------------------------+
+
+*** VI SAO channel_rx_resp_seq KHONG DUOC raise objection ***
+
+No la sequence PHAN HOI. Viec cua no la lai tin hieu suspend cua kenh,
+mai mai, suot ca mo phong. No khong co "diem ket thuc" tu nhien.
+
+Neu no raise objection -> khong bao gio drop -> mo phong CHAY MAI.
+
+=> Luat: sequence PHAN HOI (responder) khong raise objection.
+         Sequence KICH THICH (stimulus) thi co.
+
+Day la mot mo rong cua bai Section 9 ve objection. Lan dau ban thay mot
+sequence CO Y khong raise.
+
+*** clk10_rst5_seq thi sao? ***
+
+[Suy luan] Than cua no la:
+     cr.clock_period = 10; cr.reset_delay = 5; cr.run_clock = 1;
+     `uvm_send(cr)
+     #300ns;
+
+Cai "#300ns" o cuoi dang chu y. Toi doan no de giu objection them 300ns
+sau khi lai clock, cho reset xong han. Nhung toi CHUA doc clock_and_reset
+UVC co goi set_automatic_phase_objection hay khong.
+
+Ban tu kiem:
+     grep -rn "objection\|starting_phase" ../../clock_and_reset/sv/
+
+*** CAU HOI TONG HOP ***
+
+Gia su yapp_012_seq gui xong 3 goi o t = 2000ns va drop objection.
+clk10_rst5_seq cung da xong tu lau.
+channel_rx_resp_seq van dang chay.
+
+Mo phong co ket thuc khong? Khi nao? Goi thu 3 da kip di qua router
+va den channel chua?
+
+=> Day la ly do can DRAIN TIME (Section 9 slide 27):
+       phase.get_objection().set_drain_time(this, 200ns);
+Neu log cua ban thieu goi cuoi o phia channel, day la cho can sua.
+Ghi lai hien tuong khi chay, roi quay lai doan nay.
+
+
+===============================================================================
+CACH CHAY VA DOC KET QUA
+===============================================================================
+
+   xrun -f run.f -l log7.log
+   (+UVM_TESTNAME=simple_test da co trong run.f)
+
+Dem trong log:
+
+   grep -c "Sending Packet"      log7.log     -> mong doi: 3
+   grep -c "Packet Collected"    log7.log     -> mong doi: 3 (yapp monitor)
+   grep -c "CHANNEL_ID"          log7.log     -> mong doi: 0
+   grep -c "UVM_ERROR"           log7.log     -> mong doi: 0
+   grep -c "NOVIF"               log7.log     -> mong doi: 0
+
+   grep "clk10_rst5_seq"         log7.log     -> phai co "Starting ... body"
+
+*** DEM GOI O PHIA CHANNEL ***
+[Chua xac minh] Toi khong biet chuoi ID ma channel_rx_monitor in ra.
+Tu tim:
+     grep -n "uvm_info" ../../channel/sv/channel_rx_monitor.sv
+roi grep chuoi do trong log.
+
+*** KIEM TRA DINH TUYEN -- phep thu that su cua Lab 7 ***
+yapp_012_seq gui ba goi: addr=0, addr=1, addr=2.
+Vay chan0 phai thu duoc DUNG 1 goi, chan1 1 goi, chan2 1 goi.
+Neu mot kenh thu 0 goi va mot kenh thu 2 goi -> router dinh tuyen sai,
+HOAC ban noi nham day o hw_top HW-7.
+
+Hai nguyen nhan rat khac nhau. Lam sao phan biet?
+(Goi y: loi cua ban o hw_top thi waveform se cho thay data_vld_1 im
+ trong khi data_vld_0 co hai xung. Loi cua DUT thi khac.)
+===============================================================================

@@ -1,0 +1,119 @@
+===============================================================================
+tb_top.sv  --  LAB 9B  (PATCH)
+===============================================================================
+
+Doi hai dong: XOA mot `include, THEM mot import.
+
+*** DAY LA LAN DAU MOT FILE CUA BAN CHUYEN TU `include SANG import ***
+
+
+===============================================================================
+[TB-1]  XOA dong `include cua Lab 9A
+===============================================================================
+
+XOA:
+
+    // include the router scoreboard file
+    `include "router_scoreboard.sv"              <- XOA
+
+*** NEU DE LAI ***
+class router_scoreboard duoc khai HAI LAN:
+    - mot lan trong router_module_pkg (qua `include cua package)
+    - mot lan trong tb_top (qua dong nay)
+-> loi "duplicate declaration" hoac "already declared"
+
+Day la bay CO BAO LOI -- de sua. Nhung thong bao loi se tro vao
+router_scoreboard.sv, khong tro vao tb_top.sv, nen de nham cho.
+(Bay 5 trong README)
+
+
+===============================================================================
+[TB-2]  THEM dong import
+===============================================================================
+
+Them vao nhom import, SAU bon dong import UVC:
+
+    // import the clock and reset UVC package
+    import clock_and_reset_pkg::*;
+
+    // import the router module package
+    import router_module_pkg::*;              <- THEM
+
+Phan `include con lai giu nguyen:
+
+    `include "router_mcsequencer.sv"
+    `include "router_mcseqs_lib.sv"
+    `include "router_tb.sv"
+    `include "router_test_lib.sv"
+
+[Da xac minh] lab09_sbb/tb/tb_top.sv co dung cau truc nay, voi dung
+comment "// import the router module package".
+
+
+=============================================================================
+*** VI SAO import PHAI DUNG TRUOC `include "router_tb.sv" ***
+=============================================================================
+
+router_tb.sv co dong:
+    router_env router_mod;
+    ^^^^^^^^^^
+
+router_env nam trong router_module_pkg. Phai import truoc khi compiler
+doc dong khai bao do.
+
+Luat chung: moi dong import di TRUOC moi dong `include. Giong het ly do
+bon dong import UVC phai dung truoc router_tb.sv (Lab 7).
+
+
+=============================================================================
+*** SO SANH: `include VS import ***
+=============================================================================
+
+  +-------------------+-------------------------+----------------------+
+  |                   | `include (Lab 9A)       | import (Lab 9B)      |
+  +-------------------+-------------------------+----------------------+
+  | lam gi            | DAN CHU vao vi tri do   | MO TAM NHIN toi ten  |
+  | noi dung duoc copy| CO -- chu duoc nhan ban | KHONG -- chi tro toi |
+  | dung 2 lan duoc   | KHONG (trung khai bao)  | CO                   |
+  | doi tuong         | FILE                    | PACKAGE da bien dich |
+  | can trong run.f   | khong                   | CO (file package)    |
+  | pham vi class     | module tb_top           | package              |
+  +-------------------+-------------------------+----------------------+
+
+*** BA HE QUA THUC TE CUA VIEC DOI ***
+
+ (a) run.f phai liet ke ../sv/router_module_pkg.sv   ([RUN-2])
+     Lab 9A khong liet ke gi ca.
+
+ (b) Log bien dich co them mot dong:
+         file: ../sv/router_module_pkg.sv
+             package worklib.router_module_pkg:sv
+     -> tong so dong "file:" tang tu 12 len 13.
+
+ (c) Ba class gio co the duoc import tu NHIEU module khac nhau.
+     Lab 9A thi chi tb_top thay chung.
+     (Thuc te Lab 9B khong dung loi ich nay, nhung do la dieu lam
+      no thanh mot UVC "that")
+
+
+===============================================================================
+TU KIEM TRA
+===============================================================================
+
+ 1. Sau khi sua, dem trong tb_top.sv:
+        so dong import  : 6  (uvm + 4 UVC + router_module)
+        so dong `include: 5  (uvm_macros + 4 file class)
+    Lab 9A la 5 import / 6 include. Mot dong "nhay" tu nhom nay sang
+    nhom kia.
+
+ 2. Chay va grep:
+        grep -cE "^file:" log9b.log
+    Phai ra 13 (Lab 9A la 12).
+
+ 3. Thu dat dong "import router_module_pkg::*;" XUONG DUOI dong
+    `include "router_tb.sv". Loi gi? O file nao?
+
+ 4. Thu de CA HAI: vua import package, vua `include
+    "router_scoreboard.sv". Loi gi? Thong bao tro vao file nao?
+
+===============================================================================

@@ -1,0 +1,327 @@
+===============================================================================
+ LAB 6 -- PATCH cho sv/yapp_pkg.sv, sv/yapp_tx_driver.sv, sv/yapp_tx_monitor.sv
+===============================================================================
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [PKG-1]   sv/yapp_pkg.sv       -- THEM MOT DONG
+///////////////////////////////////////////////////////////////////////////////
+//
+// Section 10 slide 13: khai typedef cho uvm_config_db cua interface,
+// dat TRONG PACKAGE de ca module (tb_top) lan class (driver/monitor)
+// deu nhin thay.
+
+package yapp_pkg;
+
+  import uvm_pkg::*;
+  `include "uvm_macros.svh"
+
+  // ---- PKG-1 ---------------------------------------------------------------
+  // Them dong typedef o day, TRUOC cac `include.
+  //
+  //     typedef uvm_config_db#(virtual yapp_if) <ten_typedef>;
+  //
+  // Dat ten gi?  Repo dung "yapp_vif_config". Slide dung "yapp_vif_cfg".
+  // Chon mot, roi dung DUNG ten do o ca 3 noi: tb_top, driver, monitor.
+  //
+  // *** VI SAO PHAI CO TYPEDEF? ***
+  // uvm_config_db rat phu thuoc kieu. Neu tb_top viet
+  //     uvm_config_db#(virtual interface yapp_if)
+  // ma driver viet
+  //     uvm_config_db#(virtual yapp_if)
+  // thi CO THE la hai kho khac nhau -> set va get khong gap nhau
+  // -> [NOVIF], va khong co canh bao nao giai thich tai sao.
+  // Dung typedef thi ca hai ben tham chieu CUNG MOT TEN -> khong the lech.
+  // --------------------------------------------------------------------------
+
+
+
+  `include "yapp_packet.sv"
+  `include "yapp_tx_monitor.sv"
+  `include "yapp_tx_sequencer.sv"
+  `include "yapp_tx_seqs.sv"
+  `include "yapp_tx_driver.sv"
+  `include "yapp_tx_agent.sv"
+  `include "yapp_env.sv"
+
+endpackage : yapp_pkg
+
+// ⚠️ KHONG duoc them `include "yapp_if.sv" vao day.
+//    Interface bien dich RIENG trong run.f. (Section 10 slide 5)
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [DRV-1..5]   sv/yapp_tx_driver.sv
+//
+// Lab 3 driver cua ban chi in ra man hinh roi #10ns.
+// Lab 6 no lai day that.
+///////////////////////////////////////////////////////////////////////////////
+
+class yapp_tx_driver extends uvm_driver #(yapp_packet);
+
+  int num_sent;
+
+  // ---- DRV-1 -----------------------------------------------------------------
+  // Khai virtual interface lam property cua class:
+  //
+  //     virtual interface yapp_if vif;
+  //
+  // Luc moi tao, vif = null. No chi tro vao dau do sau khi get() thanh cong.
+  // ----------------------------------------------------------------------------
+
+
+  `uvm_component_utils_begin(yapp_tx_driver)
+    `uvm_field_int(num_sent, UVM_ALL_ON)
+  `uvm_component_utils_end
+
+  function new (string name, uvm_component parent);
+    super.new(name, parent);
+  endfunction : new
+
+
+  // ---- DRV-2 -----------------------------------------------------------------
+  // THEM connect_phase: lay vif tu config database.
+  //
+  //     function void connect_phase(uvm_phase phase);
+  //       if (!<ten_typedef>::get(this, "", "vif", vif))
+  //         `uvm_error("NOVIF", {"virtual interface must be set for: ",
+  //                              get_full_name(), ".vif"})
+  //     endfunction : connect_phase
+  //
+  // BON dieu phai hieu:
+  //  (a) "this"      -- toi la component nay, duong dan cua toi la dia chi
+  //  (b) ""          -- chuoi rong, vi "this" da du de xac dinh dia chi
+  //  (c) "vif"       -- ten mon hang, PHAI KHOP voi ben set
+  //  (d) vif (cuoi)  -- doi so inout: ham GHI KET QUA VAO DAY
+  //
+  // *** VI SAO `uvm_error MA KHONG PHAI `uvm_fatal? ***
+  // Section 10 slide 12: error cho phep phat hien NHIEU lan get that bai
+  // trong mot lan chay. Fatal thi chet ngay cai dau, sua xong chay lai
+  // chet cai thu hai... Lab 7 co 6 interface -> 6 vong lap.
+  //
+  // Cau hoi: dat o connect_phase hay build_phase? Ca hai deu chay duoc.
+  //          Chon mot va viet ra ly do.
+  // ----------------------------------------------------------------------------
+
+
+
+  function void start_of_simulation_phase(uvm_phase phase);
+    `uvm_info(get_type_name(), {"start of simulation for ", get_full_name()}, UVM_HIGH)
+  endfunction : start_of_simulation_phase
+
+
+  // ---- DRV-3 -----------------------------------------------------------------
+  // VIET LAI run_phase. Gio no chay HAI luong SONG SONG:
+  //
+  //     task run_phase(uvm_phase phase);
+  //       fork
+  //         get_and_drive();      // luong chinh: lay goi tu sequencer va gui
+  //         reset_signals();      // luong phu: canh reset, huy goi dang gui
+  //       join
+  //     endtask
+  //
+  // Cau hoi: vi sao can luong reset RIENG? Vi sao khong goi yapp_reset()
+  //          mot lan o dau get_and_drive() roi thoi?
+  //          (Goi y: reset co the xay ra GIUA chung mot goi)
+  // ----------------------------------------------------------------------------
+
+
+
+  // ---- DRV-4 -----------------------------------------------------------------
+  // task get_and_drive() -- thay the send_to_dut() cu cua Lab 3.
+  //
+  //   (a) CHO RESET truoc khi lam gi:
+  //           @(posedge vif.reset);
+  //           @(negedge vif.reset);
+  //           `uvm_info(get_type_name(), "Reset dropped", UVM_MEDIUM)
+  //
+  //       Vi sao cho CA posedge roi negedge? (Goi y: can reset DA XAY RA
+  //       va DA KET THUC, khong phai chi "dang khong reset")
+  //
+  //   (b) forever begin
+  //         seq_item_port.get_next_item(req);     <- giong Lab 3
+  //
+  //         `uvm_info(get_type_name(), $sformatf("Sending Packet :\n%s",
+  //                                    req.sprint()), UVM_HIGH)
+  //
+  //         fork
+  //           begin
+  //             // CHEP payload sang bo nho cua interface
+  //             foreach (req.payload[i])
+  //               vif.payload_mem[i] = req.payload[i];
+  //             // GOI task cua interface
+  //             vif.send_to_dut(req.length, req.addr, req.payload,
+  //                             req.parity, req.packet_delay);
+  //           end
+  //           // ghi transaction khi goi BAT DAU len bus
+  //           @(posedge vif.drvstart) void'(begin_tr(req, "Driver_YAPP_Packet"));
+  //         join
+  //
+  //         end_tr(req);
+  //         num_sent++;
+  //         seq_item_port.item_done();            <- giong Lab 3
+  //       end
+  //
+  // *** BA DIEU DANG CHU Y ***
+  //  (1) Driver KHONG dong vao tin hieu nao ca. No chi goi vif.send_to_dut().
+  //      Giao thuc nam TRONG interface. (Section 10 slide 8)
+  //  (2) Dong "foreach ... payload_mem[i] = ..." la cau noi giua mang DONG
+  //      cua packet va mang TINH cua interface.
+  //  (3) begin_tr phai doi @(posedge vif.drvstart) -- khong goi som hon,
+  //      neu khong dai transaction tren waveform se lech voi tin hieu that.
+  // ----------------------------------------------------------------------------
+
+
+
+  // ---- DRV-5 -----------------------------------------------------------------
+  // task reset_signals() -- hai dong:
+  //
+  //     task reset_signals();
+  //       forever
+  //         vif.yapp_reset();
+  //     endtask
+  //
+  // Va THEM report_phase de in tong ket:
+  //
+  //     function void report_phase(uvm_phase phase);
+  //       `uvm_info(get_type_name(),
+  //                 $sformatf("Report: YAPP TX driver sent %0d packets", num_sent),
+  //                 UVM_LOW)
+  //     endfunction
+  //
+  // Dong report nay la thu ban se dung de doi chieu voi monitor.
+  // ----------------------------------------------------------------------------
+
+
+endclass : yapp_tx_driver
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [MON-1..5]   sv/yapp_tx_monitor.sv
+//
+// Lab 3 monitor cua ban la cai vo rong. Gio no phai thu goi that.
+///////////////////////////////////////////////////////////////////////////////
+
+class yapp_tx_monitor extends uvm_monitor;
+
+  // ---- MON-1 -----------------------------------------------------------------
+  // BON property:
+  //
+  //     yapp_packet pkt;                                  // goi vua thu duoc
+  //     int num_pkt_col;                                  // dem so goi
+  //     uvm_analysis_port#(yapp_packet) item_collected_port;  // cho Lab 9
+  //     virtual interface yapp_if vif;                    // noi toi tin hieu
+  //
+  // Cau hoi: item_collected_port tao bang new() hay type_id::create()?
+  //          (Section 8 slide 8 -- "Some exceptions: TLM connection objects")
+  // ----------------------------------------------------------------------------
+
+
+  `uvm_component_utils_begin(yapp_tx_monitor)
+    `uvm_field_int(num_pkt_col, UVM_ALL_ON)
+  `uvm_component_utils_end
+
+
+  // ---- MON-2 -----------------------------------------------------------------
+  // Constructor: goi super.new, VA tao TLM port.
+  //
+  //     function new (string name, uvm_component parent);
+  //       super.new(name, parent);
+  //       item_collected_port = new("item_collected_port", this);
+  //     endfunction
+  //
+  // Chu y: TLM port tao trong CONSTRUCTOR, khong phai build_phase.
+  // ----------------------------------------------------------------------------
+
+
+
+  // ---- MON-3 -----------------------------------------------------------------
+  // connect_phase: lay vif -- GIONG DRV-2.
+  //
+  // *** MOT KHAC BIET NHO TRONG REPO ***
+  // Driver viet:   get(this, "",               "vif", vif)
+  // Monitor viet:  get(this, get_full_name(),  "vif", vif)
+  //
+  // Hai cach deu chay. Thu CA HAI va tu giai thich vi sao cung ra ket qua.
+  // (Goi y: context va instance name duoc GHEP lai -- Section 10 slide 11.
+  //  Neu context la "this" roi instance lai la duong dan day du thi sao?)
+  // ----------------------------------------------------------------------------
+
+
+
+  // ---- MON-4 -----------------------------------------------------------------
+  // run_phase -- phan chinh.
+  //
+  //   (a) Cho reset xong (giong DRV-4a)
+  //
+  //   (b) forever begin
+  //         // TAO goi moi cho MOI lan thu -- KHONG dung lai goi cu
+  //         pkt = yapp_packet::type_id::create("pkt", this);
+  //
+  //         fork
+  //           vif.collect_packet(pkt.length, pkt.addr, pkt.payload, pkt.parity);
+  //           @(posedge vif.monstart) void'(begin_tr(pkt, "Monitor_YAPP_Packet"));
+  //         join
+  //         ...
+  //
+  // *** VI SAO PHAI create() MOI LAN? ***
+  // Neu tao mot lan ngoai vong lap roi dung lai, moi goi gui vao
+  // analysis port deu la CUNG MOT object -> scoreboard o Lab 9 se thay
+  // tat ca goi giong het nhau (goi cuoi cung).
+  // Day la bug kinh dien. Tao moi moi lan.
+  // ----------------------------------------------------------------------------
+
+
+
+  // ---- MON-5 -----------------------------------------------------------------
+  // Con lai trong vong lap, sau fork...join:
+  //
+  //   (a) TINH parity_type -- viec nay interface khong lam:
+  //
+  //         pkt.parity_type = (pkt.parity == pkt.calc_parity())
+  //                           ? GOOD_PARITY : BAD_PARITY;
+  //
+  //       Monitor so parity THU DUOC voi parity TINH LAI.
+  //       Khop -> GOOD. Lech -> BAD.
+  //       Day la cho monitor bat duoc goi hong tren duong truyen.
+  //
+  //   (b) end_tr(pkt);
+  //
+  //   (c) In ra:
+  //         `uvm_info(get_type_name(),
+  //                   $sformatf("Packet Collected :\n%s", pkt.sprint()), UVM_LOW)
+  //
+  //   (d) Gui sang analysis port (chua ai nghe, Lab 9 moi dung):
+  //         item_collected_port.write(pkt);
+  //
+  //   (e) num_pkt_col++;
+  //
+  // Va THEM report_phase giong DRV-5:
+  //         "Report: YAPP Monitor Collected %0d Packets"
+  // ----------------------------------------------------------------------------
+
+
+endclass : yapp_tx_monitor
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// DOI CHIEU DRIVER vs MONITOR -- bang nay dang in ra dan
+///////////////////////////////////////////////////////////////////////////////
+//
+//                        DRIVER                    MONITOR
+//   ------------------   -----------------------   -----------------------
+//   Canh clock           NEGEDGE                   POSEDGE
+//   Vai tro              LAI tin hieu              DOC tin hieu
+//   Task cua interface   send_to_dut()             collect_packet()
+//   Doi so task          input                     output
+//   Mang payload         payload_mem[] (tinh)      payload[] (dong, new[])
+//   Co recording         drvstart                  monstart
+//   Ten transaction      "Driver_YAPP_Packet"      "Monitor_YAPP_Packet"
+//   Tinh parity_type?    KHONG (packet da co)      CO (phai tu so)
+//   Noi voi sequencer?   CO (seq_item_port)        KHONG
+//   Noi voi scoreboard?  KHONG                     CO (item_collected_port)
+//
+///////////////////////////////////////////////////////////////////////////////

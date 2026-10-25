@@ -1,0 +1,109 @@
+===============================================================================
+tb_top.sv  --  LAB 8  (PATCH)
+===============================================================================
+
+Thay doi NHO NHAT cua Lab 8: them dung HAI dong.
+Nhung THU TU cua chung thi quan trong.
+
+
+===============================================================================
+[TB-1]  Them hai dong `include
+===============================================================================
+
+Phan import GIU NGUYEN (bon dong import UVC cua Lab 7, khong doi).
+
+Phan `include doi tu:
+
+    `include "router_tb.sv"
+    `include "router_test_lib.sv"
+
+thanh:
+
+    // include the multichannel sequencer
+    `include "router_mcsequencer.sv"
+
+    // include the multichannel sequencer sequences
+    `include "router_mcseqs_lib.sv"
+
+    // include the router testbench file
+    `include "router_tb.sv"
+
+    // include the test_lib.sv file
+    `include "router_test_lib.sv"
+
+
+Phan "initial begin ... run_test(); end" GIU NGUYEN -- sau lenh vif set
+cua Lab 7, khong them khong bot.
+
+
+=============================================================================
+*** THU TU BON DONG NAY BAT BUOC ***
+=============================================================================
+
+Chuoi phu thuoc:
+
+   router_mcsequencer.sv
+          ^
+          | router_mcseqs_lib.sv co dong:
+          |     `uvm_declare_p_sequencer(router_mcsequencer)
+          |                               ^^^^^^^^^^^^^^^^^^
+   router_mcseqs_lib.sv
+          ^
+          | router_tb.sv co dong:
+          |     router_mcsequencer mcsequencer;
+          |     (va mcseqs_lib phai co truoc de test_lib thay duoc
+          |      router_simple_mcseq)
+          ^
+   router_tb.sv
+          ^
+          | router_test_lib.sv co dong:
+          |     router_tb tb;
+          |     va:  router_simple_mcseq::get_type()
+          ^
+   router_test_lib.sv
+
+
+Nho lai luat tu Lab 6: `include la DAN CHU. Sau khi dan, bon file thanh
+MOT file tuyen tinh, va SystemVerilog yeu cau class phai khai bao TRUOC
+khi duoc nhac den.
+
+Dao bat ky cap nao -> loi "... is not declared".
+
+*** CAU HOI ***
+Loi se bao ten file nao -- file bi dao, hay tb_top.sv?
+Tu tra loi truoc, roi thu dao that de kiem chung. (Mat 30 giay, va ban
+se khong bao gio quen cau tra loi.)
+
+
+=============================================================================
+*** VI SAO KHONG THEM GI VAO run.f ***
+=============================================================================
+
+Hai file moi KHONG co ten trong run.f. Chung vao compiler qua `include,
+y het router_tb.sv va router_test_lib.sv da lam tu Lab 4.
+
+Quy tac tu Lab 6 van dung:
+
+   File chua CLASS TRAN (khong boc trong package/module) thi KHONG
+   duoc liet ke trong run.f. No phai di vao qua `include cua mot
+   module hoac package.
+
+Thu them "router_mcsequencer.sv" vao run.f xem -- loi gi? O dong nao?
+(Day la cau hoi 1 cua phan tu kiem tra Lab 6; gio co dip thu that)
+
+
+===============================================================================
+TU KIEM TRA
+===============================================================================
+
+ 1. Sau khi sua, dem so dong `include trong tb_top.sv: phai la 5
+    (4 file cua ban + uvm_macros.svh).
+
+ 2. Dem so dong import: phai la 5 (uvm_pkg + 4 UVC).
+
+ 3. Chay va grep log bien dich:
+        grep -E "^file:" log8.log
+    Phai ra dung 12 dong -- Y HET Lab 7. Hai file moi KHONG xuat hien,
+    vi chung khong phai don vi bien dich rieng.
+
+===============================================================================

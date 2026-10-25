@@ -1,0 +1,1257 @@
+xrun(64): 18.03-s001: (c) Copyright 1995-2018 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	18.03-s001: Started on Oct 16, 2026 at 18:08:57 +07
+xrun
+	-f run.f
+		-64
+		-uvmhome /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv
+		-timescale 1ns/100ps
+		-incdir ../sv
+		+UVM_VERBOSITY=UVM_LOW
+		+UVM_TESTNAME=exhaustive_seq_test
+		../sv/yapp_pkg.sv
+		../sv/yapp_if.sv
+		clkgen.sv
+		tb_top.sv
+		hw_top.sv
+		../../../router_rtl/yapp_router.sv
+	+UVM_TESTNAME=exhaustive_seq_test
+	-access +rwc
+	-gui
+
+   User defined plus("+") options:
+	+UVM_VERBOSITY=UVM_LOW
+
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		$unit_0x6bedc16b
+		uvm_pkg
+		cdns_uvmapi
+		cdns_assert2uvm_pkg
+		cdns_uvm_pkg
+		yapp_pkg
+		tb_top
+		hw_top
+xmelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.fifo:sv <0x0f2f1f1e>
+			streams:  11, words:  5753
+		worklib.port_fsm:sv <0x0ecfa626>
+			streams:  39, words: 24706
+		worklib.host_ctl:sv <0x510d582d>
+			streams:  20, words: 18899
+		worklib.yapp_router:sv <0x2b510930>
+			streams:  18, words:  4105
+		worklib.clkgen:sv <0x4db36032>
+			streams:   2, words:  1265
+		worklib.uvm_pkg:sv <0x28937134>
+			streams:   8, words:  8720
+		worklib.uvm_pkg:sv <0x02bc4480>
+			streams:   8, words:  8345
+		worklib.uvm_pkg:sv <0x1fabb84d>
+			streams:   7, words:  7704
+		worklib.uvm_pkg:sv <0x26a8ff49>
+			streams:  29, words: 30348
+		worklib.uvm_pkg:sv <0x552ac001>
+			streams:   7, words:  1844
+		worklib.uvm_pkg:sv <0x27515f45>
+			streams:  22, words: 60490
+		worklib.uvm_pkg:sv <0x477dfe07>
+			streams:   7, words:  1844
+		worklib.uvm_pkg:sv <0x5c5eb33b>
+			streams:   7, words:  3126
+		worklib.uvm_pkg:sv <0x539c294d>
+			streams:  28, words: 33061
+		worklib.uvm_pkg:sv <0x41122165>
+			streams:  27, words: 31378
+		worklib.uvm_pkg:sv <0x5f5255e0>
+			streams:  23, words: 30320
+		worklib.uvm_pkg:sv <0x08fdc1af>
+			streams:  17, words: 16710
+		worklib.uvm_pkg:sv <0x5ce5c113>
+			streams:  26, words: 41853
+		worklib.uvm_pkg:sv <0x5f812eee>
+			streams:   7, words:  2348
+		worklib.uvm_pkg:sv <0x531d3409>
+			streams:  16, words: 21397
+		worklib.uvm_pkg:sv <0x0c50cb34>
+			streams:  26, words: 37594
+		worklib.uvm_pkg:sv <0x56239698>
+			streams:  25, words: 65652
+		worklib.uvm_pkg:sv <0x1183d380>
+			streams:  27, words: 41340
+		worklib.uvm_pkg:sv <0x57e2f2a3>
+			streams:  26, words: 57772
+		worklib.uvm_pkg:sv <0x3619c45a>
+			streams:  27, words: 44734
+		worklib.uvm_pkg:sv <0x5a08ec4b>
+			streams:  25, words: 65677
+		worklib.uvm_pkg:sv <0x6ea5b9af>
+			streams:  27, words: 46946
+		worklib.uvm_pkg:sv <0x71136d99>
+			streams:  25, words: 71117
+		worklib.uvm_pkg:sv <0x1ce96f90>
+			streams:  27, words: 52364
+		worklib.uvm_pkg:sv <0x4db2e616>
+			streams:  25, words: 63236
+		worklib.uvm_pkg:sv <0x56c886f7>
+			streams:  25, words: 66180
+		worklib.uvm_pkg:sv <0x1308da3f>
+			streams:  27, words: 43534
+		worklib.uvm_pkg:sv <0x72d5a19b>
+			streams:  25, words: 62461
+		worklib.uvm_pkg:sv <0x0943db08>
+			streams:  29, words: 109859
+		worklib.uvm_pkg:sv <0x5fdd90e8>
+			streams:  72, words: 152800
+		worklib.cdns_uvm_pkg:sv <0x271ca1bf>
+			streams:   9, words:  5179
+		worklib.cdns_uvm_pkg:sv <0x7d08be3f>
+			streams:  10, words:  9339
+		worklib.uvm_pkg:sv <0x5ff816b5>
+			streams:  25, words: 35116
+		worklib.uvm_pkg:sv <0x4be6672f>
+			streams:  25, words: 35348
+		worklib.uvm_pkg:sv <0x486fb014>
+			streams:  22, words: 22032
+		worklib.uvm_pkg:sv <0x28395e3f>
+			streams:  23, words: 24954
+		worklib.uvm_pkg:sv <0x36ab9af8>
+			streams:  23, words: 25319
+		worklib.uvm_pkg:sv <0x47dbf04e>
+			streams:  23, words: 24954
+		worklib.uvm_pkg:sv <0x3e63b89f>
+			streams:  23, words: 24954
+		worklib.uvm_pkg:sv <0x14b871ad>
+			streams:  25, words: 59280
+		worklib.uvm_pkg:sv <0x7e153d81>
+			streams:  25, words: 47271
+		worklib.uvm_pkg:sv <0x0d9f6efc>
+			streams:  25, words: 34968
+		worklib.uvm_pkg:sv <0x70c6b856>
+			streams:  25, words: 35027
+		worklib.uvm_pkg:sv <0x739f4831>
+			streams:  25, words: 35134
+		worklib.uvm_pkg:sv <0x39cfe7bd>
+			streams:  25, words: 34319
+		worklib.uvm_pkg:sv <0x1e580d75>
+			streams:  25, words: 27530
+		worklib.tb_top:sv <0x3c201df2>
+			streams:  26, words: 29258
+		worklib.uvm_pkg:sv <0x7d5fa028>
+			streams:   7, words:  3126
+		worklib.uvm_pkg:sv <0x45d771b8>
+			streams:  24, words: 27904
+		worklib.uvm_pkg:sv <0x0e2e271e>
+			streams:  24, words: 26053
+		worklib.uvm_pkg:sv <0x75fcee6c>
+			streams:  26, words: 48391
+		worklib.uvm_pkg:sv <0x7953540a>
+			streams:  18, words: 19212
+		worklib.uvm_pkg:sv <0x2d607b2c>
+			streams:  57, words: 85674
+		worklib.uvm_pkg:sv <0x4ef4a846>
+			streams:  25, words: 35063
+		worklib.uvm_pkg:sv <0x7cf5aeb1>
+			streams:  36, words: 47731
+		worklib.uvm_pkg:sv <0x343bf3a9>
+			streams: 238, words: 316492
+		worklib.uvm_pkg:sv <0x05ccb685>
+			streams: 106, words: 197307
+		worklib.uvm_pkg:sv <0x4999b50e>
+			streams:   7, words:  3126
+		worklib.uvm_pkg:sv <0x3922a572>
+			streams:  24, words: 27147
+		worklib.yapp_pkg:sv <0x2d5ae694>
+			streams:  36, words: 134731
+		worklib.tb_top:sv <0x7f001864>
+			streams:   1, words:  1364
+		worklib.hw_top:sv <0x745d3ba5>
+			streams:   8, words:  2089
+		worklib.yapp_if:sv <0x4f8f779d>
+			streams:  83, words: 147172
+		worklib.cdns_uvm_pkg:sv <0x1a2c769d>
+			streams: 232, words: 469970
+		worklib.cdns_uvmapi:svp <0x43662ac6>
+			streams:  27, words: 37264
+		worklib.cdns_assert2uvm_pkg:sv <0x31d10148>
+			streams:   3, words:  2534
+		worklib.uvm_pkg:sv <0x5b9f4fba>
+			streams: 5569, words: 10958395
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                       Instances  Unique
+		Modules:                       9       7
+		Interfaces:                    1       1
+		Verilog packages:              5       5
+		Registers:                 17290   12071
+		Scalar wires:                 46       -
+		Vectored wires:               26       -
+		Named events:                  5      13
+		Always blocks:                17      13
+		Initial blocks:              378     184
+		Parallel blocks:              30      31
+		Cont. assignments:            20      41
+		Pseudo assignments:           11      11
+		Assertions:                    4       4
+		Compilation units:             1       1
+		SV Class declarations:       248     364
+		SV Class specializations:    473     473
+		Simulation timescale:      100ps
+	Writing initial simulation snapshot: worklib.tb_top:sv
+SVSEED default: 1
+xmsim: *W,RNDNOXCEL: The legacy SystemVerilog constraint solver is used. Enabling the Xceligen constraint solver with "xrun/xmsim -xceligen on ..." is recommended.
+xmsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+
+-------------------------------------
+Relinquished control to SimVision...
+xcelium> 
+xcelium> source /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/xcelium/files/xmsimrc
+xcelium> source /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/files/tcl/uvm_sim.tcl
+xcelium> run
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(412) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+CDNS-UVM-1.2 (18.03-s001)
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_WARNING @ 0: reporter [MULTTST] Multiple (2) +UVM_TESTNAME arguments provided on the command line.  'exhaustive_seq_test' will be used.  Provided list: exhaustive_seq_test, exhaustive_seq_test.
+UVM_INFO @ 0: reporter [RNTST] Running test exhaustive_seq_test...
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:
+------------------------------------------------------------------------
+Name                           Type                     Size  Value     
+------------------------------------------------------------------------
+uvm_test_top                   exhaustive_seq_test      -     @1255     
+  tb                           router_tb                -     @2112     
+    yapp                       yapp_env                 -     @2147     
+      tx_agent                 yapp_tx_agent            -     @2180     
+        driver                 yapp_tx_driver           -     @2954     
+          rsp_port             uvm_analysis_port        -     @3053     
+            recording_detail   integral                 32    'd1       
+          seq_item_port        uvm_seq_item_pull_port   -     @3003     
+            recording_detail   integral                 32    'd1       
+          num_sent             integral                 32    'h0       
+          recording_detail     integral                 32    'd1       
+        monitor                yapp_tx_monitor          -     @2209     
+          item_collected_port  uvm_analysis_port        -     @2267     
+            recording_detail   integral                 32    'd1       
+          num_pkt_col          integral                 32    'h0       
+          recording_detail     integral                 32    'd1       
+        sequencer              yapp_tx_sequencer        -     @2301     
+          rsp_export           uvm_analysis_export      -     @2360     
+            recording_detail   integral                 32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp    -     @2920     
+            recording_detail   integral                 32    'd1       
+          recording_detail     integral                 32    'd1       
+          arbitration_queue    array                    0     -         
+          lock_queue           array                    0     -         
+          num_last_reqs        integral                 32    'd1       
+          num_last_rsps        integral                 32    'd1       
+        is_active              uvm_active_passive_enum  1     UVM_ACTIVE
+        recording_detail       integral                 32    'd1       
+      recording_detail         integral                 32    'd1       
+    recording_detail           integral                 32    'd1       
+------------------------------------------------------------------------
+
+stop -create -name Randomize -randomize
+Created stop Randomize
+
+SDI/Verilog Transaction Recording Facility Version 18.03-s001
+UVM_INFO ../sv/yapp_tx_seqs.sv(224) @ 0: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq [yapp_exhaustive_seq] Executing YAPP_EXHAUSTIVE_SEQ
+UVM_INFO ../sv/yapp_tx_seqs.sv(69) @ 0: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y012 [yapp_012_seq] Executing YAPP_012_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 2350: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3292      
+  length        integral           6     'h7        
+  addr          integral           2     'h0        
+  payload       da(integral)       7     -          
+    [0]         integral           8     'hdf       
+    [1]         integral           8     'h62       
+    [2]         integral           8     'ha5       
+    [3]         integral           8     'h9b       
+    [4]         integral           8     'hd4       
+    [5]         integral           8     'h36       
+    [6]         integral           8     'h9c       
+  parity        integral           8     'he1       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    1550       
+  end_time      time               64    2350       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 3350: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3404      
+  length        integral           6     'h7        
+  addr          integral           2     'h1        
+  payload       da(integral)       7     -          
+    [0]         integral           8     'hbb       
+    [1]         integral           8     'h35       
+    [2]         integral           8     'hde       
+    [3]         integral           8     'h53       
+    [4]         integral           8     'h15       
+    [5]         integral           8     'hd2       
+    [6]         integral           8     'h78       
+  parity        integral           8     'ha1       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    2550       
+  end_time      time               64    3350       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 5650: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3430      
+  length        integral           6     'ha        
+  addr          integral           2     'h2        
+  payload       da(integral)       10    -          
+    [0]         integral           8     'h14       
+    [1]         integral           8     'h4a       
+    [2]         integral           8     'h11       
+    [3]         integral           8     'h6b       
+    [4]         integral           8     'h57       
+    [5]         integral           8     'h1e       
+    [6]         integral           8     'h6a       
+    [7]         integral           8     'hce       
+    [8]         integral           8     'h27       
+    [9]         integral           8     'hb6       
+  parity        integral           8     'h72       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    4550       
+  end_time      time               64    5650       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 5700: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y1 [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 6750: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3445      
+  length        integral           6     'h1        
+  addr          integral           2     'h1        
+  payload       da(integral)       1     -          
+    [0]         integral           8     'h37       
+  parity        integral           8     'h32       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    6550       
+  end_time      time               64    6750       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(109) @ 6800: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111 [yapp_111_seq] Executing YAPP_111_SEQ
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 6800: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111.addr_1_seq [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 9150: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3456      
+  length        integral           6     'h8        
+  addr          integral           2     'h1        
+  payload       da(integral)       8     -          
+    [0]         integral           8     'h4a       
+    [1]         integral           8     'hc3       
+    [2]         integral           8     'h73       
+    [3]         integral           8     'h0        
+    [4]         integral           8     'hc0       
+    [5]         integral           8     'hdc       
+    [6]         integral           8     'h87       
+    [7]         integral           8     'hbd       
+  parity        integral           8     'hfd       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    8250       
+  end_time      time               64    9150       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 9200: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111.addr_1_seq [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 10850: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3558      
+  length        integral           6     'ha        
+  addr          integral           2     'h1        
+  payload       da(integral)       10    -          
+    [0]         integral           8     'h26       
+    [1]         integral           8     'h96       
+    [2]         integral           8     'hab       
+    [3]         integral           8     'hb8       
+    [4]         integral           8     'h1        
+    [5]         integral           8     'h77       
+    [6]         integral           8     'h63       
+    [7]         integral           8     'hf9       
+    [8]         integral           8     'hd6       
+    [9]         integral           8     'hd3       
+  parity        integral           8     'h63       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    9750       
+  end_time      time               64    10850      
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 10900: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111.addr_1_seq [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 13250: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+---------------------------------------------------
+Name            Type               Size  Value     
+---------------------------------------------------
+pkt             short_yapp_packet  -     @3599     
+  length        integral           6     'h7       
+  addr          integral           2     'h1       
+  payload       da(integral)       7     -         
+    [0]         integral           8     'h7f      
+    [1]         integral           8     'hac      
+    [2]         integral           8     'hde      
+    [3]         integral           8     'hd1      
+    [4]         integral           8     'h43      
+    [5]         integral           8     'hc3      
+    [6]         integral           8     'h55      
+  parity        integral           8     'h15      
+  parity_type   parity_t           1     BAD_PARITY
+  packet_delay  integral           32    'd0       
+  begin_time    time               64    12450     
+  end_time      time               64    13250     
+---------------------------------------------------
+
+*** ROUTER (DUT) Parity Error Identified: Expected:15 Computed:14 ***
+UVM_INFO ../sv/yapp_tx_seqs.sv(131) @ 13300: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.yaddr [yapp_repeat_addr_seq] Executing YAPP_REPEAT_ADDR_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 16150: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3620      
+  length        integral           6     'h9        
+  addr          integral           2     'h2        
+  payload       da(integral)       9     -          
+    [0]         integral           8     'hf1       
+    [1]         integral           8     'h18       
+    [2]         integral           8     'hd        
+    [3]         integral           8     'h3f       
+    [4]         integral           8     'hb9       
+    [5]         integral           8     'hbb       
+    [6]         integral           8     'hd6       
+    [7]         integral           8     'h75       
+    [8]         integral           8     'h78       
+  parity        integral           8     'h24       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    15150      
+  end_time      time               64    16150      
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 17950: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3675      
+  length        integral           6     'h2        
+  addr          integral           2     'h2        
+  payload       da(integral)       2     -          
+    [0]         integral           8     'hc8       
+    [1]         integral           8     'hf4       
+  parity        integral           8     'h36       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    17650      
+  end_time      time               64    17950      
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(151) @ 18000: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.yinc [yapp_incr_payload_seq] Executing YAPP_INCR_PAYLOAD_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 20050: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3636      
+  length        integral           6     'hd        
+  addr          integral           2     'h2        
+  payload       da(integral)       13    -          
+    [0]         integral           8     'h0        
+    [1]         integral           8     'h1        
+    [2]         integral           8     'h2        
+    [3]         integral           8     'h3        
+    [4]         integral           8     'h4        
+    ...         ...                ...   ...        
+    [8]         integral           8     'h8        
+    [9]         integral           8     'h9        
+    [10]        integral           8     'ha        
+    [11]        integral           8     'hb        
+    [12]        integral           8     'hc        
+  parity        integral           8     'h3a       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    18650      
+  end_time      time               64    20050      
+----------------------------------------------------
+
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_objection.svh(1271) @ 20100: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO ../sv/yapp_tx_driver.sv(63) @ 20100: uvm_test_top.tb.yapp.tx_agent.driver [yapp_tx_driver] Report: YAPP TX driver sent 10 packets
+UVM_INFO ../sv/yapp_tx_monitor.sv(55) @ 20100: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Report: YAPP Monitor Collected 10 Packets
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_catcher.svh(705) @ 20100: reporter [UVM/REPORT/CATCHER] 
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_server.svh(847) @ 20100: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :   26
+UVM_WARNING :    1
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[MULTTST]     1
+[RNTST]     1
+[TEST_DONE]     1
+[UVM/RELNOTES]     1
+[UVM/REPORT/CATCHER]     1
+[UVMTOP]     1
+[yapp_012_seq]     1
+[yapp_111_seq]     1
+[yapp_1_seq]     4
+[yapp_exhaustive_seq]     1
+[yapp_incr_payload_seq]     1
+[yapp_repeat_addr_seq]     1
+[yapp_tx_driver]     1
+[yapp_tx_monitor]    11
+
+Simulation complete via $finish(1) at time 2010 NS + 71
+/home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh:543     $finish;
+xcelium> run
+xmsim: *E,RNFNSH: Cannot continue simulation due to a previous $finish.
+xcelium> run
+xmsim: *E,RNFNSH: Cannot continue simulation due to a previous $finish.
+xcelium> probe -create -shm hw_top.in0.collect_packet.addr[1] hw_top.in0.collect_packet.addr[0]
+Created default SHM database xcelium.shm
+Created probe 1
+xcelium> reset
+SVSEED default: 1
+xmsim: *W,RNDNOXCEL: The legacy SystemVerilog constraint solver is used. Enabling the Xceligen constraint solver with "xrun/xmsim -xceligen on ..." is recommended.
+xmsim: *W,SCPINV: Dynamic scope `uvm_pkg::uvm_root@1154_1.run_test' no longer valid - traversing to last valid scope `tb_top'.
+xmsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+Loaded snapshot worklib.tb_top:sv
+xcelium> run
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(412) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+CDNS-UVM-1.2 (18.03-s001)
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_WARNING @ 0: reporter [MULTTST] Multiple (2) +UVM_TESTNAME arguments provided on the command line.  'exhaustive_seq_test' will be used.  Provided list: exhaustive_seq_test, exhaustive_seq_test.
+UVM_INFO @ 0: reporter [RNTST] Running test exhaustive_seq_test...
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:
+------------------------------------------------------------------------
+Name                           Type                     Size  Value     
+------------------------------------------------------------------------
+uvm_test_top                   exhaustive_seq_test      -     @1255     
+  tb                           router_tb                -     @2112     
+    yapp                       yapp_env                 -     @2147     
+      tx_agent                 yapp_tx_agent            -     @2180     
+        driver                 yapp_tx_driver           -     @2954     
+          rsp_port             uvm_analysis_port        -     @3053     
+            recording_detail   integral                 32    'd1       
+          seq_item_port        uvm_seq_item_pull_port   -     @3003     
+            recording_detail   integral                 32    'd1       
+          num_sent             integral                 32    'h0       
+          recording_detail     integral                 32    'd1       
+        monitor                yapp_tx_monitor          -     @2209     
+          item_collected_port  uvm_analysis_port        -     @2267     
+            recording_detail   integral                 32    'd1       
+          num_pkt_col          integral                 32    'h0       
+          recording_detail     integral                 32    'd1       
+        sequencer              yapp_tx_sequencer        -     @2301     
+          rsp_export           uvm_analysis_export      -     @2360     
+            recording_detail   integral                 32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp    -     @2920     
+            recording_detail   integral                 32    'd1       
+          recording_detail     integral                 32    'd1       
+          arbitration_queue    array                    0     -         
+          lock_queue           array                    0     -         
+          num_last_reqs        integral                 32    'd1       
+          num_last_rsps        integral                 32    'd1       
+        is_active              uvm_active_passive_enum  1     UVM_ACTIVE
+        recording_detail       integral                 32    'd1       
+      recording_detail         integral                 32    'd1       
+    recording_detail           integral                 32    'd1       
+------------------------------------------------------------------------
+
+
+Message!     [SDI/Verilog]                                                     
+    In $sdi_open, there's already an open SDI recording database.
+This call is ignored.
+Current simulation time = 0                                                                         
+    "/home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/additions/sv/cdns_recording.svh", 350: $sdi_open(db_name_l,use_existing_db,use_compression);
+UVM_INFO ../sv/yapp_tx_seqs.sv(224) @ 0: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq [yapp_exhaustive_seq] Executing YAPP_EXHAUSTIVE_SEQ
+UVM_INFO ../sv/yapp_tx_seqs.sv(69) @ 0: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y012 [yapp_012_seq] Executing YAPP_012_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 2350: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3292      
+  length        integral           6     'h7        
+  addr          integral           2     'h0        
+  payload       da(integral)       7     -          
+    [0]         integral           8     'hdf       
+    [1]         integral           8     'h62       
+    [2]         integral           8     'ha5       
+    [3]         integral           8     'h9b       
+    [4]         integral           8     'hd4       
+    [5]         integral           8     'h36       
+    [6]         integral           8     'h9c       
+  parity        integral           8     'he1       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    1550       
+  end_time      time               64    2350       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 3350: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3407      
+  length        integral           6     'h7        
+  addr          integral           2     'h1        
+  payload       da(integral)       7     -          
+    [0]         integral           8     'hbb       
+    [1]         integral           8     'h35       
+    [2]         integral           8     'hde       
+    [3]         integral           8     'h53       
+    [4]         integral           8     'h15       
+    [5]         integral           8     'hd2       
+    [6]         integral           8     'h78       
+  parity        integral           8     'ha1       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    2550       
+  end_time      time               64    3350       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 5650: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3433      
+  length        integral           6     'ha        
+  addr          integral           2     'h2        
+  payload       da(integral)       10    -          
+    [0]         integral           8     'h14       
+    [1]         integral           8     'h4a       
+    [2]         integral           8     'h11       
+    [3]         integral           8     'h6b       
+    [4]         integral           8     'h57       
+    [5]         integral           8     'h1e       
+    [6]         integral           8     'h6a       
+    [7]         integral           8     'hce       
+    [8]         integral           8     'h27       
+    [9]         integral           8     'hb6       
+  parity        integral           8     'h72       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    4550       
+  end_time      time               64    5650       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 5700: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y1 [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 6750: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3448      
+  length        integral           6     'h1        
+  addr          integral           2     'h1        
+  payload       da(integral)       1     -          
+    [0]         integral           8     'h37       
+  parity        integral           8     'h32       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    6550       
+  end_time      time               64    6750       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(109) @ 6800: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111 [yapp_111_seq] Executing YAPP_111_SEQ
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 6800: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111.addr_1_seq [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 9150: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3459      
+  length        integral           6     'h8        
+  addr          integral           2     'h1        
+  payload       da(integral)       8     -          
+    [0]         integral           8     'h4a       
+    [1]         integral           8     'hc3       
+    [2]         integral           8     'h73       
+    [3]         integral           8     'h0        
+    [4]         integral           8     'hc0       
+    [5]         integral           8     'hdc       
+    [6]         integral           8     'h87       
+    [7]         integral           8     'hbd       
+  parity        integral           8     'hfd       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    8250       
+  end_time      time               64    9150       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 9200: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111.addr_1_seq [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 10850: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3561      
+  length        integral           6     'ha        
+  addr          integral           2     'h1        
+  payload       da(integral)       10    -          
+    [0]         integral           8     'h26       
+    [1]         integral           8     'h96       
+    [2]         integral           8     'hab       
+    [3]         integral           8     'hb8       
+    [4]         integral           8     'h1        
+    [5]         integral           8     'h77       
+    [6]         integral           8     'h63       
+    [7]         integral           8     'hf9       
+    [8]         integral           8     'hd6       
+    [9]         integral           8     'hd3       
+  parity        integral           8     'h63       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    9750       
+  end_time      time               64    10850      
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 10900: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111.addr_1_seq [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 13250: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+---------------------------------------------------
+Name            Type               Size  Value     
+---------------------------------------------------
+pkt             short_yapp_packet  -     @3602     
+  length        integral           6     'h7       
+  addr          integral           2     'h1       
+  payload       da(integral)       7     -         
+    [0]         integral           8     'h7f      
+    [1]         integral           8     'hac      
+    [2]         integral           8     'hde      
+    [3]         integral           8     'hd1      
+    [4]         integral           8     'h43      
+    [5]         integral           8     'hc3      
+    [6]         integral           8     'h55      
+  parity        integral           8     'h15      
+  parity_type   parity_t           1     BAD_PARITY
+  packet_delay  integral           32    'd0       
+  begin_time    time               64    12450     
+  end_time      time               64    13250     
+---------------------------------------------------
+
+*** ROUTER (DUT) Parity Error Identified: Expected:15 Computed:14 ***
+UVM_INFO ../sv/yapp_tx_seqs.sv(131) @ 13300: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.yaddr [yapp_repeat_addr_seq] Executing YAPP_REPEAT_ADDR_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 16150: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3623      
+  length        integral           6     'h9        
+  addr          integral           2     'h2        
+  payload       da(integral)       9     -          
+    [0]         integral           8     'hf1       
+    [1]         integral           8     'h18       
+    [2]         integral           8     'hd        
+    [3]         integral           8     'h3f       
+    [4]         integral           8     'hb9       
+    [5]         integral           8     'hbb       
+    [6]         integral           8     'hd6       
+    [7]         integral           8     'h75       
+    [8]         integral           8     'h78       
+  parity        integral           8     'h24       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    15150      
+  end_time      time               64    16150      
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 17950: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3678      
+  length        integral           6     'h2        
+  addr          integral           2     'h2        
+  payload       da(integral)       2     -          
+    [0]         integral           8     'hc8       
+    [1]         integral           8     'hf4       
+  parity        integral           8     'h36       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    17650      
+  end_time      time               64    17950      
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(151) @ 18000: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.yinc [yapp_incr_payload_seq] Executing YAPP_INCR_PAYLOAD_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 20050: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3639      
+  length        integral           6     'hd        
+  addr          integral           2     'h2        
+  payload       da(integral)       13    -          
+    [0]         integral           8     'h0        
+    [1]         integral           8     'h1        
+    [2]         integral           8     'h2        
+    [3]         integral           8     'h3        
+    [4]         integral           8     'h4        
+    ...         ...                ...   ...        
+    [8]         integral           8     'h8        
+    [9]         integral           8     'h9        
+    [10]        integral           8     'ha        
+    [11]        integral           8     'hb        
+    [12]        integral           8     'hc        
+  parity        integral           8     'h3a       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    18650      
+  end_time      time               64    20050      
+----------------------------------------------------
+
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_objection.svh(1271) @ 20100: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO ../sv/yapp_tx_driver.sv(63) @ 20100: uvm_test_top.tb.yapp.tx_agent.driver [yapp_tx_driver] Report: YAPP TX driver sent 10 packets
+UVM_INFO ../sv/yapp_tx_monitor.sv(55) @ 20100: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Report: YAPP Monitor Collected 10 Packets
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_catcher.svh(705) @ 20100: reporter [UVM/REPORT/CATCHER] 
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_server.svh(847) @ 20100: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :   26
+UVM_WARNING :    1
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[MULTTST]     1
+[RNTST]     1
+[TEST_DONE]     1
+[UVM/RELNOTES]     1
+[UVM/REPORT/CATCHER]     1
+[UVMTOP]     1
+[yapp_012_seq]     1
+[yapp_111_seq]     1
+[yapp_1_seq]     4
+[yapp_exhaustive_seq]     1
+[yapp_incr_payload_seq]     1
+[yapp_repeat_addr_seq]     1
+[yapp_tx_driver]     1
+[yapp_tx_monitor]    11
+
+Simulation complete via $finish(1) at time 2010 NS + 71
+/home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh:543     $finish;
+xcelium> run
+xmsim: *E,RNFNSH: Cannot continue simulation due to a previous $finish.
+xcelium> run
+xmsim: *E,RNFNSH: Cannot continue simulation due to a previous $finish.
+xcelium> reset
+SVSEED default: 1
+xmsim: *W,RNDNOXCEL: The legacy SystemVerilog constraint solver is used. Enabling the Xceligen constraint solver with "xrun/xmsim -xceligen on ..." is recommended.
+xmsim: *W,SCPINV: Dynamic scope `uvm_pkg::uvm_root@1154_1.run_test' no longer valid - traversing to last valid scope `tb_top'.
+xmsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+Loaded snapshot worklib.tb_top:sv
+xcelium> run
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(412) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+CDNS-UVM-1.2 (18.03-s001)
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_WARNING @ 0: reporter [MULTTST] Multiple (2) +UVM_TESTNAME arguments provided on the command line.  'exhaustive_seq_test' will be used.  Provided list: exhaustive_seq_test, exhaustive_seq_test.
+UVM_INFO @ 0: reporter [RNTST] Running test exhaustive_seq_test...
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:
+------------------------------------------------------------------------
+Name                           Type                     Size  Value     
+------------------------------------------------------------------------
+uvm_test_top                   exhaustive_seq_test      -     @1255     
+  tb                           router_tb                -     @2112     
+    yapp                       yapp_env                 -     @2147     
+      tx_agent                 yapp_tx_agent            -     @2180     
+        driver                 yapp_tx_driver           -     @2954     
+          rsp_port             uvm_analysis_port        -     @3053     
+            recording_detail   integral                 32    'd1       
+          seq_item_port        uvm_seq_item_pull_port   -     @3003     
+            recording_detail   integral                 32    'd1       
+          num_sent             integral                 32    'h0       
+          recording_detail     integral                 32    'd1       
+        monitor                yapp_tx_monitor          -     @2209     
+          item_collected_port  uvm_analysis_port        -     @2267     
+            recording_detail   integral                 32    'd1       
+          num_pkt_col          integral                 32    'h0       
+          recording_detail     integral                 32    'd1       
+        sequencer              yapp_tx_sequencer        -     @2301     
+          rsp_export           uvm_analysis_export      -     @2360     
+            recording_detail   integral                 32    'd1       
+          seq_item_export      uvm_seq_item_pull_imp    -     @2920     
+            recording_detail   integral                 32    'd1       
+          recording_detail     integral                 32    'd1       
+          arbitration_queue    array                    0     -         
+          lock_queue           array                    0     -         
+          num_last_reqs        integral                 32    'd1       
+          num_last_rsps        integral                 32    'd1       
+        is_active              uvm_active_passive_enum  1     UVM_ACTIVE
+        recording_detail       integral                 32    'd1       
+      recording_detail         integral                 32    'd1       
+    recording_detail           integral                 32    'd1       
+------------------------------------------------------------------------
+
+
+Message!     [SDI/Verilog]                                                     
+    In $sdi_open, there's already an open SDI recording database.
+This call is ignored.
+Current simulation time = 0                                                                         
+    "/home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/additions/sv/cdns_recording.svh", 350: $sdi_open(db_name_l,use_existing_db,use_compression);
+UVM_INFO ../sv/yapp_tx_seqs.sv(224) @ 0: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq [yapp_exhaustive_seq] Executing YAPP_EXHAUSTIVE_SEQ
+UVM_INFO ../sv/yapp_tx_seqs.sv(69) @ 0: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y012 [yapp_012_seq] Executing YAPP_012_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 2350: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3292      
+  length        integral           6     'h7        
+  addr          integral           2     'h0        
+  payload       da(integral)       7     -          
+    [0]         integral           8     'hdf       
+    [1]         integral           8     'h62       
+    [2]         integral           8     'ha5       
+    [3]         integral           8     'h9b       
+    [4]         integral           8     'hd4       
+    [5]         integral           8     'h36       
+    [6]         integral           8     'h9c       
+  parity        integral           8     'he1       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    1550       
+  end_time      time               64    2350       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 3350: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3407      
+  length        integral           6     'h7        
+  addr          integral           2     'h1        
+  payload       da(integral)       7     -          
+    [0]         integral           8     'hbb       
+    [1]         integral           8     'h35       
+    [2]         integral           8     'hde       
+    [3]         integral           8     'h53       
+    [4]         integral           8     'h15       
+    [5]         integral           8     'hd2       
+    [6]         integral           8     'h78       
+  parity        integral           8     'ha1       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    2550       
+  end_time      time               64    3350       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 5650: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3433      
+  length        integral           6     'ha        
+  addr          integral           2     'h2        
+  payload       da(integral)       10    -          
+    [0]         integral           8     'h14       
+    [1]         integral           8     'h4a       
+    [2]         integral           8     'h11       
+    [3]         integral           8     'h6b       
+    [4]         integral           8     'h57       
+    [5]         integral           8     'h1e       
+    [6]         integral           8     'h6a       
+    [7]         integral           8     'hce       
+    [8]         integral           8     'h27       
+    [9]         integral           8     'hb6       
+  parity        integral           8     'h72       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    4550       
+  end_time      time               64    5650       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 5700: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y1 [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 6750: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3448      
+  length        integral           6     'h1        
+  addr          integral           2     'h1        
+  payload       da(integral)       1     -          
+    [0]         integral           8     'h37       
+  parity        integral           8     'h32       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    6550       
+  end_time      time               64    6750       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(109) @ 6800: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111 [yapp_111_seq] Executing YAPP_111_SEQ
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 6800: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111.addr_1_seq [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 9150: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3459      
+  length        integral           6     'h8        
+  addr          integral           2     'h1        
+  payload       da(integral)       8     -          
+    [0]         integral           8     'h4a       
+    [1]         integral           8     'hc3       
+    [2]         integral           8     'h73       
+    [3]         integral           8     'h0        
+    [4]         integral           8     'hc0       
+    [5]         integral           8     'hdc       
+    [6]         integral           8     'h87       
+    [7]         integral           8     'hbd       
+  parity        integral           8     'hfd       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    8250       
+  end_time      time               64    9150       
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 9200: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111.addr_1_seq [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 10850: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3561      
+  length        integral           6     'ha        
+  addr          integral           2     'h1        
+  payload       da(integral)       10    -          
+    [0]         integral           8     'h26       
+    [1]         integral           8     'h96       
+    [2]         integral           8     'hab       
+    [3]         integral           8     'hb8       
+    [4]         integral           8     'h1        
+    [5]         integral           8     'h77       
+    [6]         integral           8     'h63       
+    [7]         integral           8     'hf9       
+    [8]         integral           8     'hd6       
+    [9]         integral           8     'hd3       
+  parity        integral           8     'h63       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    9750       
+  end_time      time               64    10850      
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(89) @ 10900: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.y111.addr_1_seq [yapp_1_seq] Executing YAPP_1_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 13250: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+---------------------------------------------------
+Name            Type               Size  Value     
+---------------------------------------------------
+pkt             short_yapp_packet  -     @3602     
+  length        integral           6     'h7       
+  addr          integral           2     'h1       
+  payload       da(integral)       7     -         
+    [0]         integral           8     'h7f      
+    [1]         integral           8     'hac      
+    [2]         integral           8     'hde      
+    [3]         integral           8     'hd1      
+    [4]         integral           8     'h43      
+    [5]         integral           8     'hc3      
+    [6]         integral           8     'h55      
+  parity        integral           8     'h15      
+  parity_type   parity_t           1     BAD_PARITY
+  packet_delay  integral           32    'd0       
+  begin_time    time               64    12450     
+  end_time      time               64    13250     
+---------------------------------------------------
+
+*** ROUTER (DUT) Parity Error Identified: Expected:15 Computed:14 ***
+UVM_INFO ../sv/yapp_tx_seqs.sv(131) @ 13300: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.yaddr [yapp_repeat_addr_seq] Executing YAPP_REPEAT_ADDR_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 16150: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3623      
+  length        integral           6     'h9        
+  addr          integral           2     'h2        
+  payload       da(integral)       9     -          
+    [0]         integral           8     'hf1       
+    [1]         integral           8     'h18       
+    [2]         integral           8     'hd        
+    [3]         integral           8     'h3f       
+    [4]         integral           8     'hb9       
+    [5]         integral           8     'hbb       
+    [6]         integral           8     'hd6       
+    [7]         integral           8     'h75       
+    [8]         integral           8     'h78       
+  parity        integral           8     'h24       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    15150      
+  end_time      time               64    16150      
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 17950: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3678      
+  length        integral           6     'h2        
+  addr          integral           2     'h2        
+  payload       da(integral)       2     -          
+    [0]         integral           8     'hc8       
+    [1]         integral           8     'hf4       
+  parity        integral           8     'h36       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    17650      
+  end_time      time               64    17950      
+----------------------------------------------------
+
+UVM_INFO ../sv/yapp_tx_seqs.sv(151) @ 18000: uvm_test_top.tb.yapp.tx_agent.sequencer@@yapp_exhaustive_seq.yinc [yapp_incr_payload_seq] Executing YAPP_INCR_PAYLOAD_SEQ
+UVM_INFO ../sv/yapp_tx_monitor.sv(48) @ 20050: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Packet Collected :
+----------------------------------------------------
+Name            Type               Size  Value      
+----------------------------------------------------
+pkt             short_yapp_packet  -     @3639      
+  length        integral           6     'hd        
+  addr          integral           2     'h2        
+  payload       da(integral)       13    -          
+    [0]         integral           8     'h0        
+    [1]         integral           8     'h1        
+    [2]         integral           8     'h2        
+    [3]         integral           8     'h3        
+    [4]         integral           8     'h4        
+    ...         ...                ...   ...        
+    [8]         integral           8     'h8        
+    [9]         integral           8     'h9        
+    [10]        integral           8     'ha        
+    [11]        integral           8     'hb        
+    [12]        integral           8     'hc        
+  parity        integral           8     'h3a       
+  parity_type   parity_t           1     GOOD_PARITY
+  packet_delay  integral           32    'd0        
+  begin_time    time               64    18650      
+  end_time      time               64    20050      
+----------------------------------------------------
+
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_objection.svh(1271) @ 20100: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO ../sv/yapp_tx_driver.sv(63) @ 20100: uvm_test_top.tb.yapp.tx_agent.driver [yapp_tx_driver] Report: YAPP TX driver sent 10 packets
+UVM_INFO ../sv/yapp_tx_monitor.sv(55) @ 20100: uvm_test_top.tb.yapp.tx_agent.monitor [yapp_tx_monitor] Report: YAPP Monitor Collected 10 Packets
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_catcher.svh(705) @ 20100: reporter [UVM/REPORT/CATCHER] 
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+UVM_INFO /home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_server.svh(847) @ 20100: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :   26
+UVM_WARNING :    1
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[MULTTST]     1
+[RNTST]     1
+[TEST_DONE]     1
+[UVM/RELNOTES]     1
+[UVM/REPORT/CATCHER]     1
+[UVMTOP]     1
+[yapp_012_seq]     1
+[yapp_111_seq]     1
+[yapp_1_seq]     4
+[yapp_exhaustive_seq]     1
+[yapp_incr_payload_seq]     1
+[yapp_repeat_addr_seq]     1
+[yapp_tx_driver]     1
+[yapp_tx_monitor]    11
+
+Simulation complete via $finish(1) at time 2010 NS + 71
+/home/abc24/eda/cadence/xcelium/XCELIUM1803/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh:543     $finish;
+xcelium> probe -create -shm hw_top.in0.send_to_dut.addr[1] hw_top.in0.send_to_dut.addr[0]
+Created probe 2
+xcelium> run
+xmsim: *E,RNFNSH: Cannot continue simulation due to a previous $finish.
+xcelium> ^C
+xcelium> exit
+TOOL:	xrun(64)	18.03-s001: Exiting on Oct 16, 2026 at 18:12:00 +07  (total: 00:03:03)

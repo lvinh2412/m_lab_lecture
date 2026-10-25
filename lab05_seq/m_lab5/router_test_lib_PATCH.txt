@@ -1,0 +1,157 @@
+===============================================================================
+ LAB 5 -- PATCH cho tb/router_test_lib.sv
+ THEM 3 class vao CUOI file Lab 4 cua ban. Khong sua gi phia tren.
+===============================================================================
+
+ File Lab 4 cua ban dang co: base_test, test2, short_packet_test, set_config_test
+ Lab 5 them:                 incr_payload_test, exhaustive_seq_test, seq_from_test
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [TEST-1..2]   incr_payload_test
+//
+// Chay yapp_incr_payload_seq. Dung khuon short_packet_test cua Lab 4 lam mau.
+///////////////////////////////////////////////////////////////////////////////
+
+class incr_payload_test extends base_test;
+
+  // ---- TEST-1 --------------------------------------------------------------
+  // macro + constructor  (giong moi test khac)
+  // --------------------------------------------------------------------------
+
+
+
+  function void build_phase(uvm_phase phase);
+
+    // ---- TEST-2 ------------------------------------------------------------
+    // HAI dong:
+    //
+    //  (a) Type override: doi yapp_packet -> short_yapp_packet
+    //      (de goi ngan, payload tang dan de nhin hon)
+    //      Dung lai dung dong ban da viet o Lab 4 short_packet_test.
+    //
+    //  (b) Chon sequence chay tren sequencer:
+    //      uvm_config_wrapper::set(this, "<duong dan>.run_phase",
+    //                              "default_sequence",
+    //                              yapp_incr_payload_seq::get_type());
+    //
+    //      Duong dan lay tu print_topology() cua chinh ban.
+    //
+    // VA dong super.build_phase(phase);
+    //
+    // *** THU TU ***
+    // Ba dong tren xep the nao? Nho lai hai luat khac nhau:
+    //   - type override: Section 8 slide 11, 16  -> phai TRUOC khi dung cay
+    //   - default_sequence: duoc doc luc nao? Section 9 slide 17 + Section 4
+    //
+    // Hai dong nay KHONG cung mot cau tra loi. Nghi ky truoc khi viet.
+    // ------------------------------------------------------------------------
+
+
+
+  endfunction : build_phase
+
+endclass : incr_payload_test
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [TEST-3]   exhaustive_seq_test
+//
+// Giong incr_payload_test, chi doi sequence.
+///////////////////////////////////////////////////////////////////////////////
+
+class exhaustive_seq_test extends base_test;
+
+  // ---- TEST-3 --------------------------------------------------------------
+  // Viet ca class. Giong het incr_payload_test, doi moi ten sequence
+  // thanh yapp_exhaustive_seq.
+  //
+  // Sau khi chay, dem so goi trong log:
+  //     grep -c "Input Packet to Send" log_exh.log
+  // So sanh voi con so ban du doan o SEQ-19.
+  // --------------------------------------------------------------------------
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// [TEST-4..5]   seq_from_test
+//
+// *** CACH CHAY SEQUENCE THU HAI -- Section 9 slide 18 ***
+//
+// Khong dung default_sequence. Test tu cam handle sequencer va goi .start().
+// Day la cach DUY NHAT trong lab cho ban thay objection do TEST giu.
+///////////////////////////////////////////////////////////////////////////////
+
+class seq_from_test extends base_test;
+
+  // ---- TEST-4 --------------------------------------------------------------
+  // (a) macro + constructor
+  //
+  // (b) HAI handle (Section 9 slide 18):
+  //       - mot handle kieu SEQUENCER  -> tro toi sequencer cua UVC
+  //       - mot handle kieu SEQUENCE   -> instance sequence se chay
+  //         (dung yapp_5_packets cho don gian)
+  //
+  // (c) build_phase: TAO instance sequence bang factory
+  //         <handle> = <kieu>::type_id::create("<ten>", this);
+  //     roi goi super.build_phase(phase);
+  //
+  //     Cau hoi: sequence la OBJECT. Vi sao van truyen "this"?
+  //              (Da tra loi o Section 8 slide 9 -- nho lai)
+  //
+  // (d) connect_phase: GAN handle sequencer tro toi sequencer that
+  //         <handle_seqr> = tb.yapp.tx_agent.sequencer;
+  //
+  //     Cau hoi: vi sao dong nay o connect_phase ma khong o build_phase?
+  //              (Goi y: Section 4 -- build chay TOP-DOWN. Luc base_test
+  //               build xong, tb.yapp.tx_agent.sequencer da ton tai chua?)
+  // --------------------------------------------------------------------------
+
+
+
+
+  // ---- TEST-5 --------------------------------------------------------------
+  // run_phase -- BA dong, dung thu tu:
+  //
+  //     task run_phase(uvm_phase phase);
+  //       phase.raise_objection(this, "<mo ta>");
+  //       <handle_seq>.start(<handle_seqr>);
+  //       phase.drop_objection(this, "<mo ta>");
+  //     endtask
+  //
+  // *** VI SAO TEST PHAI TU RAISE O DAY? ***
+  // yapp_5_packets ke thua yapp_base_seq, ma yapp_base_seq CO pre_body()
+  // raise objection roi co ma? Sao con phai raise them?
+  //
+  // Doc lai Section 9 slide 22 + 24. Cau tra loi nam o gia tri cua
+  // starting_phase khi sequence duoc chay bang .start() tu test.
+  //
+  // THI NGHIEM: viet xong, chay thu. Roi XOA hai dong raise/drop di,
+  // chay lai. Du doan truoc: mo phong dung o thoi diem nao?
+  // --------------------------------------------------------------------------
+
+
+
+endclass : seq_from_test
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// GOI Y KIEM TRA SAU KHI CHAY CA BA TEST
+///////////////////////////////////////////////////////////////////////////////
+//
+//   # dem goi
+//   grep -c "Input Packet to Send" log_exh.log
+//
+//   # soi objection
+//   grep -i objection log_exh.log
+//
+//   # tim randomization failure
+//   grep -i "warning\|randomization" log_exh.log
+//
+//   # xem kieu packet (type override co chay khong)
+//   grep -m1 "^req " log_exh.log
+//
+///////////////////////////////////////////////////////////////////////////////

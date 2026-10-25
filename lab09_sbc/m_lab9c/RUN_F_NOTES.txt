@@ -1,0 +1,203 @@
+===============================================================================
+run.f  --  LAB 9C
+===============================================================================
+
+*** KHUYEN NGHI CUA TOI: KHONG DOI GI CA. ***
+
+Giu nguyen run.f cua Lab 9B:
+
+    -incdir ../sv
+    ...
+    // router module package
+    ../sv/router_module_pkg.sv
+
+Lab 9C khong them file nao, khong bo file nao. So dong "file:" trong log
+van la 13, giong het Lab 9B.
+
+Nhung ban VAN PHAI DOC muc [RUN-1] duoi day, vi repo chuan lam KHAC,
+va cach repo lam dang giau mot cai bay.
+
+
+===============================================================================
+[RUN-1]  *** BAY THAT TRONG REPO -- DA XAC MINH ***
+===============================================================================
+
+lab09_sbc/tb/run.f cua repo chuan KHONG tro vao ../sv. No tro vao
+ban UVC dung chung:
+
+    dong 15:  -incdir ../sv                      <- VAN CON, dung DAU
+    ...
+    dong 20:  -incdir ../../router/sv            <- THEM MOI o 9C
+    ...
+    dong 41:  ../../router/sv/router_module_pkg.sv   <- DOI tu ../sv/
+
+Nhin thoang qua: "a, Lab 9C chuyen sang dung Module UVC dung chung."
+
+*** NHUNG KHONG PHAI VAY. ***
+
+
+=============================================================================
+DIEU THUC SU XAY RA
+=============================================================================
+
+Bien dich ../../router/sv/router_module_pkg.sv. File do co ba dong:
+
+    `include "router_scoreboard.sv"
+    `include "router_reference.sv"
+    `include "router_module_env.sv"
+
+`include tim file theo THU TU -incdir. Va -incdir ../sv dung TRUOC.
+
+=> Ba file duoc lay tu ../sv/  (ban CUC BO cua lab09_sbc),
+   KHONG phai tu ../../router/sv/  (ban dung chung).
+
+*** BANG CHUNG TRONG CHINH LOG CUA REPO ***
+lab09_sbc/tb/xrun.log, dong 77:
+
+    xmvlog: *W,SPDUSD: Include directory ../../router/sv given but not used.
+
+"given but not used" -- trinh bien dich dang noi thang: cai -incdir
+ban vua them, toi khong dung toi.
+
+Ket qua: *** CHI CO FILE PACKAGE den tu router/sv. BA FILE NOI DUNG
+         van den tu ../sv. ***
+
+
+=============================================================================
+*** VI SAO DIEU NAY NGUY HIEM ***
+=============================================================================
+
+[Da xac minh -- grep repo] Hai ban router_module_env.sv co TEN EXPORT
+KHAC NHAU:
+
+    lab09_sbc/sv/      :  hbus_in, yapp_in, sb_chan0, sb_chan1, sb_chan2
+    router/sv/         :  router_hbus, router_yapp, router_chan0/1/2
+
+Va lab09_sbc/tb/router_tb.sv noi toi  router_mod.yapp_in.
+
+=> No chi chay duoc vi -incdir ../sv tinh co dung TRUOC.
+
+*** XOA MOT DONG LA HONG ***
+Bo dong "-incdir ../sv" (hoac day no xuong duoi dong 20):
+    -> `include tim thay router_module_env.sv o ../../router/sv/
+    -> class router_env gio co export ten router_yapp, khong co yapp_in
+    -> loi: "yapp_in is not a member of router_env"
+    -> thong bao loi tro vao router_tb.sv dong 77
+    -> nhung NGUYEN NHAN la mot dong -incdir o file khac, cach do 60 dong
+
+Day la loai bug ton nua ngay de tim.
+
+
+=============================================================================
+*** THI NGHIEM 5 PHUT -- DANG LAM ***
+=============================================================================
+
+Neu ban muon thay tan mat:
+
+  Buoc 1: chep run.f cua ban thanh run_trap.f
+  Buoc 2: trong run_trap.f, DAO thu tu hai dong incdir:
+              -incdir ../../router/sv        <- len TRUOC
+              -incdir ../sv                  <- xuong SAU
+          va doi dong file thanh:
+              ../../router/sv/router_module_pkg.sv
+  Buoc 3: xrun -f run_trap.f +UVM_TESTNAME=test_mc -l log_trap.log
+  Buoc 4: grep -E "not a member|SPDUSD" log_trap.log
+
+  [Suy luan] Du doan cua toi: loi "yapp_in is not a member of router_env",
+  tro vao router_tb.sv. Va KHONG con canh bao SPDUSD cho router/sv
+  (vi gio no duoc dung that), nhung CO THE co SPDUSD cho ../sv.
+
+  Toi CHUA CHAY thi nghiem nay. Bao toi ket qua that.
+
+
+=============================================================================
+*** BAI HOC NGHE NGHIEP ***
+=============================================================================
+
+Canh bao SPDUSD la loai canh bao ai cung bo qua. Trong log cua
+lab09_sbc no nam o dong 77, giua hang tram dong khac.
+
+Nhung no dang noi mot cau rat cu the:
+
+    "Ban nghi ban dang dung file A. Ban dang dung file B."
+
+*** THOI QUEN NEN CO: sau moi lan sua run.f, chay ***
+
+    grep "SPDUSD" <log>
+
+Neu co, hoi: "toi them -incdir do de lam gi, va vi sao no khong duoc dung?"
+Mot trong hai dieu dang xay ra:
+    (a) -incdir thua  -> xoa di
+    (b) -incdir bi mot cai khac che  -> ban dang bien dich NHAM FILE
+
+
+===============================================================================
+[RUN-2]  (TUY CHON) Don dep tuy chon dong lenh
+===============================================================================
+
+Repo chuan bo hai dong o lab09_sbc/tb/run.f:
+
+    //+UVM_VERBOSITY=UVM_MEDIUM
+    +UVM_VERBOSITY=UVM_NONE
+
+va chi giu:
+
+    //+UVM_VERBOSITY=UVM_LOW
+    +UVM_TESTNAME=test_mc
+
+Neu ban van truyen +UVM_TESTNAME tren dong lenh, hay COMMENT dong
++UVM_TESTNAME trong run.f, neu khong ban se an canh bao MULTVERB /
+trung tham so.
+
+    // +UVM_VERBOSITY=UVM_LOW
+    // +UVM_TESTNAME=test_mc
+
+Day la viec toi da khuyen tu Lab 8 va van chua thay ban lam.
+
+
+===============================================================================
+BANG DOI CHIEU run.f: 9A -> 9B -> 9C
+===============================================================================
+
+   +---------------------+--------+--------+--------+
+   |                     | Lab 9A | Lab 9B | Lab 9C |
+   +---------------------+--------+--------+--------+
+   | so -incdir          |   5    |   5    |   5    |
+   | so dong file .sv    |  12    |  13    |  13    |
+   | file cha            |   5    |   6    |   6    |
+   | don vi bien dich    |  12    |  13    |  13    |
+   | file .sv tong       |  52    |  55    |  55    |
+   +---------------------+--------+--------+--------+
+
+Lab 9C la lab DAU TIEN trong ca khoa khong them mot file nao va
+khong them mot dong run.f nao.
+
+
+===============================================================================
+TU KIEM TRA
+===============================================================================
+
+ 1. Canh bao SPDUSD trong log lab09_sbc noi "../../router/sv given but
+    not used". Neu tac gia repo DINH dung ban router/sv that su, ho phai
+    doi gi? Lieu ke hai cach.
+
+ 2. `include tim file theo thu tu -incdir. Dieu nay co giong luat tim
+    file cua C/C++ khong? Neu ban tung viet Makefile, -I cua gcc hoat
+    dong the nao?
+
+ 3. Lab 9C khong them file nao vao run.f. Nhung Lab 9B thi co
+    (router_module_pkg.sv). Vi sao Lab 9B can ma Lab 9C khong?
+    (Goi y: luat tu Lab 6 -- class tran di qua `include, package
+     phai co ten trong run.f.)
+
+ 4. Neu ban co HAI file cung ten router_module_env.sv trong hai -incdir
+    khac nhau, va ca hai deu hop le, trinh bien dich chon cai nao?
+    Co canh bao gi khong? Neu khong, lam sao ban biet no chon cai nao?
+    (Goi y: grep "file:" trong log chi liet ke file trong run.f, khong
+     liet ke file duoc `include. Thu tim cach khac.)
+
+ 5. Trong du an that voi 500 file va 40 -incdir, lam sao ban kiem tra
+    duoc file nao THUC SU duoc bien dich? Neu khong biet, do la cau hoi
+    dang mang di hoi nguoi huong dan.
+
+===============================================================================

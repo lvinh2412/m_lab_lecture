@@ -1,0 +1,223 @@
+===============================================================================
+router_tb.sv  --  LAB 9C  (PATCH)
+===============================================================================
+
+Doi dung NAM DONG. Khong them, khong xoa. Chi RUT NGAN duong dan.
+
+*** DAY LA TOAN BO "LAB" CUA LAB 9C NHIN TU PHIA TESTBENCH ***
+
+
+===============================================================================
+[RTB-1]  Rut ngan nam duong dan trong connect_phase
+===============================================================================
+
+XOA nam dong cua Lab 9B:
+
+    yapp.tx_agent.monitor.item_collected_port.connect(router_mod.reference.yapp_in);
+    hbus.masters[0].monitor.item_collected_port.connect(router_mod.reference.hbus_in);
+    chan0.rx_agent.monitor.item_collected_port.connect(router_mod.scoreboard.sb_chan0);
+    chan1.rx_agent.monitor.item_collected_port.connect(router_mod.scoreboard.sb_chan1);
+    chan2.rx_agent.monitor.item_collected_port.connect(router_mod.scoreboard.sb_chan2);
+
+THAY bang:
+
+    yapp.tx_agent.monitor.item_collected_port.connect(router_mod.yapp_in);
+    hbus.masters[0].monitor.item_collected_port.connect(router_mod.hbus_in);
+    chan0.rx_agent.monitor.item_collected_port.connect(router_mod.sb_chan0);
+    chan1.rx_agent.monitor.item_collected_port.connect(router_mod.sb_chan1);
+    chan2.rx_agent.monitor.item_collected_port.connect(router_mod.sb_chan2);
+
+HAI DONG VIRTUAL SEQUENCER O TREN: KHONG DOI.
+
+    mcsequencer.hbus_seqr = hbus.masters[0].sequencer;
+    mcsequencer.yapp_seqr = yapp.tx_agent.sequencer;
+
+[Da xac minh] Day la toan bo diff cua router_tb.sv giua lab09_sbb va
+lab09_sbc tren repo cua ban (ngoai mot vai khoang trang thut le).
+
+
+=============================================================================
+*** XEM KY CAI GI BIEN MAT ***
+=============================================================================
+
+   Lab 9B:  router_mod . reference  . yapp_in
+            ^^^^^^^^^^   ^^^^^^^^^    ^^^^^^^
+            UVC          CON cua UVC  CONG cua con
+
+   Lab 9C:  router_mod . yapp_in
+            ^^^^^^^^^^   ^^^^^^^
+            UVC          CONG cua UVC
+
+Mot doan ".reference." va ".scoreboard." bien mat.
+
+Doan do chinh la THONG TIN NOI BO ma router_tb khong duoc phep biet.
+
+*** BA DIEU router_tb KHONG CON BIET ***
+  (1) router_env co con ten "reference"
+  (2) router_env co con ten "scoreboard"
+  (3) goi YAPP phai vao reference TRUOC, khong phai scoreboard
+
+Dieu (3) la quan trong nhat. O Lab 9B, neu nguoi viet router_tb nham
+va noi YAPP thang vao scoreboard, no van bien dich, van chay, va cho
+ket qua SAI (do chinh la "BAY 1" trong skeleton Lab 9B).
+
+O Lab 9C, router_tb KHONG CON LUA CHON do. Chi co mot cong ten yapp_in.
+Di dau tiep la viec cua router_env.
+
+=> *** DONG GOI KHONG CHI LAM CODE DEP. NO XOA BO MOT LOP LOI. ***
+
+
+=============================================================================
+*** BANG DOI CHIEU BA LAB ***
+=============================================================================
+
+  +------------------+---------------------------+---------------------------+
+  | tu monitor       | Lab 9B (tho vao ruot)     | Lab 9C (qua mat tien)     |
+  +------------------+---------------------------+---------------------------+
+  | yapp.tx_agent    | router_mod.reference      | router_mod.yapp_in        |
+  |                  |           .yapp_in        |                           |
+  | hbus.masters[0]  | router_mod.reference      | router_mod.hbus_in        |
+  |                  |           .hbus_in        |                           |
+  | chan0.rx_agent   | router_mod.scoreboard     | router_mod.sb_chan0       |
+  |                  |           .sb_chan0       |                           |
+  | chan1.rx_agent   | router_mod.scoreboard     | router_mod.sb_chan1       |
+  |                  |           .sb_chan1       |                           |
+  | chan2.rx_agent   | router_mod.scoreboard     | router_mod.sb_chan2       |
+  |                  |           .sb_chan2       |                           |
+  +------------------+---------------------------+---------------------------+
+  | so dong          | 5                         | 5                         |
+  | tang doan        | 3                         | 2                         |
+  | ten CON lo ra    | reference, scoreboard     | (khong cai nao)           |
+  +------------------+---------------------------+---------------------------+
+
+
+===============================================================================
+[RTB-2]  Kiem chung -- BA PHEP DO
+===============================================================================
+
+*** PHEP DO 1: ket qua PHAI GIONG HET Lab 9B ***
+
+    diff <(grep -E "packets_forwarded|Packets In|Packets Dropped" log9b_base.log) \
+         <(grep -E "packets_forwarded|Packets In|Packets Dropped" log9c.log)
+
+    -> phai KHONG RA GI
+
+    Lab 9C KHONG them chuc nang kiem tra nao. Neu con so doi, ban da
+    lam hong mot thu gi do, khong phai "cai tien".
+
+
+*** PHEP DO 2: print_topology PHAI co THEM dung 5 dong ***
+
+    grep -c "uvm_analysis" log9b_base.log
+    grep -c "uvm_analysis" log9c.log
+
+    Hieu phai bang dung 5.
+
+    Hoac nhin truc tiep:
+    grep -A12 "router_mod" log9c.log
+
+    Phai thay:
+      router_mod      router_env                -  @xxxx
+        hbus_in       uvm_analysis_export       -  @xxxx     <- MOI
+        yapp_in       uvm_analysis_export       -  @xxxx     <- MOI
+        sb_chan0      uvm_analysis_export       -  @xxxx     <- MOI
+        sb_chan1      uvm_analysis_export       -  @xxxx     <- MOI
+        sb_chan2      uvm_analysis_export       -  @xxxx     <- MOI
+        reference     router_reference          -  @xxxx
+          ...
+        scoreboard    router_scoreboard         -  @xxxx
+          ...
+
+    *** THU TU TRONG print_topology NOI LEN DIEU GI ***
+    Nam export hien TRUOC reference/scoreboard, vi chung duoc tao trong
+    CONSTRUCTOR (chay truoc build_phase), con hai component kia duoc tao
+    trong build_phase.
+    => print_topology dang cho ban xem THU TU TAO, khong phai thu tu
+       ban go trong file.
+
+
+*** PHEP DO 3: hai con so cheo (thoi quen tu Lab 9B) ***
+
+    grep -E "Packets Forwarded|Packets In" log9c.log
+
+    reference.packets_forwarded  ==  scoreboard.packets_in   -> DUNG
+    packets_in = 0                                           -> mat [ENV-4]
+    packets_in gap doi                                       -> noi ca hai cach
+
+
+===============================================================================
+*** BON KICH BAN HONG VA TRIEU CHUNG ***
+===============================================================================
+
+ (1) Sua router_tb NHUNG CHUA sua router_module_env
+     -> Loi bien dich: "yapp_in is not a member of router_env"
+     -> CO BAO LOI. De sua.
+
+ (2) Sua router_module_env NHUNG CHUA sua router_tb
+     -> KHONG LOI GI CA. Chay binh thuong, PASSED.
+     -> 5 export tao ra roi nam khong. (Buoc 3 trong README)
+     -> IM LANG. Day moi la cai nguy hiem.
+
+ (3) Doi NUA chung (vd sua 3 dong, quen 2 dong)
+     -> Van chay. Mot phan di qua export, mot phan tho vao ruot.
+     -> Ket qua DUNG, nhung dong goi hong mot nua.
+     -> Cach bat: grep "reference\.\|scoreboard\." router_tb.sv
+        Sau Lab 9C, lenh nay phai KHONG RA GI.
+
+ (4) Dung bo ten SAI (router_yapp thay vi yapp_in)
+     -> "router_yapp is not a member of router_env"
+     -> Xem BAY 4 trong README. Co HAI phien ban file nay trong repo
+        voi hai bo ten khac nhau.
+
+
+===============================================================================
+*** MOT LENH DE TU CHAM DIEM LAB 9C ***
+===============================================================================
+
+    grep -n "router_mod\." router_tb.sv
+
+Sau Lab 9C, moi dong ra phai co DUNG MOT dau cham sau "router_mod":
+
+    router_mod.yapp_in      <- OK
+    router_mod.hbus_in      <- OK
+    router_mod.sb_chan0     <- OK
+
+Neu con dong nao co HAI dau cham:
+
+    router_mod.reference.yapp_in       <- CHUA XONG
+    router_mod.scoreboard.sb_chan0     <- CHUA XONG
+
+=> Dem dau cham. Do la toan bo tieu chi dung/sai cua Lab 9C nhin tu
+   phia router_tb.
+
+
+===============================================================================
+TU KIEM TRA
+===============================================================================
+
+ 1. Lab 9C xoa ".reference." va ".scoreboard." khoi router_tb. Nhung
+    hai dong virtual sequencer o tren VAN tho vao ruot cua UVC khac:
+        mcsequencer.hbus_seqr = hbus.masters[0].sequencer;
+    Vi sao dong nay KHONG duoc "dong goi" giong nam dong kia?
+    (Goi y: Section 14 slide 26, cum tu "Exception".)
+
+ 2. O kich ban (2) o tren, mo phong PASSED ma khong mot warning nao,
+    du ban da them 5 export khong ai dung. Neu UVM muon canh bao, no
+    phai doi con so nao trong constructor cua uvm_analysis_export?
+    Va lam vay se pha vo cau nao cua slide 21 Section 14?
+
+ 3. router_tb.connect_phase gio co 7 dong (2 sequencer + 5 TLM).
+    Neu ban DAO NGUOC thu tu hoan toan -- 5 dong TLM truoc, 2 dong
+    sequencer sau -- co sao khong? Vi sao?
+    (Goi y: mot ben la connect(), mot ben la phep GAN con tro.)
+
+ 4. Gia su ngay mai nguoi viet router_env quyet dinh BO router_reference
+    di va cho scoreboard tu loc (giong Lab 9D). Ho phai doi nhung gi
+    trong router_module_env.sv? Va router_tb.sv phai doi may dong?
+
+    Tra loi cau nay roi doc lai lab09_sbd/tb/router_tb.sv de doi chieu.
+
+ 5. Lenh "dem dau cham" o tren se cho ket qua the nao neu chay tren
+    lab09_sbd/tb/router_tb.sv (Lab 9D)? Thu doan truoc, roi grep.
+
+===============================================================================
